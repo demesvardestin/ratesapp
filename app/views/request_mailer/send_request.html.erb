@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    </head>
+    
+    <body>
+        <h5>Hi <%= @promoter.username %>,</h5>
+        <p>
+            You have a new request from <%= @request.client_email %>!
+        </p>
+        <p>
+            Package: $<%= @request.promo.package_price %>
+        </p>
+        <p>
+            Photo Link: <%= @request.image.url %>
+        </p>
+        <p>
+            Video Link: <%= @request.video_link %>
+        </p>
+        <p>
+            Audio Link: <%= @request.audio_link %>
+        </p>
+        <p>
+            Website Link: <%= @request.website_link %>
+        </p>
+        <p>
+            Caption: <%= @request.caption %>
+        </p>
+        <p>
+            Additional Notes: <%= @request.additional_notes %>
+        </p>
+    </body>
+</html>

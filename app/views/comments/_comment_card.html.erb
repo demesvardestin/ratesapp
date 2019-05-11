@@ -1,0 +1,31 @@
+<div class="card" style="margin-top: 15px;">
+    <div class="card-header text-center"
+        style="background-color: #00adf2; color: #fff; border-bottom: none;">
+        <h5 style="margin-bottom: 0;">Reviews</h5>
+        <p style="margin-bottom: 0;">
+            <span style="margin-right: 5px;">
+                <i class="far fa-comments"></i>
+            </span>
+            What other people are saying
+        </p>
+    </div>
+    <div class="card-body" style="border-bottom: none; background-color: #e7e7e9;" align="center">
+        <% if current_brand && current_brand.is_client_of(@promoter) %>
+            <div style="margin-bottom: 15px;">
+                <%= render 'comments/form' %>
+            </div>
+        <% end %>
+        
+        <% if @comments.present? %>
+            <div id="comments-container">
+                <%= render 'comments/comments' %>
+            </div>
+        <% else %>
+            <div style="text-align: center; padding: 15px 0;">
+                <p style="margin: 0;">
+                    Looks like <b><%= @promoter.username %></b> hasn't been reviewed yet.
+                </p>
+            </div>
+        <% end %>
+    </div>
+</div>

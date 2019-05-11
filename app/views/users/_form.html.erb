@@ -1,0 +1,27 @@
+<%= form_for(@promoter, :html => { :multipart => true, :id => "user-form" }, :remote => true) do |f| %>
+    <%= render 'shared/image/errors', object: @promoter %>
+    
+    <% if @promoter.image? %>
+        <div class="profile-image"
+            style="height: 120px; width: 120px; border-radius: 60px;
+                background-image: url('<%= @promoter.image.url %>');
+                background-size: cover; background-repeat: no-repeat;
+                margin-bottom: 15px;"></div>
+    <% else %>
+        <div class="profile-image" style="margin-bottom: 15px;">
+            <i class="far fa-user-circle" style="font-size: 120px;"></i>
+        </div>
+    <% end %>
+    
+    <div class="field">
+        <%= f.file_field :image %>
+    </div>
+    
+    <div class="field">
+        <%= f.text_field :username, class:"form-control", placeholder:"username", value:"#{@promoter.username}" %>
+    </div>
+    
+    <div class="actions">
+        <%= f.submit "Update", class:"btn btn-success btn-block", data: { :disable_with => "Updating..." } %>
+    </div>
+<% end %>

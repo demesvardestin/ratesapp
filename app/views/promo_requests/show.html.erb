@@ -1,0 +1,156 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header text-center"
+                style="border-bottom: none; background-color: #00adf2; color: #fff; ">
+                <h5 style="margin-bottom: 0;">Promoter</h5>
+                <p style="margin-bottom: 0;">
+                    <span style="margin-right: 5px;">
+                        <i class="fab fa-instagram"></i>
+                    </span>
+                    <%= @promoter.username %>
+                </p>
+            </div>
+            <div class="card-body" style="border-bottom: none;" align="center">
+                <div class="profile-image"
+                    style="height: 120px; width: 120px; border-radius: 60px;
+                        background-image: url('<%= @promoter.profile_pic_url %>');
+                        background-size: cover; background-repeat: no-repeat;
+                        margin-bottom: 15px;"></div>
+                
+                <div class="profile-details text-center row">
+                    <div class="col-md-4">
+                        <p>Posts<br /><span><%= shorten number_to_human(@promoter.posts, :precision => 3) %></span></p>
+                    </div>
+                    <div class="col-md-4">
+                        <p>Followers<br /><span><%= shorten number_to_human(@promoter.followers, :precision => 3) %></span></p>
+                    </div>
+                    <div class="col-md-4">
+                        <p>Following<br /><span><%= shorten number_to_human(@promoter.following, :precision => 3) %></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header text-center"
+                style="border-bottom: none; background-color: #00adf2; color: #fff; ">
+                <h5 style="margin-bottom: 0;">Package Details</h5>
+                <p style="margin-bottom: 0;">
+                    <span style="margin-right: 5px;">
+                        <i class="fas fa-money-check"></i>
+                    </span>
+                    <%= "$" + @request.promo.package_price %>
+                </p>
+            </div>
+            <div class="card-body" style="border-bottom: none;" align="center">
+                <%= @request.promo.package_details %>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header text-center"
+                style="background-color: #00adf2; color: #fff; border-bottom: none;">
+                <h5 style="margin-bottom: 0;">Request Details</h5>
+                <p style="margin-bottom: 0;">
+                    <span style="margin-right: 5px;">
+                        <i class="fas fa-info-circle"></i>
+                    </span>
+                    <%= @request.token %>
+                </p>
+            </div>
+            <div class="card-body" style="padding-top: 30px; padding-bottom: 30px; text-align: center;">
+                
+                <div class="attribute-col">
+                    <h6>Video Link</h6>
+                    <p><%= pretty_display  @request.video_link, true %></p>
+                </div>
+                
+                <div class="attribute-col">
+                    <h6>Audio Link</h6>
+                    <p><%= pretty_display  @request.audio_link, true %></p>
+                </div>
+                
+                <div class="attribute-col">
+                    <h6>Website Link</h6>
+                    <p><%= pretty_display  @request.website_link, true %></p>
+                </div>
+                
+                <div class="attribute-col">
+                    <h6>Caption</h6>
+                    <p><%= pretty_display  @request.caption %></p>
+                </div>
+                
+                <div class="attribute-col">
+                    <h6>Hashtags</h6>
+                    <p><%= pretty_display  @request.hashtags %></p>
+                </div>
+                
+                <div class="attribute-col">
+                    <h6>Additional Notes</h6>
+                    <p><%= pretty_display  @request.additional_notes %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header text-center"
+                style="border-bottom: none; background-color: #00adf2; color: #fff; ">
+                <h5 style="margin-bottom: 0;">Picture</h5>
+                <p style="margin-bottom: 0;">
+                    <span style="margin-right: 5px;">
+                        <i class="far fa-image"></i>
+                    </span>
+                    Provided Content
+                </p>
+            </div>
+            <div class="card-body" align="center" style="border-bottom: none;">
+                <a href="<%= @request.image.url %>" target="_blank"
+                    style="background-color: transparent;">
+                    <%= image_tag(@request.image.url, alt: "Image", id: "request-image",
+                        title: "Open in new tab") if @request.image? %>
+                </a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header text-center"
+                style="border-bottom: none; background-color: #00adf2; color: #fff; ">
+                <h5 style="margin-bottom: 0;">Status</h5>
+                <p style="margin-bottom: 0;">
+                    <span style="margin-right: 5px;">
+                        <i class="fas fa-spinner"></i>
+                    </span>
+                    <%= @request.status %>
+                </p>
+            </div>
+            <div class="card-body" style="border-bottom: none;" align="center">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                        role="progressbar" style="width: <%= @request.status_level %>%;"
+                        aria-valuenow="<%= @request.status_level %>" aria-valuemin="0" aria-valuemax="100">
+                        <%= @request.status_level %>%
+                    </div>
+                </div>
+                
+                <div class="status-meaning" style="color: #a1a1a3; margin-top: 15px;">
+                    <a class="btn btn-link" data-toggle="collapse" href="#statusMeaning"
+                        role="button" aria-expanded="false" aria-controls="statusMeaning"
+                        style="text-decoration: none;">
+                        Status Meaning <i class="fas fa-angle-down"></i>
+                    </a>
+                     
+                    <div class="collapse" id="statusMeaning">
+                        <div class="card card-body">
+                            <%= @request.status_meaning %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

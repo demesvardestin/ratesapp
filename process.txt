@@ -1,0 +1,50 @@
+1. User sets up account, then puts link in bio
+2. Brand selects promo package and sends request
+3. Promoter accepts request and money gets debited from brand account
+4. Money gets put in escrow pending promotion verification
+5. Verification happens by checking brand account for promoted brand post:
+    first check happens as soon as the post goes up
+    second check happens at a random time during the agreed duration of promo
+    third time happens a short time at the end of promo
+    once all three checks pass, process goes on to step 6
+6. Once it has been verified that brand has been promoted, money gets debited
+    into promoter account
+
+Description
+A marketplace for people needing to promote something to a specific audience, to
+connect with promoters (ig/twitter/soundcloud accounts with medium to large followings).
+
+Features:
+Curated search
+Promoter profiles:
+Post count
+Follower count
+Following count
+Views per post
+Price breakdown
+Direct messaging:
+Ability to message multiple promoters at once
+Payments
+Promotion results:
+When your content gets promoted, the views data gets pooled automatically, and
+you can view the results, which will help you decide whether you want to work
+with that promoter again
+Verification process: when account posts content, add two hashtags
+(#igpromos and keyword chosen by client needing promotion). Once system verifies
+hashtags, it waits for a few hours before messaging client to ask if they like
+their promoted post, then it processes the payment.
+
+Why us?
+No need to jump from account to account. Don’t get defrauded. Search for accounts
+based on topic, price, following count, responsivity, etc. Secure payments instead
+of paypal, so you can track how much you spend, and who you spend with the most.
+
+What are my expenses?
+Stripe, Twilio, SendGrid, Hosting
+
+How will I reach customers?
+IG ads, Twitter ads, Yogi comments, regular comments. Encourage accounts to replace ‘DM for promo/ads’ to ‘
+
+How do I make money?
+I earn 10% off every transaction made. Perhaps further down the road, I run promo ads (funny, i know).
+

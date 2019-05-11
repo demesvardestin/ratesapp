@@ -1,0 +1,39 @@
+<style type="text/css">
+    .form-control, .btn {
+        box-shadow: none !important;
+    }
+</style>
+
+<form id="stripe-form" data-remote="true" method="post" action="/add_payout_info">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="field">
+                <input type="text" class="form-control" name="name" placeholder="Name on Card">
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="field">
+                <input type="text" class="form-control" name="number" placeholder="Card Number">
+            </div>
+        </div>
+        
+        <div class="col-md-2">
+            <div class="field">
+                <input type="text" class="form-control" name="zipcode" placeholder="Zipcode">
+            </div>
+        </div>
+        
+        <div class="col-md-2">
+            <div class="field">
+                <input type="text" class="form-control" name="cvv" placeholder="CVV">
+            </div>
+        </div>
+    </div>
+    
+    <div class="action">
+        <button type="submit" class="btn btn-success btn-block">
+            Submit
+        </button>
+    </div>
+</form>

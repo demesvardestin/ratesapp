@@ -1,0 +1,9 @@
+$('#promoter-packages').html(`
+    <%= render "promos/promos" %>
+`);
+
+document.querySelector('#promo-form').reset();
+
+$('.package-types-selector').html(`
+    Select a package type <i class="fas fa-angle-down"></i>
+`);

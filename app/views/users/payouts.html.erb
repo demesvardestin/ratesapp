@@ -1,0 +1,68 @@
+<section class="row">
+    <div class="col-md-4" align="center">
+        <div class="card">
+            <div class="card-header"
+                style="background-color: #00adf2; color: #fff; border-bottom: none;">
+                <h6 style="margin-bottom: 0;">How it works</h6>
+            </div>
+            <div class="card-body" style="border-bottom: none; padding: 20px;">
+                <div id="first-step" style="margin-bottom: 15px;">
+                    <i class="fab fa-cc-visa" style="font-size: 25px; color: #28a745;"></i><br />
+                    <p style="color: #a1a1a3; font-size: 15px;">
+                        You provide us with your debit card information, which
+                        is securely processed by Stripe.
+                    </p>
+                </div>
+                
+                <div id="second-step" style="margin-bottom: 15px;">
+                    <i class="fas fa-file-invoice-dollar" style="font-size: 25px; color: #28a745;"></i><br />
+                    <p style="color: #a1a1a3; font-size: 15px;">
+                        When submitting a promo request, your client will have
+                        the option to pay at the same time.
+                    </p>
+                </div>
+                
+                <div id="third-step">
+                    <i class="far fa-check-circle" style="font-size: 25px; color: #28a745;"></i><br />
+                    <p style="color: #a1a1a3; font-size: 15px;">
+                        The money goes directly to your account, and all you have
+                        to worry about is posting their content once you receive
+                        the request!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8" align="center">
+        <div class="card">
+            <div class="card-header"
+                style="background-color: #00adf2; color: #fff; border-bottom: none;">
+                <h6 style="margin-bottom: 0;">Payment Info</h6>
+            </div>
+            <div class="card-body" style="border-bottom: none; padding: 20px;">
+                <% if current_user.has_account_set_up %>
+                    <%= render "stripe/account_set_up" %>
+                <% else %>
+                    <%= render "stripe/connect_form" %>
+                <% end %>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header"
+                style="background-color: #00adf2; color: #fff; border-bottom: none;">
+                <h6 style="margin-bottom: 0;">Disclaimer</h6>
+            </div>
+            <div class="card-body" style="border-bottom: none; padding: 20px;">
+                <p style="color: #a1a1a3;">
+                    Your information is securely processed by Stripe and never
+                    touches our server. Because our service is entirely intermediary in
+                    nature, refund issues should be handled between you and your
+                    client. For more information, check out our terms of service
+                    as well as Stripe's terms of service.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>

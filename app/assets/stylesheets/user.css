@@ -1,0 +1,57 @@
+.package-card {
+    border-width: 0.5px !important;
+}
+
+.package-card-body {
+    background-color: #b9d1d9 !important;
+}
+
+.basic-package {
+    background-color: #00bfbf !important;
+}
+
+.bronze-package {
+    background-color: #cd7f32 !important;
+}
+
+.silver-package {
+    background-color: #c0c0c0 !important;
+}
+
+.gold-package {
+    background-color: #ffd700 !important;
+}
+
+.platinum-package {
+    background-color: #e5e4e2 !important;
+}
+
+.package-part {
+    display: inline-block;
+}
+
+.package-type-icon {
+    height: 60px;
+    margin: auto;
+}
+
+.profile-details span {
+    font-size: 20px;
+    font-weight: bold;
+    color: #00adf2 !important;
+}
+
+.profile-details p {
+    color: #19485d !important;
+}
+
+.profile-link > a:hover {
+    color: #454545 !important;
+}
+
+@media only screen and (max-device-width: 812px) {
+    .package-part {
+        display: block !important;
+        width: 100% !important;
+    }
+}

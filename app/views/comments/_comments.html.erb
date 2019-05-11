@@ -1,0 +1,29 @@
+<% @comments.each do |c| %>
+    <div class="row" style="color: #666666 !important;">
+        <div class="col-md-1 brand-comment-avatar-col" align="left">
+            <span style="font-size: 35px;">
+                <i class="far fa-user-circle"></i>
+            </span>
+        </div>
+        
+        <div class="col-md-11" style="padding-left: 0;">
+            <div class="row">
+                <div class="col-md-12" align="left" style="padding-top: 10px;">
+                    <span style="margin-right: 3px;">
+                        <b><%= c.brand.name %></b>
+                    </span>&bull;
+                    <span style="font-weight: lighter; font-size: 13px;">
+                        <%= c.created_at.strftime("%b %e, %Y at %l:%M%p") %>
+                    </span>
+                </div>
+                <div class="col-md-12" >
+                    <p style="text-align: left;"><%= c.content %></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-12">
+            <hr>
+        </div>
+    </div>
+<% end %>

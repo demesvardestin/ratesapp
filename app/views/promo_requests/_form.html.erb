@@ -1,0 +1,91 @@
+<style type="text/css">
+    .form-control {
+        box-shadow: none !important;
+    }
+    
+    textarea {
+        height: 100px !important;
+    }
+</style>
+
+<%= form_for(@request, :html => { :multipart => true, :id => "request-form" } ) do |f| %>
+    <%= render 'shared/image/errors', object: @request %>
+    
+    <%= f.hidden_field :promo_id, value:"#{params[:promo_id]}" %>
+    <div class="field">
+        <label>Email</label>
+        <div>
+            <%= f.text_field :client_email, class:"form-control", placeholder:"Your email" %>
+        </div>
+    </div>
+    
+    <div class="field">
+        <label>Do you have a picture you'd like promoted?</label>
+        <div>
+            <%= f.file_field :image, class:"form-control" %>
+        </div>
+    </div>
+    
+    <div class="field">
+        <label>If you have a video, please provide the link</label>
+        <div>
+            <%= f.text_field :video_link, class:"form-control", placeholder:"https://youtube.com/" %>
+        </div>
+    </div>
+    
+    <div class="field">
+        <label>If you have an audio content, please provide the link</label>
+        <div>
+            <%= f.text_field :audio_link, class:"form-control", placeholder:"https://soundcloud.com" %>
+        </div>
+    </div>
+    
+    <div class="field">
+        <label>Do you have a website you'd like to attach to this promo?</label>
+        <div>
+            <%= f.text_field :website_link, class:"form-control", placeholder:"https://yourwebsite.com" %>
+        </div>
+    </div>
+    
+    <div class="field">
+        <label>What would you like the caption to be?</label>
+        <div>
+            <%= f.text_area :caption, class:"form-control", placeholder:"Caption" %>
+        </div>
+    </div>
+    
+    <div class="field">
+        <label>Any hashtags you'd like <%= @promoter.username %> to include? (separate by a space)</label>
+        <div>
+            <%= f.text_field :hashtags, class:"form-control", placeholder:"#hashtag1 #hashtag2 #hashtag3" %>
+        </div>
+    </div>
+    
+    <div class="field">
+        <label>Any additional notes?</label>
+        <div>
+            <%= f.text_area :additional_notes, class:"form-control", placeholder:"Additional notes..." %>
+        </div>
+    </div>
+    
+    <hr>
+    
+    <% if @promoter.has_account_set_up %>
+        <div class="direct-payment" style="color: #a1a1a3; margin: 15px 0;">
+            <a class="btn btn-link" data-toggle="collapse" href="#payDirectly"
+                role="button" aria-expanded="false" aria-controls="payDirectly"
+                style="text-decoration: none;">
+                Optional - Pay directly on our platform <i class="fas fa-angle-down"></i>
+            </a>
+             
+            <div class="collapse" id="payDirectly">
+                <%= render "stripe/make_payment" %>
+            </div>
+        </div>
+    <% end %>
+    
+    <div class="actions">
+        <%= f.submit "Submit Request", class:"btn btn-primary btn-block", data: { :disable_with => "Submitting..." }%>
+    </div>
+    
+<% end %>

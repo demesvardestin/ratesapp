@@ -1,0 +1,54 @@
+<style type="text/css">
+    nav {
+        display: none !important;
+    }
+    
+    body {
+        margin-top: 15px !important;
+    }
+</style>
+
+<section class="row">
+    <div class="col-md-4 offset-md-4" align="center">
+        <div class="profile-image"
+            style="height: 90px; width: 90px; border-radius: 45px;
+                background-image: url('<%= @promoter.profile_pic_url %>');
+                background-size: cover; background-repeat: no-repeat;
+                margin-bottom: 15px;"></div>
+        <div class="profile-link" style="margin-bottom: 15px;">
+            <a href="<%= @promoter.instagram_link %>" target="_blank"
+                style="color: #737374; text-decoration: none; font-weight: bold;">
+                <%= "@" + @promoter.username %>
+            </a>
+        </div>
+        
+        <div class="card">
+            <div class="card-header"
+                style="background-color: #00adf2; color: #fff; border-bottom: none;">
+                <h5 style="margin-bottom: 0;">Confirmation</h5>
+                <p style="margin-bottom: 0;">
+                    <span style="margin-right: 5px;">
+                        <i class="far fa-check-circle"></i>
+                    </span>
+                    ID: <%= @request.token %>
+                </p>
+            </div>
+            <div class="card-body" style="border-bottom: none; padding: 20px;">
+                <h5>Your request has been sent!</h5>
+                
+                <p style="margin-top: 15px; color: #a1a1a3;">
+                    Keep an eye on your inbox, you may receive a follow up email
+                    from
+                    <a href="<%= @promoter.instagram_link %>" target="_blank"
+                        style="text-decoration: none;">
+                        <%= "@" + @promoter.username %>
+                    </a>
+                    with additional details such
+                    as payment details.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%= render "shared/footer" %>
