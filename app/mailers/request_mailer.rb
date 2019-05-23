@@ -6,12 +6,16 @@ class RequestMailer < ApplicationMailer
         @request = promo_request
         @promoter = @request.promo.user
         
-        mail(to: @promoter.email, subject: "New promo request: #{@request.token}")
+        unless @promoter.unsubscribed_from_email
+            mail(to: @promoter.email, subject: "New promo request: #{@request.token}")
+        end
     end
     
     def send_welcome_email(promoter)
         @promoter = promoter
         
-        mail(to: @promoter.email, subject: "Welcome to MyRates!")
+        unless @promoter.unsubscribed_from_email
+            mail(to: @promoter.email, subject: "Welcome to MyRates!")
+        end
     end
 end

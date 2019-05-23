@@ -29,6 +29,11 @@ class UsersController < ApplicationController
         @promo = @promoter.promos.first
     end
     
+    def unsubscribe
+        @promoter = current_user
+        @promoter.update(unsubscribed_from_email: true)
+    end
+    
     def update
         @promoter = current_user
         begin
