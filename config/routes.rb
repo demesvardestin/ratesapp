@@ -16,8 +16,8 @@ Rails.application.routes.draw do
     get '/login', to: 'devise/sessions#new'
     get '/signup', to: 'devise/registrations#new'
     get '/register', to: 'devise/registrations#new'
-    get '/password-settings', to: 'users/registrations#edit'
-    get '/retrieve-password', to: 'devise/passwords#new'
+    get '/password/settings', to: 'users/registrations#edit'
+    get '/retrieve/password', to: 'devise/passwords#new'
   end
   authenticated :user do
     root 'users#dashboard', as: :authenticated_user_root

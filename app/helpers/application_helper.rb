@@ -64,4 +64,9 @@ module ApplicationHelper
             "N/A"
         end
     end
+    
+    def page_name
+        return "" if request.path_info == "/"
+        " | " + request.path_info.split('/').map(&:capitalize).join(' ')
+    end
 end
