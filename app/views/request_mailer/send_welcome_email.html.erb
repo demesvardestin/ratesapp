@@ -4,8 +4,9 @@
         <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
     </head>
     
-    <body>
-        <div>
+    <body style="backgorund-color: #eef3f5;">
+        <div style="border: 1px solid #e7e7e9; border-radius: 2px; padding: 15px;
+                background-color: #fff;">
             <p>
                 Hi <%= @promoter.username %>,
                 <br /><br />
@@ -21,25 +22,18 @@
             </p>
             
             <p>
-                Feel free to <a href="mailto:teammyrates@gmail.com">reach out</a>
-                to us with any question, concern, or suggestion!
+                If you did not create this account, please
+                <a href="https://myrates.herokuapp.com/pages/help">click here</a>.
             </p>
             
             <p>
-                Best,<br />
-                The MyRates Team
-            </p>
-            
-            <hr>
-            
-            <p style="font-size: 13px;">
-                Click <a href="https://myrates.herokuapp.com/pages/help">
-                    here
-                </a> if you did not create this account.<br />
-                Click <a href="https://myrates.herokuapp.com/help/unsubscribe_from_email">
-                    here
-                </a> to unsubscribe.
+                - The MyRates Team
             </p>
         </div>
+        <p style="font-size: 11px !important; color: #e7e7e9 !important;">
+            Click <a href="https://myrates.herokuapp.com/help/unsubscribe_from_email">
+                here
+            </a> to unsubscribe.
+        </p>
     </body>
 </html>
