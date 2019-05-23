@@ -15,34 +15,31 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/login', to: 'devise/sessions#new'
     get '/signup', to: 'devise/registrations#new'
+    get '/register', to: 'devise/registrations#new'
     get '/password-settings', to: 'users/registrations#edit'
     get '/retrieve-password', to: 'devise/passwords#new'
   end
   authenticated :user do
-    root 'users#show', as: :authenticated_user_root
+    root 'users#dashboard', as: :authenticated_user_root
   end
-  
-  resources :comments, except: [:show, :index, :new]
   resources :promos, except: [:show, :index, :new]
   resources :promo_requests, except: [:index]
+  resources :users, only: [:update, :show]
   
-  resources :users, only: [:show, :update] do
-    resources :promos, only: [:index]
-  end
+  get '/:username', to: "users#show", as: "promoter"
   
-  # namespace :ig do
-  get '/:username', to: "users#show"
-  # end
-  
-  get '/update_notification_watcher', to: 'ig/users#update_notification_watcher'
-  get '/update_all_notifications', to: 'ig/users#update_all_notifications'
+  get '/request/mark_as_processed', to: 'promo_requests#mark_as_processed'
   get '/confirmation/receipt', to: 'promo_requests#receipt'
+  get '/assets/download_image', to: 'promo_requests#download_image'
+  get '/request/ship', to: 'promo_requests#ship_request'
+  get '/request/receipt', to: 'promo_requests#receipt'
+  post '/send_email', to: 'promo_requests#send_email'
   
-  get '/account/payouts', to: "users#payouts"
   get '/account/settings', to: "users#edit"
   get '/promo/requests', to: "users#promo_requests"
-  # get "/oauth/connect/:username", to: 'users#auth_connect'
-  # get "/oauth/callback", to: 'users#auth_callback'
-  
+  get '/requests/fetch_processed_requests', to: "promo_requests#processed"
+  get '/requests/fetch_unprocessed_requests', to: "promo_requests#unprocessed"
+  get '/requests/fetch_all_requests', to: 'promo_requests#all'
+  get '/notifications/update_all_notifications', to: 'users#update_all_notifications'
   root 'welcome#home'
 end

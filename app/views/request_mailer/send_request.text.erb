@@ -1,0 +1,31 @@
+You have a new promotion request:
+
+Client: <%= @request.client_email %>
+
+Platform: <%= @request.social_platform %>
+
+Package Price: <%= "$" + @request.promo.package_price %>
+
+Photo Link: <%= @request.image? ? (pretty_display("https://promoin.bio/#{@request.image.url}")) : 'N/A'  %>
+
+Video Link: <%= pretty_display@request.video_link %>
+
+Audio Link: <%= pretty_display@request.audio_link %>
+
+Website Link: <%= pretty_display@request.website_link %>
+
+Caption: <%= pretty_display@request.caption %>
+
+Hashtags: <%= pretty_display@request.hashtags %>
+        
+Additional Notes: <%= pretty_display@request.additional_notes %>
+        
+NOTE: If this is an unpaid request, remember to request payment before
+doing the promotion. You can also view it in more details
+on your dashboard, where you can mark it as complete.
+    
+Visit your dashboard at https://promoin.bio to view this request in more details,
+or reach out to us at contact@promoin.bio for any question or concern.
+
+Best,
+The PromoinBio Team

@@ -49,6 +49,10 @@
     color: #454545 !important;
 }
 
+.active-theme-color {
+    border: 3px solid #28a745;
+}
+
 @media only screen and (max-device-width: 812px) {
     .package-part {
         display: block !important;

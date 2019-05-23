@@ -12,6 +12,31 @@
     <%= render 'shared/image/errors', object: @request %>
     
     <%= f.hidden_field :promo_id, value:"#{params[:promo_id]}" %>
+    
+    <div class="field">
+        <label>Choose a social media platform</label>
+        <div class="dropdown">
+            <button class="btn btn-secondary btn-block platform-selector" type="button"
+                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false"
+                style="border-color: #e7e7e9 !important; background-color: transparent;
+                    color: #a1a1a3; box-shadow: none !important;">
+                Select <i class="fas fa-angle-down"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                style="border: 0.5px solid #e7e7e9; width: 100%;">
+                <% platforms.each do |platform| %>
+                    <a class="dropdown-item cursor-pointer"
+                        onclick="$('.platform-selector').html(this.innerHTML);
+                            document.querySelector('#social-platform-input').value = '<%= platform %>';">
+                        <i class="fab fa-<%= platform.downcase %>"></i> <%= platform %>
+                    </a>
+                <% end %>
+            </div>
+        </div>
+        <%= f.hidden_field :social_platform, id:"social-platform-input" %>
+    </div>
+    
     <div class="field">
         <label>Email</label>
         <div>
@@ -20,9 +45,15 @@
     </div>
     
     <div class="field">
-        <label>Do you have a picture you'd like promoted?</label>
+        <label>Do you have a picture you'd like promoted?</label><br />
+        <a class="btn btn-primary" id="image-upload-trigger"
+            style="color: #fff; cursor: pointer;"
+            onclick="document.querySelector('#promo-request-picture').click();">
+            <i class="fas fa-camera"></i> Upload
+        </a>
         <div>
-            <%= f.file_field :image, class:"form-control" %>
+            <%= f.file_field :image, style:"display: none;", id:"promo-request-picture",
+                onchange:"$('#image-upload-trigger').text(this.value.substring(0,20));"%>
         </div>
     </div>
     
@@ -55,9 +86,9 @@
     </div>
     
     <div class="field">
-        <label>Any hashtags you'd like <%= @promoter.username %> to include? (separate by a space)</label>
+        <label>Any hashtags you'd like <%= @promoter.username %> to include? (separated by a comma)</label>
         <div>
-            <%= f.text_field :hashtags, class:"form-control", placeholder:"#hashtag1 #hashtag2 #hashtag3" %>
+            <%= f.text_field :hashtags, class:"form-control", placeholder:"#hashtag1,#hashtag2,#hashtag3..." %>
         </div>
     </div>
     
@@ -85,7 +116,7 @@
     <% end %>
     
     <div class="actions">
-        <%= f.submit "Submit Request", class:"btn btn-primary btn-block", data: { :disable_with => "Submitting..." }%>
+        <%= f.submit "Submit", class:"btn btn-primary btn-block", data: { :disable_with => "Submitting..." }%>
     </div>
     
 <% end %>

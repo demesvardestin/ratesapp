@@ -7,16 +7,32 @@ module ApplicationHelper
         end
     end
     
+    def body
+        if current_user
+            "layouts/promoter_body"
+        else
+            "layouts/base_body"
+        end
+    end
+    
+    def footer
+        if current_user
+            "layouts/promoter_footer"
+        else
+            "layouts/base_footer"
+        end
+    end
+    
     def request_count
-        requests.count
+        if requests.present?
+            requests.unseen.count
+        else
+            0
+        end
     end
     
     def requests
-        current_user.promo_requests.unseen
-    end
-    
-    def display_if_notifications_unchecked
-        current_user.notification_watcher.checked ? 'hide' : ''
+        current_user.promo_requests
     end
     
     def background_color_for_notification(req)
@@ -29,5 +45,23 @@ module ApplicationHelper
     
     def package_types
         ["Basic", "Bronze", "Silver", "Gold", "Platinum"]
+    end
+    
+    def pretty_display(text, link=false)
+        if !text.empty?
+            if !link
+                text
+            else
+                html = <<-html
+                    <a href="#{text}" target="_blank">
+                        #{text}
+                    </a>
+                html
+                
+                raw html
+            end
+        else
+            "N/A"
+        end
     end
 end

@@ -1,0 +1,6 @@
+document.querySelector('#email-form-btn').removeAttribute('disabled');
+$('#email-form-btn').html(`Send <i class="far fa-paper-plane"></i>`);
+
+$('#alert-notice').html(`<%= render 'shared/alert_notice', notice: @notice %>`);
+
+document.querySelector('#tinymce').innerHTML = '';

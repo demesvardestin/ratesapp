@@ -1,63 +1,24 @@
-<style type="text/css">
-    nav {
-        display: none !important;
-    }
-    
-    body {
-        margin-top: 15px !important;
-    }
-</style>
+<%= render 'shared/client_facing_css' %>
 
-<section class="row">
-    <div class="col-md-12" align="center">
-        <div class="profile-image"
-            style="height: 80px; width: 80px; border-radius: 40px;
-                background-image: url('<%= @promoter.profile_pic_url %>');
-                background-size: cover; background-repeat: no-repeat;
-                margin-bottom: 15px;"></div>
-        <div class="profile-link" style="margin-bottom: 15px;">
-            <a href="<%= @promoter.instagram_link %>" target="_blank"
-                style="color: #737374; text-decoration: none; font-weight: bold;">
-                <%= "@" + @promoter.username %>
-            </a>
-        </div>
-    </div>
-    
-    <div class="col-md-8 offset-md-2" align="center">
-        <div class="card">
-            <div class="card-header"
-                style="background-color: #00adf2; color: #fff; border-bottom: none;">
-                <h5 style="margin-bottom: 0;">Promo Request</h5>
-                <p style="margin-bottom: 0;">
-                    <span style="margin-right: 5px;">
-                        <i class="far fa-clipboard"></i>
-                    </span>
-                    Tell us more about your request
-                </p>
-            </div>
-            <div class="card-body" style="border-bottom: none; padding-top: 20px; padding-bottom: 30px;">
-                <%= render "promo_requests/form" %>
+<section class="container">
+    <div class="row">
+        <%= render "users/promoter" %>
+        <div class="col-md-8 offset-md-2" align="center">
+            <div class="card">
+                <div class="card-header"
+                    style="background-color: #00adf2; color: #fff; border-bottom: none;">
+                    <h6>
+                        <span style="margin-right: 5px;">
+                            <i class="far fa-clipboard"></i>
+                        </span>
+                        Tell us more about your request
+                    </h6>
+                </div>
+                <div class="card-body" style="border-bottom: none; padding-top: 20px; padding-bottom: 30px;">
+                    <%= render "promo_requests/form" %>
+                </div>
             </div>
         </div>
     </div>
-    
-    <!--<div class="col-md-4" align="center">-->
-    <!--    <div class="card">-->
-    <!--        <div class="card-header"-->
-    <!--            style="background-color: #00adf2; color: #fff; border-bottom: none;">-->
-    <!--            <h5 style="margin-bottom: 0;">Optional</h5>-->
-    <!--            <p style="margin-bottom: 0;">-->
-    <!--                <span style="margin-right: 5px;">-->
-    <!--                    <i class="fab fa-cc-visa"></i>-->
-    <!--                </span>-->
-    <!--                Pay Directly on Our Platform-->
-    <!--            </p>-->
-    <!--        </div>-->
-    <!--        <div class="card-body" style="border-bottom: none; padding: 20px;">-->
-                
-    <!--        </div>-->
-    <!--    </div>-->
-    <!--</div>-->
+    <%= render "shared/footer" %>
 </section>
-
-<%= render "shared/footer" %>

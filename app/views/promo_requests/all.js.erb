@@ -1,0 +1,11 @@
+$('#all-requests').html(`
+    <% if @requests.present? %>
+        <%= render partial: "promo_requests/requests", locals: { requests: @requests } %>
+    <% else %>
+        <p align="center">You haven't received any request yet</p>
+    <% end %>
+`);
+
+$('#requests-card-header').html(`
+    <h6 style="margin-bottom: 0;">All Requests</h6>
+`);

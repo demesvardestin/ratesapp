@@ -5,7 +5,7 @@ class PromosController < ApplicationController
         @promo = Promo.new(promo_params)
         @promoter = current_user
         @promo.user = @promoter
-        @promo.package_type = @promo.package_type.downcase
+        @promo.package_price = @promo.package_price.split('$').join('')
         
         respond_to do |format|
             if @promo.save
@@ -14,13 +14,6 @@ class PromosController < ApplicationController
             else
                 format.js { render "error", :layout => false }
             end
-        end
-    end
-    
-    def edit
-        @promo = Promo.find(params[:id])
-        if @promo.user != current_user
-            redirect_to root_path
         end
     end
     
@@ -38,6 +31,6 @@ class PromosController < ApplicationController
     private
     
     def promo_params
-        params.require(:promo).permit(:package_type, :package_price, :package_details)
+        params.require(:promo).permit(:package_price, :package_details)
     end
 end

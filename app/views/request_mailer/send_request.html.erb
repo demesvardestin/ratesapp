@@ -5,30 +5,53 @@
     </head>
     
     <body>
-        <h5>Hi <%= @promoter.username %>,</h5>
-        <p>
-            You have a new request from <%= @request.client_email %>!
-        </p>
-        <p>
-            Package: $<%= @request.promo.package_price %>
-        </p>
-        <p>
-            Photo Link: <%= @request.image.url %>
-        </p>
-        <p>
-            Video Link: <%= @request.video_link %>
-        </p>
-        <p>
-            Audio Link: <%= @request.audio_link %>
-        </p>
-        <p>
-            Website Link: <%= @request.website_link %>
-        </p>
-        <p>
-            Caption: <%= @request.caption %>
-        </p>
-        <p>
-            Additional Notes: <%= @request.additional_notes %>
-        </p>
+        <div style="background-color: #007bff; border-radius: 2px; padding: 10px 15px;
+            border-bottom-left-radius: 0; border-bottom-right-radius: 0; color: #fff;">
+            <h2>PromoinBio</h2>
+        </div>
+        <div style="border-bottom-left-radius: 2px; border-bottom-right-radius: 2px;
+            border: 0.5px solid #e7e7e9; border-top: none; padding: 15px">
+            <div>
+                <p>
+                    You have a new promotion request:
+                    <br /><br />
+                    <strong>Client</strong>: <%= @request.client_email %>
+                    <br />
+                    <strong>Platform</strong>: <%= @request.social_platform %>
+                    <br />
+                    <strong>Package Price</strong>: <%= "$" + @request.promo.package_price %>
+                    <br />
+                    <strong>Photo Link</strong>:
+                    <%= @request.image? ? (pretty_display("https://promoin.bio/#{@request.image.url}")) : 'N/A'  %>
+                    <br />
+                    <strong>Video Link</strong>: <%= pretty_display @request.video_link %>
+                    <br />
+                    <strong>Audio Link</strong>: <%= pretty_display @request.audio_link %>
+                    <br />
+                    <strong>Website Link</strong>: <%= pretty_display @request.website_link %>
+                    <br />
+                    <strong>Caption</strong>: <%= pretty_display @request.caption %>
+                    <br />
+                    <strong>Hashtags</strong>: <%= pretty_display @request.hashtags %>
+                    <br />
+                    <strong>Additional Notes</strong>: <%= pretty_display @request.additional_notes %>
+                    <br /><br />
+                    <a href="mailto:<%= @request.client_email %>?Subject=RE: Your Promoinbio Request With <%= @promoter.username %>">Click here</a>
+                    to reply directly to the client.
+                </p>
+                
+                <p>
+                    Visit your <a href="https://promoin.bio/promo_requests/<%= @request.token %>">dashboard</a>
+                    to view this request in more details, or
+                    reach out to us at <a href="mailto:contact@promoin.bio">contact@promoin.bio</a>
+                    for any question, or concern.
+                </p>
+                
+                <p>
+                    Best,<br />
+                    The PromoinBio Team
+                </p>
+            </div>
+        </div>
     </body>
 </html>

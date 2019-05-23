@@ -1,0 +1,56 @@
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <% @promos.sorted.each do |promo| %>
+        <div class="modal fade" id="viewPromoDetails<%= promo.id %>" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content box-shadow">
+              <div class="modal-header" style="border-bottom: none;">
+                <h5 class="modal-title" id="exampleModalLabel">What you get for this rate</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" style="text-align: left !important;">
+                <%= sanitize(promo.package_details) %>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="carousel-item <%= "active" if promo == @promos.first %>"
+          data-interval="600000">
+            <div class="" align="center">
+                <div class="card package-card box-shadow" style="min-height: 170px;">
+                    <div class="card-header basic-package"
+                        style="color: #fff; font-weight: bold; border-bottom: none;
+                            padding-top: 25px; border-top-left-radius: 2px !important;
+                            border-top-right-radius: 2px !important;">
+                        <i class="fas fa-award" style="font-size: 25px;"></i>
+                        <h3><%= "$" + shorten(number_to_human(promo.package_price)) %></h3>
+                        <h6 data-toggle="modal" data-target="#viewPromoDetails<%= promo.id %>"
+                            style="cursor: pointer;">
+                            View Details
+                        </h6>
+                    </div>
+                    <div class="card-footer" style="padding: 0;">
+                      <%= link_to "Select",
+                          new_promo_request_path(:promoter => @promoter.username, :promo_id => promo.id),
+                          class:"btn btn-link btn-block",
+                          style:"color: #737374; text-decoration: none; font-weight: bold;
+                              padding-top: 15px; padding-bottom: 15px;" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>

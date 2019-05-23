@@ -1,0 +1,45 @@
+<section id="email-section">
+    <div id="email-label" onclick="toggleEmailBoxDisplay()">
+        <p style="margin-bottom: 0; font-size: 15px;">Send Email</p>
+    </div>
+    
+    <div id="email-box" class="hide card" style="margin-bottom: 0 !important;">
+        <div class="card-header" onclick="toggleEmailBoxDisplay()"
+            style="border-bottom: none; background-color: #8d8e90; color: #fff;
+                padding-left: 12px !important;">
+            <h6>
+                Email <b><%= @request.client_email %></b>
+                <span style="float: right;">
+                    &times;
+                </span>
+            </h6>
+        </div>
+        
+        <div class="card-body" style="padding: 0;">
+            <form method="post" action="/send_email" data-remote="true" id="email-form">
+                <div class="field">
+                    <input type="hidden" value="<%= @request.token %>" name="request_id">
+                    <textarea id="email-text-area" class="tinymce form-control"
+                        name="email_content"></textarea>
+                </div>
+                
+                <div class="actions" style="padding: 0 15px;">
+                    <button type="submit" id="email-form-btn" class="btn btn-primary"
+                        style="padding-top: 8px; padding-bottom: 8px; height: 40px;
+                            box-shadow: none !important; outline: none !important;">
+                        Send <i class="far fa-paper-plane"></i>
+                    </button>
+                    
+                    <a class="btn btn-secondary cursor-pointer"
+                        style="font-size: 15px; float: right; color: #fff;
+                            padding-top: 8px; padding-bottom: 8px;"
+                        id="discard-email" onclick="discardEmail()">
+                        Discard <i class="fas fa-trash"></i>
+                    </a>
+                </div>
+            </form>
+            
+            <%= tinymce %>
+        </div>
+    </div>
+</section>

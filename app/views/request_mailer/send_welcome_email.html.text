@@ -1,0 +1,15 @@
+Thanks for joining Promoinbio <%= @promoter.username %>!
+
+We provide a super simple interface for your clients to
+submit their promo requests so that you can avoid unnecessary
+rounds of fruitless emails. In the coming weeks, we'll be
+introducing a secure payment flow to allow your clients to
+pay for their request directly on the platform
+(no more cashapp requests or paypal invoices!), so keep an
+eye out!
+
+Feel free to reach out to us at contact@promoin.bio
+for any question, concern, or suggestion!
+
+Best,
+The PromoinBio Team

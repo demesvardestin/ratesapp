@@ -1,14 +1,93 @@
 <section class="row">
-    <div class="col-md-8 offset-md-2" align="center">
+    <div class="col-md-4" align="center">
         <div class="card">
             <div class="card-header"
                 style="background-color: #00adf2; color: #fff; border-bottom: none;">
                 <h6 style="margin-bottom: 0;">Account Settings</h6>
             </div>
-            <div class="card-body" style="border-bottom: none; padding: 20px;"
-                align="center">
+            <div class="card-body" align="center"
+                style="border-bottom: none; padding: 20px; font-size: 15px !important;">
                 <%= render "users/form" %>
             </div>
         </div>
     </div>
+    
+    <div class="col-md-4" align="center">
+        <div class="card">
+            <div class="card-header"
+                style="background-color: #00adf2; color: #fff; border-bottom: none;">
+                <h6 style="margin-bottom: 0;">Social</h6>
+            </div>
+            <div class="card-body">
+                <p style="font-weight: bold;">Social media bio link</p>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control"
+                        aria-label="bio-link" aria-describedby="button-addon2"
+                        value="promoin.bio/<%= @promoter.username %>"
+                        id="your-bio-link">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button"
+                            id="button-addon2" onclick="copyText()"
+                            style="border-top-left-radius: 0 !important;
+                                border-bottom-left-radius: 0 !important;
+                                box-shadow: none !important; border-color: #e7e7e9 !important;">Copy</button>
+                    </div>
+                </div>
+                
+                <hr>
+                  
+                <a href="/" class="btn btn-primary btn-block"
+                    style="padding-top: 15px; padding-bottom: 15px;">
+                    My Rates
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4" align="center">
+        <div class="card" style="height: calc(100% - 15px);">
+            <div class="card-header"
+                style="background-color: #00adf2; color: #fff; border-bottom: none;">
+                <h6 style="margin-bottom: 0;">Preview</h6>
+            </div>
+            <div class="card-body" align="center"
+                style="border-bottom: none; padding: 20px; font-size: 15px !important;">
+                <div class="row" style="text-align: center !important;" id="profile-preview-row">
+                    <div style="border-radius: 10px; border: 1px solid #e7e7e9; height: 400px;
+                            background: <%= @promoter.theme_color %>;"
+                        class="col-md-8 offset-md-2" align="center">
+                        <% if @promoter.image? %>
+                            <div class="profile-image"
+                                style="height: 60px; width: 60px; border-radius: 30px;
+                                    background-image: url('<%= @promoter.image.url %>');
+                                    background-size: cover; background-repeat: no-repeat;
+                                    margin: 30px 0 10px 0;"></div>
+                        <% else %>
+                            <div class="profile-image" style="margin-bottom: 15px;">
+                                <i class="far fa-user-circle" style="font-size: 60px; margin: 30px 0 10px 0;"></i>
+                            </div>
+                        <% end %>
+                        
+                        <p style="color: <%= "#fff" unless @promoter.theme_color == "#eef3f5" %>; font-size: 12px;">
+                            <b><%= "@" + @promoter.username %></b>
+                        </p>
+                        
+                        <p style="margin-top: 75px;
+                            color: <%= "#fff" unless @promoter.theme_color == "#eef3f5" %>;">
+                            [Promos appear here]
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script type="text/javascript">
+    function copyText () {
+        document.getElementById('your-bio-link').select();
+        document.execCommand("copy");
+        
+        alert("Copied link to clipboard!");
+    }
+</script>

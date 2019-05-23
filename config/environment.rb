@@ -8,9 +8,9 @@ require 'carrierwave'
 require 'carrierwave/orm/activerecord'
 
 ActionMailer::Base.smtp_settings = {
-  :user_name => "demo07",
-  :password => "Knowledge1!",
-  :domain => "action-cable-chat-demo07.c9users.io/",
+  :user_name => ENV["SENDGRID_USERNAME"],
+  :password => ENV["SENDGRID_PASSWORD"],
+  :domain => ENV["SENDGRID_DOMAIN"],
   :address => 'smtp.sendgrid.net',
   :port => 587,
   :authentication => :plain,

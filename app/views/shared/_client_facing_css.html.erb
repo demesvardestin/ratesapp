@@ -1,0 +1,15 @@
+<style type="text/css">
+    nav {
+        display: none !important;
+    }
+    
+    body {
+        margin-top: -25px !important;
+        background: <%= @promoter.theme_color if @promoter.theme_color.present? %>;
+        color: <%= "#fff !important;" if @promoter.theme_color != '#eef3f5' %>;
+    }
+    
+    #platform-logo a, .profile-link a {
+        color: <%= "#fff !important;" if @promoter.theme_color != '#eef3f5' %>;
+    }
+</style>

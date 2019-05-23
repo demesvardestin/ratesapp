@@ -1,41 +1,16 @@
 class User < ApplicationRecord
     mount_uploader :image, ImageUploader
-    validates :image, file_size: { less_than: 5.megabytes }
-    require 'open-uri'
-    
-    # SOCKET ERROR HANDLING IN THE FUTURE
-    # require 'socket'
-    # begin
-    #   puts IPSocket.getaddress("exceptionalcreatures.com")
-    #   # => 104.198.14.52
-    #   IPSocket.getaddress("SomeUnknownDomain.com")
-    # rescue SocketError => ex
-    #   puts ex.inspect
-    #   # => <SocketError: getaddrinfo: Name or service not known>
-    # end
+    validates :image, file_size: { less_than: 20.megabytes }
     
     devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :validatable
     
     before_create { self.claimed = true }
-    after_create { NotificationWatcher.create(user_id: self.id, checked: true) }
+    after_create { send_welcome_email }
     
     validates_uniqueness_of :username
     has_many :promos
     has_many :promo_requests, through: :promos
-    has_one :notification_watcher
-    
-    def profile_pic_url
-        profile["profile_pic_url_hd"]
-    end
-    
-    def claim_status
-        claimed ? "claimed" : "unclaimed"
-    end
-    
-    def instagram_link
-        "https://instagram.com/#{username}"
-    end
     
     def has_account_set_up
         stripe_token.present?
@@ -63,32 +38,50 @@ class User < ApplicationRecord
     #     results = noko_array.map {|a| User.new(a).profile if a.length > 0 }
     #     results
     # end
-    
-    def self.html(username)
-        Nokogiri::HTML(open("https://instagram.com/" + username))
-    end
-    
+    # 
+    # def self.html(username)
+    #     Nokogiri::HTML(open("https://instagram.com/" + username))
+    # end
+    # 
     ## Get profile stats (followers, following, posts).
     ## This method needs to be refined, as the hash returned has inversed
     ## duplicates and nil values.
-    def profile
-        document = User.html(username).css('script')
-        script_array = document.select {|i| i.content.include?("follow") }.map {|s| s.content }
-        script_content = script_array.last
-        script_content_json = JSON.parse(script_content.split("window._sharedData = ").last.delete(';'))
-        user_data = script_content_json["entry_data"]["ProfilePage"][0]["graphql"]["user"]
-        user_data
-    end
+    # def profile
+    #     document = User.html(username).css('script')
+    #     script_array = document.select {|i| i.content.include?("follow") }.map {|s| s.content }
+    #     script_content = script_array.last
+    #     script_content_json = JSON.parse(script_content.split("window._sharedData = ").last.delete(';'))
+    #     user_data = script_content_json["entry_data"]["ProfilePage"][0]["graphql"]["user"]
+    #     user_data
+    # end
+    # 
+    # def posts
+    #     profile["edge_owner_to_timeline_media"]["count"]
+    # end
+    # 
+    # def followers
+    #     profile["edge_followed_by"]["count"]
+    # end
+    # 
+    # def following
+    #     profile["edge_follow"]["count"]
+    # end
+    # 
+    # def profile_pic_url
+    #     profile["profile_pic_url_hd"]
+    # end
     
-    def posts
-        profile["edge_owner_to_timeline_media"]["count"]
-    end
+    # def claim_status
+    #     claimed ? "claimed" : "unclaimed"
+    # end
     
-    def followers
-        profile["edge_followed_by"]["count"]
-    end
+    # def instagram_link
+    #     "https://instagram.com/#{username}"
+    # end
     
-    def following
-        profile["edge_follow"]["count"]
+    protected
+    
+    def send_welcome_email
+        RequestMailer.send_welcome_email(self).deliver_now
     end
 end

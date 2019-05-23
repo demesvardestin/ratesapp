@@ -13,4 +13,15 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require tinymce
 //= require_tree .
+
+// POSiBLE DESIGN CHOICE FOR BUTTON AND FORM LOADING
+//
+// window.onload = function() {
+    // $('form').on('submit', function() {
+    //     $('form > div > .btn').prepend(`
+    //         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+    //     `);
+    // });
+// };

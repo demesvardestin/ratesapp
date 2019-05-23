@@ -1,91 +1,11 @@
-<% if !current_user %>
-    <style type="text/css">
-        nav {
-            display: none !important;
-        }
-        
-        body {
-            margin-top: 15px !important;
-        }
-    </style>
-<% end %>
+<%= render 'shared/client_facing_css' %>
 
-<div class="row">
-    <div class="col-md-8 offset-md-2" align="center">
-        <% if !current_user || (current_user && current_user != @promoter) %>
-            <div class="profile-image"
-                style="height: 80px; width: 80px; border-radius: 40px;
-                    background-image: url('<%= @promoter.profile_pic_url %>');
-                    background-size: cover; background-repeat: no-repeat;
-                    margin-bottom: 15px;"></div>
-            <div class="profile-link" style="margin-bottom: 15px;">
-                <a href="<%= @promoter.instagram_link %>" target="_blank"
-                    style="color: #737374; text-decoration: none; font-weight: bold;">
-                    <%= "@" + @promoter.username %>
-                </a>
-            </div>
-        <% end %>
-        
-        <div class="card">
-            <div class="card-header text-center"
-                style="background-color: #00adf2; color: #fff; border-bottom: none;">
-                <h5 style="margin-bottom: 0;">Packages & Rates</h5>
-                <p style="margin-bottom: 0;">
-                    <span style="margin-right: 5px;">
-                        <i class="fas fa-info-circle"></i>
-                    </span>
-                    Details on <%= @promoter.username %>'s promo rates
-                </p>
-            </div>
-            <div class="card-body" style="padding-top: 30px; padding-bottom: 30px;"
-                align="center">
-                <% if @promos.present? %>
-                    <div id="promoter-packages" align="center">
-                        <%= render 'promos/promos' %><br />
-                    </div>
-                <% else %>
-                    <p style="margin: 0; text-align: center;">
-                        <% if @promoter == current_user %>
-                            You haven't
-                        <% else %>
-                            <b><%= @promoter.username %></b> hasn't
-                        <% end %>
-                        posted any rates yet.
-                    </p>
-                <% end %>
-                
-                <% if current_user && current_user == @promoter %>
-                    <div class="modal fade" id="newPromoPackageModal" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header" style="border-bottom: none;">
-                            <h5 class="modal-title text-center" id="exampleModalLabel">Add a new promo package</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <%= render 'promos/form' %>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <button class="btn btn-light background-transparent"
-                        style="border: 1px solid #007bff; color: #007bff; margin-top: 15px;"
-                        data-toggle="modal" data-target="#newPromoPackageModal">
-                        Add a Promo Package
-                    </button>
-                <% else %>
-                    <% if @promos.size > 8 %>
-                        <%= link_to "View all #{@promoter.username}'s promos",
-                            "#{@promoter.username}/promos", :class => "btn btn-primary box-shadow",
-                            :style => "padding: 15px 20px; border-radius: 0 !important;" %>
-                    <% end %>
-                <% end %>
-            </div>
+<section class="container">
+    <div class="row">
+        <%= render "users/promoter" %>
+        <div class="col-md-8 offset-md-2" align="center">
+            <%= render "promos/client_facing_promos" %>
+            <%= render "shared/footer" %>
         </div>
-        
-        <%= render "shared/footer" %>
     </div>
-</div>
+</section>
