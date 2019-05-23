@@ -1,6 +1,6 @@
 class RequestMailer < ApplicationMailer
     add_template_helper(ApplicationHelper)
-    default from: 'jan@myrates.co'
+    default from: 'MyRates@myrates.co'
  
     def send_request(promo_request)
         @request = promo_request
