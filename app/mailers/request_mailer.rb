@@ -1,10 +1,11 @@
 class RequestMailer < ApplicationMailer
     add_template_helper(ApplicationHelper)
-    default from: 'MyRates', sender: 'no-reply@myrates.co', reply_to: 'teammyrates@gmail.com'
+    default from: 'MyRates', sender: 'no-reply@myrates.co', reply_to: 'help@myrates.co'
  
     def send_request(promo_request)
         @request = promo_request
         @promoter = @request.promo.user
+        attachments['image.png'] = File.read("#{@request.image.url}")
         
         unless @promoter.unsubscribed_from_email
             mail(to: @promoter.email, subject: "New promo request: #{@request.token}")

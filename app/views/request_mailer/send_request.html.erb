@@ -4,54 +4,79 @@
         <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
     </head>
     
-    <body>
-        <div style="background-color: #007bff; border-radius: 2px; padding: 10px 15px;
-            border-bottom-left-radius: 0; border-bottom-right-radius: 0; color: #fff;">
-            <h2>PromoinBio</h2>
-        </div>
-        <div style="border-bottom-left-radius: 2px; border-bottom-right-radius: 2px;
-            border: 0.5px solid #e7e7e9; border-top: none; padding: 15px">
-            <div>
-                <p>
-                    You have a new promotion request:
-                    <br /><br />
-                    <strong>Client</strong>: <%= @request.client_email %>
-                    <br />
-                    <strong>Platform</strong>: <%= @request.social_platform %>
-                    <br />
-                    <strong>Package Price</strong>: <%= "$" + @request.promo.package_price %>
-                    <br />
-                    <strong>Photo Link</strong>:
-                    <%= @request.image? ? (pretty_display("https://promoin.bio/#{@request.image.url}")) : 'N/A'  %>
-                    <br />
-                    <strong>Video Link</strong>: <%= pretty_display @request.video_link %>
-                    <br />
-                    <strong>Audio Link</strong>: <%= pretty_display @request.audio_link %>
-                    <br />
-                    <strong>Website Link</strong>: <%= pretty_display @request.website_link %>
-                    <br />
-                    <strong>Caption</strong>: <%= pretty_display @request.caption %>
-                    <br />
-                    <strong>Hashtags</strong>: <%= pretty_display @request.hashtags %>
-                    <br />
-                    <strong>Additional Notes</strong>: <%= pretty_display @request.additional_notes %>
-                    <br /><br />
-                    <a href="mailto:<%= @request.client_email %>?Subject=RE: Your Promoinbio Request With <%= @promoter.username %>">Click here</a>
-                    to reply directly to the client.
-                </p>
-                
-                <p>
-                    Visit your <a href="https://promoin.bio/promo_requests/<%= @request.token %>">dashboard</a>
-                    to view this request in more details, or
-                    reach out to us at <a href="mailto:contact@promoin.bio">contact@promoin.bio</a>
-                    for any question, or concern.
-                </p>
-                
-                <p>
-                    Best,<br />
-                    The PromoinBio Team
-                </p>
-            </div>
+    <body style="backgorund-color: #eef3f5 !important;">
+        <div style="background-color: #f1f1f1 !important;" align="center">
+            <table>
+                <tbody>
+                    <tr>
+                        <td style="max-width: 600px!important; display: block !important; clear: both !important;">
+                            <div style="border: 1px solid #e7e7e9; border-radius: 2px; padding: 30px;
+                                    background-color: #fff; margin: 25px !important; color: #505051 !important;"
+                                    align="left">
+                                <img src="https://s3.us-east-2.amazonaws.com/myrates/email_logo.png"
+                                    style="margin-bottom: 15px !important; display: block !important;"
+                                    alt="MyRates Logo" title="MyRates Logo" height="80" />
+                                
+                                <p>
+                                    Hi <%= @promoter.username %>,
+                                    <br /><br />
+                                    You have a new promo request.
+                                </p>
+                                
+                                <p>
+                                    <strong>Client</strong>: <%= @request.client_email %>
+                                    <br />
+                                    <strong>Social Media Platform</strong>: <%= @request.social_platform %>
+                                    <br />
+                                    <strong>Rate</strong>: <%= "$" + @request.promo.package_price %>
+                                    <br />
+                                    <strong>Photo Link</strong>:
+                                    <%= @request.image? ? (pretty_display("https://myrates.co/#{@request.image.url}")) : 'N/A'  %>
+                                    <br />
+                                    <strong>Video Link</strong>: <%= pretty_display @request.video_link %>
+                                    <br />
+                                    <strong>Audio Link</strong>: <%= pretty_display @request.audio_link %>
+                                    <br />
+                                    <strong>Website Link</strong>: <%= pretty_display @request.website_link %>
+                                    <br />
+                                    <strong>Caption</strong>: <%= pretty_display @request.caption %>
+                                    <br />
+                                    <strong>Hashtags</strong>: <%= pretty_display @request.hashtags %>
+                                    <br />
+                                    <strong>Additional Notes</strong>: <%= pretty_display @request.additional_notes %>
+                                </p>
+                                
+                                <p>
+                                    <a href="mailto:<%= @request.client_email %>?Subject=RE: Your Promoinbio Request With <%= @promoter.username %>"
+                                        style="padding-top: 15px !important; padding-bottom: 15px !important;
+                                            border-radius: 2px !important; border: 1px solid #007bff !important;
+                                            background-color: #007bff !important; display: block !important;
+                                            color: #fff !important; text-align: center; text-decoration: none;
+                                            font-size: 16px !important">
+                                        Reply To This Client
+                                    </a>
+                                </p>
+                                
+                                <p>
+                                    If you have any question or concern, feel free to
+                                    <a href="mailto:teammyrates@gmail.com">email us</a>.
+                                </p>
+                                
+                                <p>
+                                    - The MyRates Team
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center !important;">
+                            <p style="font-size: 13px !important; color: #505051 !important;">
+                                &copy; Bloom Digital LLC | <a href="https://myrates.herokuapp.com/help/unsubscribe_from_email">Unsubscribe</a>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </body>
 </html>
