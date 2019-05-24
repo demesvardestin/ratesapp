@@ -5,7 +5,7 @@ class RequestMailer < ApplicationMailer
     def send_request(promo_request)
         @request = promo_request
         @promoter = @request.promo.user
-        attachments['image.png'] = File.read("#{@request.image.url}") if @request.image?
+        attachments['image.png'] = @request.image.url if @request.image?
         
         unless @promoter.unsubscribed_from_email
             mail(to: @promoter.email, subject: "New promo request: #{@request.token}")
