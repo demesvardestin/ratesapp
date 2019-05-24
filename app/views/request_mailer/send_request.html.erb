@@ -20,7 +20,7 @@
                                 <p>
                                     Hi <%= @promoter.username %>,
                                     <br /><br />
-                                    You have a new promo request.
+                                    You have a new promo request. Here are the details:
                                 </p>
                                 
                                 <p>
@@ -31,7 +31,7 @@
                                     <strong>Rate</strong>: <%= "$" + @request.promo.package_price %>
                                     <br />
                                     <strong>Photo Link</strong>:
-                                    <%= @request.image? ? (pretty_display("https://myrates.co/#{@request.image.url}")) : 'N/A'  %>
+                                    <%= @request.image? ? (pretty_display(@request.image.url})) : 'N/A'  %>
                                     <br />
                                     <strong>Video Link</strong>: <%= pretty_display @request.video_link %>
                                     <br />
@@ -47,7 +47,7 @@
                                 </p>
                                 
                                 <p>
-                                    <a href="mailto:<%= @request.client_email %>?Subject=RE: Your Promoinbio Request With <%= @promoter.username %>"
+                                    <a href="mailto:<%= @request.client_email %>?Subject=RE: Your MyRates Request With <%= @promoter.username %>"
                                         style="padding-top: 15px !important; padding-bottom: 15px !important;
                                             border-radius: 2px !important; border: 1px solid #007bff !important;
                                             background-color: #007bff !important; display: block !important;

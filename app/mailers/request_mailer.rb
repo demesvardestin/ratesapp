@@ -8,7 +8,7 @@ class RequestMailer < ApplicationMailer
         attachments['image.png'] = @request.image.url if @request.image?
         
         unless @promoter.unsubscribed_from_email
-            mail(to: @promoter.email, subject: "New promo request: #{@request.token}")
+            mail(to: @promoter.email, subject: "New Request: #{@request.token}")
         end
     end
     
