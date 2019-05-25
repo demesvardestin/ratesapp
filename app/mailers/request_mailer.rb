@@ -1,7 +1,6 @@
 class RequestMailer < ApplicationMailer
     add_template_helper(ApplicationHelper)
-    default from: %("MyRates" <"no-reply@myrates.co">)
-    default sender: 'no-reply@myrates.co', reply_to: 'help@myrates.co'
+    default from: 'MyRates', sender: 'no-reply@myrates.co', reply_to: 'help@myrates.co'
  
     def send_request(promo_request)
         @request = promo_request
