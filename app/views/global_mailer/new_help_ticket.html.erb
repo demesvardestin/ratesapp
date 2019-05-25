@@ -18,34 +18,17 @@
                                     alt="MyRates Logo" title="MyRates Logo" height="80" />
                                 
                                 <p>
-                                    Hi <%= @promoter.username %>,
-                                    <br /><br />
-                                    Thanks for joining MyRates!
-                                    Our easy-to-use platform allows social media users to
-                                    view your promo rates and submit promo requests directly to
-                                    your inbox so that you can avoid unnecessary rounds of email
-                                    exchanges. We look forward to helping you
-                                    optimize your promo sales!
+                                    New help ticket:
                                 </p>
                                 
                                 <p>
-                                    <a href="https://myrates.herokuapp.com/login"
-                                        style="padding-top: 15px !important; padding-bottom: 15px !important;
-                                            border-radius: 2px !important; border: 1px solid #007bff !important;
-                                            background-color: #007bff !important; display: block !important;
-                                            color: #fff !important; text-align: center; text-decoration: none;
-                                            font-size: 16px !important">
-                                        Start Adding Your Rates
-                                    </a>
+                                    <b>Email</b>:
+                                    <%= @ticket.email %>
                                 </p>
                                 
                                 <p>
-                                    If you did not create this account, please
-                                    <a href="https://myrates.herokuapp.com/pages/help">click here</a>.
-                                </p>
-                                
-                                <p>
-                                    - The MyRates Team
+                                    <b>Message</b>:
+                                    <%= @ticket.content %>
                                 </p>
                             </div>
                         </td>

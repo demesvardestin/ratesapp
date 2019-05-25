@@ -4,7 +4,7 @@ Client: <%= @request.client_email %>
 
 Platform: <%= @request.social_platform %>
 
-Package Price: <%= "$" + @request.promo.package_price %>
+Package Price: <%= number_to_currency @request.promo.package_price %>
 
 Photo Link: <%= @request.image? ? (pretty_display(@request.image.url)) : 'N/A'  %>
 

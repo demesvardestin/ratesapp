@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   resources :promos, except: [:show, :index, :new]
   resources :promo_requests, except: [:index]
   resources :users, only: [:update, :show]
+  resources :help_tickets, only: :create
   
   get '/:username', to: "users#show", as: "promoter"
   
@@ -38,6 +39,7 @@ Rails.application.routes.draw do
   get '/pages/help', to: 'welcome#help'
   get '/pages/terms', to: 'welcome#terms'
   get '/pages/privacy', to: 'welcome#privacy'
+  post '/account/set_email_preferences', to: 'users#set_email_preferences'
   get '/account/settings', to: "users#edit"
   get '/promo/requests', to: "users#promo_requests"
   get '/requests/fetch_processed_requests', to: "promo_requests#processed"

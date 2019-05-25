@@ -33,56 +33,7 @@
                                 </a>
                             </p>
                         <% else %>
-                            <form action="/submit_help_ticket" method="post" id="help-ticket-form"
-                                onsubmit="disableForm()">
-                                <div class="field">
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary btn-block topic-selector" type="button"
-                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false"
-                                            style="border-color: #e7e7e9 !important; background-color: transparent;
-                                                color: #a1a1a3; box-shadow: none !important;">
-                                            Select a topic <i class="fas fa-angle-down"></i>
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
-                                            style="border: 1px solid #e7e7e9; width: 100%;">
-                                            <% help_topics.each do |t| %>
-                                                <a class="dropdown-item cursor-pointer"
-                                                    onclick="$('.topic-selector').html(this.innerHTML + `<i class='fas fa-angle-down'></i>`);
-                                                        document.querySelector('#subject').value = this.innerHTML;">
-                                                    <%= t %>
-                                                </a>
-                                            <% end %>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" name="subject" id="subject">
-                                </div>
-                                
-                                <div class="field">
-                                    <label for="name">Your Name</label>
-                                    <input type="text" name="name" placeholder="John Doe" class="form-control"
-                                        required="true">
-                                </div>
-                                
-                                <div class="field">
-                                    <label for="name">Your Email</label>
-                                    <input type="email" name="email" placeholder="john@example.com" class="form-control"
-                                        required="true">
-                                </div>
-                                
-                                <div class="field">
-                                    <label for="name">Additional Details (optional)</label>
-                                    <textarea type="text" name="message" placeholder="Provide more details for your request"
-                                        class="form-control" style="min-height: 100px;"></textarea>
-                                </div>
-                                
-                                <div class="action">
-                                    <button type="submit" class="btn btn-success btn-block box-shadow"
-                                        id="help-form-btn">
-                                        Submit
-                                    </butotn>
-                                </div>
-                            </form>
+                            <%= render 'help_ticket_form' %>
                         <% end %>
                     </div>
                 </div>

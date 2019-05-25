@@ -1,0 +1,17 @@
+<%= form_for(@ticket, :html => { :multipart => true, :id => 'help-ticket-form' }) do |f| %>
+    <div class="field">
+        <label for="name">Your Email</label>
+        <%= f.email_field :email, class: "form-control", placeholder: "john@example.com", required: true %>
+    </div>
+    
+    <div class="field">
+        <label for="name">Additional Details (optional)</label>
+        <%= f.text_area :content, class: "form-control", style: "min-height: 150px;",
+            placeholder: "Provide more details for your request", required: true %>
+    </div>
+    
+    <div class="actions">
+        <%= f.submit "Submit", class: "btn btn-success btn-block box-shadow",
+            data: { :disable_with => "Submitting..." } %>
+    </div>
+<% end %>

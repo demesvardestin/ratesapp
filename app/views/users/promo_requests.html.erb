@@ -35,7 +35,9 @@
                 id="all-requests">
                 <% if @requests.present? %>
                     <%= render partial: "promo_requests/requests", locals: { requests: @requests } %>
-                    <%= will_paginate @requests, :page_links => false %>
+                    <div style="margin-top: 10px;">
+                        <%= will_paginate @requests, :page_links => false %>
+                    </div>
                 <% else %>
                     <p align="center">You haven't received any request yet</p>
                 <% end %>

@@ -11,6 +11,10 @@ class ImageUploader < CarrierWave::Uploader::Base
     %w(jpg jpeg gif png)
   end
   
+  def default_url(*args)
+    "https://s3.us-east-2.amazonaws.com/myrates/myratesemaillogo.png"
+  end
+  
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end

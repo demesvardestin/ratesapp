@@ -22,7 +22,7 @@
                 
                 <div class="attribute-col">
                     <h6><i class="fas fa-tag"></i> Price</h6>
-                    <p><%= "$" + @request.promo.package_price %></p>
+                    <p><%= number_to_currency @request.promo.package_price %></p>
                 </div>
                 
                 <hr>

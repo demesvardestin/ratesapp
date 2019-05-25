@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    skip_before_action :verify_authenticity_token, only: :update
+    skip_before_action :verify_authenticity_token, only: [:update, :set_email_preferences]
     before_action :authenticate_user!, except: [:show]
     
     def show
@@ -29,9 +29,30 @@ class UsersController < ApplicationController
         @promo = @promoter.promos.first
     end
     
-    def unsubscribe
+    def set_email_preferences
         @promoter = current_user
-        @promoter.update(unsubscribed_from_email: true)
+        promotional_sub_status = case params[:promo_email].strip.downcase
+            when 'subscribe'
+                false
+            when 'unsubscribe'
+                true
+            else
+                @promoter.unsubscribed_from_promotional_emails
+        end
+        
+        general_sub_status = case params[:unsubscribe].strip.downcase
+            when 'subscribe'
+                false
+            when 'unsubscribe'
+                true
+            else
+                @promoter.unsubscribed_from_email
+        end
+        
+        @promoter.update(unsubscribed_from_email: general_sub_status,
+            unsubscribed_from_promotional_emails: promotional_sub_status)
+            
+        redirect_to :back, notice: "Account details updated!"
     end
     
     def update

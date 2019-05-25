@@ -26,7 +26,7 @@
                                 <p>
                                     <strong>Social Media Platform</strong>: <%= @request.social_platform %>
                                     <br />
-                                    <strong>Rate</strong>: <%= "$" + @request.promo.package_price %>
+                                    <strong>Rate</strong>: <%= number_to_currency @request.promo.package_price %>
                                     <br />
                                     <strong>Photo Link</strong>:
                                     <%= @request.image? ? (pretty_display(@request.image.url)) : 'N/A'  %>

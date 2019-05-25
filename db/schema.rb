@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190523204048) do
+ActiveRecord::Schema.define(version: 20190525164502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(version: 20190523204048) do
     t.datetime "remember_created_at"
     t.index ["email"], name: "index_brands_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_brands_on_reset_password_token", unique: true, using: :btree
+  end
+
+  create_table "help_tickets", force: :cascade do |t|
+    t.boolean  "resolved",   default: false
+    t.string   "email"
+    t.text     "content"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "messages", force: :cascade do |t|
@@ -67,24 +75,25 @@ ActiveRecord::Schema.define(version: 20190523204048) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
     t.string   "access_token"
-    t.string   "email",                   default: "",        null: false
-    t.string   "encrypted_password",      default: "",        null: false
+    t.string   "email",                                default: "",        null: false
+    t.string   "encrypted_password",                   default: "",        null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.boolean  "claimed",                 default: false
+    t.boolean  "claimed",                              default: false
     t.string   "username"
     t.string   "followed_by"
     t.string   "follows"
     t.integer  "post_count"
     t.string   "stripe_token"
     t.string   "image"
-    t.string   "theme_color",             default: "#eef3f5"
+    t.string   "theme_color",                          default: "#eef3f5"
     t.string   "background_image"
-    t.boolean  "unsubscribed_from_email", default: false
+    t.boolean  "unsubscribed_from_email",              default: false
+    t.boolean  "unsubscribed_from_promotional_emails", default: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

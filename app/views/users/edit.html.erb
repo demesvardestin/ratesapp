@@ -12,7 +12,7 @@
         <div class="card">
             <div class="card-header"
                 style="background-color: #00adf2; color: #fff; border-bottom: none;">
-                <h6 style="margin-bottom: 0;">Account Settings</h6>
+                <h6 style="margin-bottom: 0;">Account</h6>
             </div>
             <div class="card-body" align="center"
                 style="border-bottom: none; padding: 20px; font-size: 15px !important;">
@@ -21,15 +21,14 @@
         </div>
     </div>
     
-    <div class="col-md-4" align="center">
+    <div class="col-md-4" align="center" style="height: calc(100% - 15px);">
         <div class="card">
             <div class="card-header"
                 style="background-color: #00adf2; color: #fff; border-bottom: none;">
                 <h6 style="margin-bottom: 0;">Social</h6>
             </div>
             <div class="card-body">
-                <p style="font-weight: bold;">Social media bio link</p>
-                <div class="input-group mb-3">
+                <div class="input-group mb-3" style="margin-bottom: 0.75rem !important;">
                     <input type="text" class="form-control"
                         aria-label="bio-link" aria-describedby="button-addon2"
                         value="myrates.co/<%= @promoter.username %>"
@@ -39,16 +38,85 @@
                             id="button-addon2" onclick="copyText()"
                             style="border-top-left-radius: 0 !important;
                                 border-bottom-left-radius: 0 !important;
-                                box-shadow: none !important; border-color: #e7e7e9 !important;">Copy</button>
+                                box-shadow: none !important; border-color: #e7e7e9 !important;">Add link to bio</button>
                     </div>
                 </div>
-                
-                <hr>
                   
-                <a href="/" class="btn btn-primary btn-block"
-                    style="padding-top: 15px; padding-bottom: 15px;">
-                    My Rates
+                <a href="/" align="center">
+                    Go to my rates <i class="fas fa-long-arrow-alt-right"></i>
                 </a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header"
+                style="background-color: #00adf2; color: #fff; border-bottom: none;">
+                <h6 style="margin-bottom: 0;">Email</h6>
+            </div>
+            <div class="card-body" align="center"
+                style="border-bottom: none; padding: 20px; font-size: 15px !important;">
+                <form action="/account/set_email_preferences" method="post">
+                    <div class="field">
+                        <label>Promotional emails</label>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary btn-block promo-email-dropdown" type="button"
+                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false"
+                                style="border-color: #e7e7e9 !important; background-color: transparent;
+                                    color: #a1a1a3; box-shadow: none !important;">
+                                <% if @promoter.unsubscribed_from_promotional_emails %>
+                                    Unsubscribed <i class="fas fa-angle-down"></i>
+                                <% else %>
+                                    Subscribed <i class="fas fa-angle-down"></i>
+                                <% end %>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                                style="border: 1px solid #e7e7e9; width: 100%;">
+                                <% ["Subscribe", "Unsubscribe"].each do |t| %>
+                                    <a class="dropdown-item cursor-pointer"
+                                        onclick="$('.promo-email-dropdown').html(this.innerHTML + `<i class='fas fa-angle-down'></i>`);
+                                            document.querySelector('#promo-email').value = this.text;">
+                                        <%= t %>
+                                    </a>
+                                <% end %>
+                            </div>
+                        </div>
+                        <input type="hidden" name="promo_email" id="promo-email">
+                    </div>
+                    
+                    <div class="field">
+                        <label>All other emails</label>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary btn-block unsubscribe-dropdown" type="button"
+                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false"
+                                style="border-color: #e7e7e9 !important; background-color: transparent;
+                                    color: #a1a1a3; box-shadow: none !important;">
+                                <% if @promoter.unsubscribed_from_email %>
+                                    Unsubscribed <i class="fas fa-angle-down"></i>
+                                <% else %>
+                                    Subscribed <i class="fas fa-angle-down"></i>
+                                <% end %>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                                style="border: 1px solid #e7e7e9; width: 100%;">
+                                <% ["Subscribe", "Unsubscribe"].each do |t| %>
+                                    <a class="dropdown-item cursor-pointer"
+                                        onclick="$('.unsubscribe-dropdown').html(this.innerHTML + `<i class='fas fa-angle-down'></i>`);
+                                            document.querySelector('#unsubscribe').value = this.text;">
+                                        <%= t %>
+                                    </a>
+                                <% end %>
+                            </div>
+                        </div>
+                        <input type="hidden" name="unsubscribe" id="unsubscribe">
+                    </div>
+                    
+                    <div class="action">
+                        <input type="submit" class="btn btn-success btn-block box-shadow"
+                            value="Update">
+                    </div>
+                </form>
             </div>
         </div>
     </div>

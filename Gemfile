@@ -17,7 +17,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'omniauth', '~> 1.6.1'
 gem 'omniauth-auth0', '~> 2.0.0'
 gem 'devise'
-gem 'mail_form'
 gem 'carrierwave', '~> 1.0'
 gem "fog-aws"
 gem 'file_validators'
