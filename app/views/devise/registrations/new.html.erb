@@ -4,7 +4,12 @@
     }
     
     body {
-        margin-top: -45px !important;
+        padding-top: 0 !important;
+    }
+    
+    #base-body {
+      min-height: calc(100vh - 65px);
+      margin-bottom: 15px;
     }
     
     .form-control {
@@ -43,7 +48,7 @@
             
             <div class="field">
               <%= f.label :username %><br />
-              <%= f.text_field :username, autofocus: true, autocomplete: "username", class:"form-control", placeholder:"Your social media username" %>
+              <%= f.text_field :username, autofocus: true, autocomplete: "username", class:"form-control", placeholder:"Social media username" %>
             </div>
           
             <div class="field">

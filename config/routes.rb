@@ -33,8 +33,11 @@ Rails.application.routes.draw do
   get '/assets/download_image', to: 'promo_requests#download_image'
   get '/request/ship', to: 'promo_requests#ship_request'
   get '/request/receipt', to: 'promo_requests#receipt'
-  post '/send_email', to: 'promo_requests#send_email'
   
+  post '/submit_help_ticket', to: 'welcome#submit_help_ticket'
+  get '/pages/help', to: 'welcome#help'
+  get '/pages/terms', to: 'welcome#terms'
+  get '/pages/privacy', to: 'welcome#privacy'
   get '/account/settings', to: "users#edit"
   get '/promo/requests', to: "users#promo_requests"
   get '/requests/fetch_processed_requests', to: "promo_requests#processed"

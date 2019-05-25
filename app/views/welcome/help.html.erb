@@ -1,0 +1,102 @@
+<style type="text/css">
+    body {
+        padding-top: 0 !important;
+        background: #396afc;
+        background: -webkit-linear-gradient(to right, #2948ff, #396afc);
+        background: linear-gradient(to right, #2948ff, #396afc);
+    }
+    
+    #contact-form {
+      min-height: calc(100vh - 155px);
+    }
+</style>
+
+<section id="contact-form" style="padding: 30px 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card box-shadow">
+                    <div class="card-header"
+                        style="background-color: #00adf2; color: #fff; border-bottom: none;">
+                        What Can We Help You With?
+                    </div>
+                    
+                    <div class="card-body">
+                        <% if params[:submitted] %>
+                            <p align="center">
+                                Your request has been submitted!
+                            </p>
+                            
+                            <p align="center">
+                                <a href="/pages/help" class="btn btn-link">
+                                    Return to form
+                                </a>
+                            </p>
+                        <% else %>
+                            <form action="/submit_help_ticket" method="post" id="help-ticket-form"
+                                onsubmit="disableForm()">
+                                <div class="field">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary btn-block topic-selector" type="button"
+                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false"
+                                            style="border-color: #e7e7e9 !important; background-color: transparent;
+                                                color: #a1a1a3; box-shadow: none !important;">
+                                            Select a topic <i class="fas fa-angle-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                                            style="border: 1px solid #e7e7e9; width: 100%;">
+                                            <% help_topics.each do |t| %>
+                                                <a class="dropdown-item cursor-pointer"
+                                                    onclick="$('.topic-selector').html(this.innerHTML + `<i class='fas fa-angle-down'></i>`);
+                                                        document.querySelector('#subject').value = this.innerHTML;">
+                                                    <%= t %>
+                                                </a>
+                                            <% end %>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="subject" id="subject">
+                                </div>
+                                
+                                <div class="field">
+                                    <label for="name">Your Name</label>
+                                    <input type="text" name="name" placeholder="John Doe" class="form-control"
+                                        required="true">
+                                </div>
+                                
+                                <div class="field">
+                                    <label for="name">Your Email</label>
+                                    <input type="email" name="email" placeholder="john@example.com" class="form-control"
+                                        required="true">
+                                </div>
+                                
+                                <div class="field">
+                                    <label for="name">Additional Details (optional)</label>
+                                    <textarea type="text" name="message" placeholder="Provide more details for your request"
+                                        class="form-control" style="min-height: 100px;"></textarea>
+                                </div>
+                                
+                                <div class="action">
+                                    <button type="submit" class="btn btn-success btn-block box-shadow"
+                                        id="help-form-btn">
+                                        Submit
+                                    </butotn>
+                                </div>
+                            </form>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    document.querySelector('#help-ticket-form')
+    .addEventListener('submit', e => {
+        let btn = document.querySelector('#help-form-btn');
+        
+        btn.setAttribute('disabled', '');
+        btn.innerHTML = 'Submitting...';
+    });
+</script>

@@ -8,8 +8,16 @@ class RequestMailer < ApplicationMailer
         attachments['image.png'] = @request.image.url if @request.image?
         
         unless @promoter.unsubscribed_from_email
-            mail(to: @promoter.email, subject: "New Request: #{@request.token}")
+            mail(to: @promoter.email, subject: "You have a new request")
         end
+    end
+    
+    def send_confirmation(promo_request)
+        @request = promo_request
+        @promoter = @request.promo.user
+        attachments['image.png'] = @request.image.url if @request.image?
+        
+        mail(to: @request.client_email, subject: "Your request has been submitted!")
     end
     
     def send_welcome_email(promoter)

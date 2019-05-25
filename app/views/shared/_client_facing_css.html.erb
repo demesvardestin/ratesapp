@@ -4,12 +4,21 @@
     }
     
     body {
-        margin-top: -25px !important;
+        padding-top: 30px !important;
         background: <%= @promoter.theme_color if @promoter.theme_color.present? %>;
         color: <%= "#fff !important;" if @promoter.theme_color != '#eef3f5' %>;
     }
     
     #platform-logo a, .profile-link a {
         color: <%= "#fff !important;" if @promoter.theme_color != '#eef3f5' %>;
+    }
+    
+    #base-body {
+      min-height: calc(100vh - 65px);
+      margin-bottom: 15px;
+    }
+    
+    footer {
+        display: none;
     }
 </style>

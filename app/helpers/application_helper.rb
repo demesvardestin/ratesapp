@@ -69,4 +69,9 @@ module ApplicationHelper
         return "" if request.path_info == "/"
         " | " + request.path_info.split('/').map(&:capitalize).join(' ')
     end
+    
+    def help_topics
+        ["I'm not receiving emails", "I'm having trouble logging into my account",
+            "I'm getting spammed", "Other"]
+    end
 end

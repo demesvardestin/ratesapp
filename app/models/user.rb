@@ -8,7 +8,7 @@ class User < ApplicationRecord
     before_create { self.claimed = true }
     after_create { send_welcome_email }
     
-    validates_uniqueness_of :username
+    validates_uniqueness_of :username, :email
     has_many :promos
     has_many :promo_requests, through: :promos
     

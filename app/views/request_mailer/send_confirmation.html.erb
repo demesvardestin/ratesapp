@@ -18,14 +18,12 @@
                                     alt="MyRates Logo" title="MyRates Logo" height="80" />
                                 
                                 <p>
-                                    Hi <%= @promoter.username %>,
+                                    Hello there,
                                     <br /><br />
-                                    You have a new promo request. Here are the details:
+                                    Thank you for submitting your request on MyRates. Here are the details:
                                 </p>
                                 
                                 <p>
-                                    <strong>Client</strong>: <%= @request.client_email %>
-                                    <br />
                                     <strong>Social Media Platform</strong>: <%= @request.social_platform %>
                                     <br />
                                     <strong>Rate</strong>: <%= "$" + @request.promo.package_price %>
@@ -47,13 +45,13 @@
                                 </p>
                                 
                                 <p>
-                                    <a href="mailto:<%= @request.client_email %>?Subject=RE: Your MyRates Request With <%= @promoter.username %>"
+                                    <a href="mailto:<%= @promoter.email %>?Subject=RE: MyRates Request <%= @request.token %>"
                                         style="padding-top: 15px !important; padding-bottom: 15px !important;
                                             border-radius: 2px !important; border: 1px solid #007bff !important;
                                             background-color: #007bff !important; display: block !important;
                                             color: #fff !important; text-align: center; text-decoration: none;
                                             font-size: 16px !important">
-                                        Reply To This Client
+                                        Message <%= @promoter.username %>
                                     </a>
                                 </p>
                                 
@@ -71,7 +69,7 @@
                     <tr>
                         <td style="text-align: center !important;">
                             <p style="font-size: 13px !important; color: #505051 !important;">
-                                &copy; MyRates | <a href="https://myrates.herokuapp.com/help/unsubscribe_from_email">Unsubscribe</a>
+                                &copy; MyRates
                             </p>
                         </td>
                     </tr>

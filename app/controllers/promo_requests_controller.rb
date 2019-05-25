@@ -14,6 +14,7 @@ class PromoRequestsController < ApplicationController
       if @request.save
         format.html { redirect_to request_receipt_path(:request_id => @request.token) }
         RequestMailer.send_request(@request).deliver_now
+        RequestMailer.send_confirmation(@request).deliver_now
       else
         @promoter = Promo.find(@request.promo_id).user
         format.html { render :new, :promoter => @promoter.username, :promo_id => @request.promo_id }

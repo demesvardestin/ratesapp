@@ -9,12 +9,43 @@
 
 <section id="home-banner">
     <div class="container">
+        <div class="modal fade" id="spamNoticeModal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content box-shadow" style="margin-top: 45px;">
+              <div class="modal-header" style="border-bottom: none;">
+                <h5 class="modal-title text-center" id="exampleModalLabel">
+                    Spam Notice
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>
+                    It's come to our attention that many of our emails are going
+                    directly to spam. If you are a new user, make sure to whitelist
+                    us from your spam folder immediately after signing up. We understand
+                    that emails are central to the service, and we're working diligently
+                    to resolve the issue. Thank you for your patience!
+                </p>
+                
+                <p>
+                   - The MyRates Team 
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button style="display: none;" data-toggle="modal" id="spamNoticeModalBtn"
+            data-target="#spamNoticeModal">
+            Add new rate
+        </button>
         <div class="row">
             <div class="col-md-6" style="color: #fff; padding-top: 90px;">
                 <h1 style="font-size: 3rem; line-height: 135%;">
                     <strong>
-                        A Simpler Way For Users To View And Request
-                        Promo Rates
+                        A Simpler Way For Users To View Your Promo Rates
                     </strong>
                 </h1>
                 <h4 style="margin-top: 15px;">Convenient, hassle-free, cost-free</h4>
@@ -28,8 +59,9 @@
             <div class="col-md-4 offset-md-2" style="padding-top: 40px;" align="center">
                 <img src="/images/mockup.png" height="500">
             </div>
-            <div class="col-md-12" align="center" style="bottom: 0;">
-                <i class="fas fa-angle-down" style="font-size: 25px; color: #fff;"></i>
+            <div class="col-md-12" align="center" style="bottom: 0;" id="scroll-icon">
+                <i class="fas fa-angle-down cursor-pointer" style="font-size: 25px; color: #fff;"
+                    onclick="window.scrollBy(0, 500);"></i>
             </div>
         </div>
     </div>
@@ -109,24 +141,13 @@
                             Features
                         </div>
                         <div class="card-body" align="center">
-                            <!--<h5>-->
-                            <!--    Features-->
-                            <!--</h5>-->
-                            
-                            <!--<hr style="background-color: #007bff; border-color: #007bff;-->
-                            <!--    height: 5px; width: 25%;">-->
-                            
                             <div id="features" style="margin-top: 15px;">
                                 <p>
-                                    <i class="fas fa-check" style="color: #007bff;"></i> Add as many rates as you want
+                                    <i class="fas fa-check" style="color: #007bff;"></i> Get requests sent directly to your email
                                 </p>
                                 
                                 <p>
-                                    <i class="fas fa-check" style="color: #007bff;"></i> Get all requests sent directly to your email
-                                </p>
-                                
-                                <p>
-                                    <i class="fas fa-check" style="color: #007bff;"></i> Manage all requests in your dashboard
+                                    <i class="fas fa-check" style="color: #007bff;"></i> Manage requests in your dashboard
                                 </p>
                                 
                                 <p>
@@ -139,6 +160,10 @@
                                 
                                 <p>
                                     <i class="fas fa-check" style="color: #007bff;"></i> Get paid directly through us (coming soon)
+                                </p>
+                                
+                                <p>
+                                    <i class="fas fa-check" style="color: #007bff;"></i> Track stats like visits and clicks (coming soon)
                                 </p>
                             </div>
                         </div>
@@ -160,4 +185,8 @@
             </div>
         </div>
     </div>
-</div>
+</section>
+
+<script type="text/javascript">
+    document.querySelector('#spamNoticeModalBtn').click();
+</script>
