@@ -1,6 +1,9 @@
 class GlobalMailer < ApplicationMailer
     add_template_helper(ApplicationHelper)
-    default from: 'MyRates', sender: 'no-reply@myrates.co'
+    default from: "%('MyRates' <'no-reply@myrates.co'>)"
+    default sender: 'no-reply@myrates.co'
+    default reply_to: 'teammyrates@gmail.com'
+    default unsubscribe: 'https://myrates.herokuapp.com/account/settings'
  
     def new_help_ticket(ticket)
         @ticket = ticket
