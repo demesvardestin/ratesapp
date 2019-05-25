@@ -77,7 +77,7 @@
                                 <% requests.unseen.each do |req| %>
                                     <div class="notification-item">
                                         <p style="font-size: 14px; margin-bottom: 0;">
-                                            New request from <%= req.client_email.truncate(15) %>
+                                            New request from <%= req.client_email.truncate(11) %>
                                             <span style="">
                                                 <%= link_to promo_request_path(:id => req.token), class:"btn btn-link", style: "padding: 0;" do %>
                                                     <i class="fas fa-search"></i>
