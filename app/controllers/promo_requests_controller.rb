@@ -49,7 +49,7 @@ class PromoRequestsController < ApplicationController
   
   def download_image
     @request = PromoRequest.find_by(token: params[:request_id])
-    send_file "#{Rails.root}/public#{@request.image.url}", type: "image/png", x_sendfile: true
+    send_file "#{@request.image.url}", type: "image/png", x_sendfile: true
   end
   
   def processed
