@@ -30,6 +30,8 @@
         </div>
         <div class="card-body">
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
+            
             <% flash.each do |name, msg| %>
               <% if msg.is_a?(String) && !msg.downcase.include?("signed out successfully") %>
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -49,7 +51,7 @@
             <div class="field">
               <%= f.label :username %><br />
               <%= f.text_field :username, autofocus: true, autocomplete: "username",
-                class:"form-control", placeholder:"Social media username",
+                class:"form-control", placeholder:"Social media username", value:"#{params[:username] if params[:username]}",
                 onkeyup:"document.querySelector('#username-display').value = this.value" %>
               <%= f.hidden_field :username_display, id:"username-display" %>
             </div>

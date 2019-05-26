@@ -5,12 +5,9 @@ class UsersController < ApplicationController
     def show
         @promoter = User.find_by(username_display: params[:username].downcase)
         
-        if @promoter.nil?
-            redirect_to "/404"
-            return
+        if !@promoter.nil?
+            @promos = @promoter.promos
         end
-        
-        @promos = @promoter.promos
     end
     
     def dashboard
