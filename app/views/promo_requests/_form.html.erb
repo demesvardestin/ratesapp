@@ -99,22 +99,6 @@
         </div>
     </div>
     
-    <hr>
-    
-    <% if @promoter.has_account_set_up %>
-        <div class="direct-payment" style="color: #a1a1a3; margin: 15px 0;">
-            <a class="btn btn-link" data-toggle="collapse" href="#payDirectly"
-                role="button" aria-expanded="false" aria-controls="payDirectly"
-                style="text-decoration: none;">
-                Optional - Pay directly on our platform <i class="fas fa-angle-down"></i>
-            </a>
-             
-            <div class="collapse" id="payDirectly">
-                <%= render "stripe/make_payment" %>
-            </div>
-        </div>
-    <% end %>
-    
     <div class="actions">
         <%= f.submit "Submit", class:"btn btn-primary btn-block", data: { :disable_with => "Submitting..." }%>
     </div>
