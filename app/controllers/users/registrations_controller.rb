@@ -43,7 +43,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :username])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :username, :username_display])
     devise_parameter_sanitizer.permit(:sign_in, keys: [:email, :password])
     # devise_parameter_sanitizer.permit(:account_update, keys: [:password, :password_confirmation, :current_password])
   end

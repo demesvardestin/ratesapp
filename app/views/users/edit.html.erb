@@ -34,11 +34,13 @@
                         value="myrates.co/<%= @promoter.username %>"
                         id="your-bio-link">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button"
-                            id="button-addon2" onclick="copyText()"
+                        <button class="btn btn-secondary" type="button"
+                            id="button-addon2" onclick="copyText(this)"
                             style="border-top-left-radius: 0 !important;
                                 border-bottom-left-radius: 0 !important;
-                                box-shadow: none !important; border-color: #e7e7e9 !important;">Add link to bio</button>
+                                box-shadow: none !important;">
+                            Add link to bio
+                        </button>
                     </div>
                 </div>
                   
@@ -160,10 +162,11 @@
 </div>
 
 <script type="text/javascript">
-    function copyText () {
+    function copyText (elem) {
         document.getElementById('your-bio-link').select();
         document.execCommand("copy");
         
-        alert("Copied link to clipboard!");
+        // alert("Copied link to clipboard!");
+        elem.innerHTML = 'Link Copied!'
     }
 </script>

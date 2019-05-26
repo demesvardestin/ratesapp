@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     before_action :authenticate_user!, except: [:show]
     
     def show
-        @promoter = User.find_by(username: params[:username])
+        @promoter = User.find_by(username_display: params[:username].downcase)
         
         if @promoter.nil?
             redirect_to "/404"
@@ -85,7 +85,7 @@ class UsersController < ApplicationController
     
     def user_params
         params.require(:user).permit(:username, :image, :theme_color, :background_image,
-            :paypal_link, :cashapp_link)
+            :paypal_link, :cashapp_link, :username_display)
     end
     
     def mobile_device?

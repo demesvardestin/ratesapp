@@ -19,7 +19,6 @@
 </style>
 
 <section id="register" class="container">
-  <%= render 'shared/spam_alert' %>
   <div class="row">
     <div class="col-md-4 offset-md-4">
       <%= render "shared/header" %>
@@ -49,7 +48,10 @@
             
             <div class="field">
               <%= f.label :username %><br />
-              <%= f.text_field :username, autofocus: true, autocomplete: "username", class:"form-control", placeholder:"Social media username" %>
+              <%= f.text_field :username, autofocus: true, autocomplete: "username",
+                class:"form-control", placeholder:"Social media username",
+                onkeyup:"document.querySelector('#username-display').value = this.value" %>
+              <%= f.hidden_field :username_display, id:"username-display" %>
             </div>
           
             <div class="field">
@@ -78,7 +80,3 @@
     </div>
   </div>
 </section>
-
-<script type="text/javascript">
-    document.querySelector('#spamNoticeModalBtn').click();
-</script>

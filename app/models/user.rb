@@ -6,9 +6,10 @@ class User < ApplicationRecord
         :recoverable, :rememberable, :validatable
     
     before_create { self.claimed = true }
+    before_create { self.username_display = self.username.downcase }
     after_create { send_welcome_email }
     
-    validates_uniqueness_of :username, :email
+    validates_uniqueness_of :username, :email, :username_display
     has_many :promos
     has_many :promo_requests, through: :promos
     
