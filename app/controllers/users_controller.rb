@@ -18,6 +18,10 @@ class UsersController < ApplicationController
         
         @promo = Promo.new
         @promos = @promoter.promos
+        
+        if mobile_device?
+            flash[:notice] = "Note: Adding and editing your rates is better handled on a desktop"
+        end
     end
     
     def payouts
@@ -77,6 +81,14 @@ class UsersController < ApplicationController
     
     def user_params
         params.require(:user).permit(:username, :image, :theme_color, :background_image)
+    end
+    
+    def mobile_device?
+        if session[:mobile_param]
+            session[:mobile_param] == "1"
+        else
+            request.user_agent =~ /Mobile|webOS/
+        end
     end
     
 end
