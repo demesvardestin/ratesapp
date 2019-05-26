@@ -41,7 +41,7 @@ class PromoRequest < ApplicationRecord
     protected
     
     def generate_token
-        token = RandomToken.random
+        token = RandomToken.random(8)
         
         until !PromoRequest.exists?(token: token)
           generate_token
