@@ -1,28 +1,37 @@
 <%= render 'shared/client_facing_css' %>
 
-<section class="row">
-    <%= render "users/promoter" %>
-    <div class="col-md-4 offset-md-4" align="center">
-        <div class="card">
-            <div class="card-header"
-                style="background-color: #00adf2; color: #fff; border-bottom: none;">
-                <h6 style="margin-bottom: 0;">Confirmation</h6>
+<section class="container">
+    <div class="row">
+        <%= render "users/promoter" %>
+        <div class="col-md-4 offset-md-4" align="center">
+            <div class="card">
+                <div class="card-header"
+                    style="background-color: #00adf2; color: #fff; border-bottom: none;">
+                    <h6 style="margin-bottom: 0;">Confirmation</h6>
+                </div>
+                <div class="card-body" style="border-bottom: none; padding: 20px;">
+                    <h5 style="color: #505051;">Your request has been sent!</h5>
+                    
+                    <p style="margin-top: 15px; color: #a1a1a3; font-size: 15px;">
+                        We've sent you a confirmation email. You may also receive a
+                        separate email from
+                        <%= link_to "@#{@promoter.username}", promoter_path(@promoter.username),
+                            style:"text-decoration: none; font-weight: bold;" %>
+                        with additional info such as payment details.
+                    </p>
+                    
+                    <p style="color: #a1a1a3; font-size: 15px;">
+                        Request ID: <b><%= @request.token %></b>
+                    </p>
+                </div>
             </div>
-            <div class="card-body" style="border-bottom: none; padding: 20px;">
-                <h5 style="color: #505051;">Your request has been sent!</h5>
-                
-                <p style="margin-top: 15px; color: #a1a1a3; font-size: 15px;">
-                    We've sent you a confirmation email. You may also receive a
-                    separate email from
-                    <%= link_to "@#{@promoter.username}", promoter_path(@promoter.username),
-                        style:"text-decoration: none; font-weight: bold;" %>
-                    with additional info such as payment details.
-                </p>
-                
-                <p style="color: #a1a1a3; font-size: 15px;">
-                    Request ID: <b><%= @request.token %></b>
-                </p>
-            </div>
+            
+            <% @promoter.payout_links.each do |link| %>
+                <a href="https://<%= link[:link] %>" class="btn btn-success box-shadow btn-block"
+                    style="padding-top: 15px; padding-bottom: 15px;" target="_blank">
+                    <i class="<%= link[:icon] %>"></i> Pay with <%= link[:service].capitalize %>
+                </a>
+            <% end %>
         </div>
     </div>
 </section>

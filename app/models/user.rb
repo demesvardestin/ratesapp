@@ -12,8 +12,12 @@ class User < ApplicationRecord
     has_many :promos
     has_many :promo_requests, through: :promos
     
-    def has_account_set_up
-        stripe_token.present?
+    def payout_links
+        links = []
+        links << { :service => "paypal", :link => "paypal.me/#{paypal_link}", :icon => "fab fa-paypal" } if paypal_link.present?
+        links << { :service => "cashapp", :link => "cash.me/#{cashapp_link}", :icon => "fas fa-dollar-sign" } if cashapp_link.present?
+        
+        return links
     end
     
     ## GLOBAL SEARCH

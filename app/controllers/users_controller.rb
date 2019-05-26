@@ -61,11 +61,15 @@ class UsersController < ApplicationController
     
     def update
         @promoter = current_user
+        if params[:user][:cashapp_link]
+            params[:user][:cashapp_link] = params[:user][:cashapp_link].split('$').join('')
+        end
+        
         begin
             @promoter.update!(user_params)
-            redirect_to account_settings_path, notice: "Account settings updated!"
+            redirect_to :back, notice: "Account settings updated!"
         rescue ActiveRecord::RecordInvalid => e
-            redirect_to account_settings_path, notice: e
+            redirect_to :back, notice: e
         end
     end
     
@@ -80,7 +84,8 @@ class UsersController < ApplicationController
     private
     
     def user_params
-        params.require(:user).permit(:username, :image, :theme_color, :background_image)
+        params.require(:user).permit(:username, :image, :theme_color, :background_image,
+            :paypal_link, :cashapp_link)
     end
     
     def mobile_device?
