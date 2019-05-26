@@ -5,6 +5,10 @@
         background: -webkit-linear-gradient(to right, #2948ff, #396afc);
         background: linear-gradient(to right, #2948ff, #396afc);
     }
+    
+    .modal-backdrop.show {
+        opacity: 0.8;
+    }
 </style>
 
 <section id="home-banner">
@@ -12,27 +16,17 @@
         <div class="modal fade" id="spamNoticeModal" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
-            <div class="modal-content box-shadow" style="margin-top: 45px;">
+            <div class="modal-content box-shadow"
+                style="margin-top: 45px; background-size: cover; background-repeat: no-repeat;
+                    background-image: url('https://s3.us-east-2.amazonaws.com/myrates/spam_notice.png');
+                    height: 425px;">
               <div class="modal-header" style="border-bottom: none;">
-                <h5 class="modal-title text-center" id="exampleModalLabel">
-                    Spam Notice
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close" style="color: #fff;">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                <p>
-                    It's come to our attention that many of our emails are going
-                    directly to spam. If you are a new user, make sure to whitelist
-                    us from your spam folder immediately after signing up. We understand
-                    that emails are central to the service, and we're working diligently
-                    to resolve the issue. Thank you for your patience!
-                </p>
-                
-                <p>
-                   - The MyRates Team 
-                </p>
               </div>
             </div>
           </div>
@@ -68,7 +62,8 @@
 </section>
 
 <section id="howto-banner">
-    <div class="jumbotron" style="background-color: #fff; border-radius: 0; padding: 2rem 0;">
+    <div class="jumbotron" style="background-color: #f6f9fc; border-radius: 0; padding: 2rem 0 3rem;
+        margin-bottom: 0;">
         <div class="container">
             <div class="row">
                 <div class="col-md-12" align="center" style="margin-bottom: 15px;">
@@ -132,9 +127,68 @@
 </section>
 
 <section id="features-banner">
+    <div class="row" style="margin: 0;">
+        <div class="half-display"
+            style="display: inline-block; width: 50%; min-height: 300px;
+                background-color: #fff; padding: 30px 0;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12" align="center" style="margin-bottom: 20px;">
+                        <h3 style="color: #7b7c7e;">Automatic Payouts</h3>
+                        
+                        <div style="margin: 20px 0;" align="center">
+                            <i class="fab fa-cc-stripe" style="font-size: 130px; color: #c4c7c9;"></i>
+                        </div>
+                        
+                        <div style="margin: 20px 0;" align="center">
+                            <p style="color: #7b7c7e;">
+                                (Coming soon via
+                                <a href="https://stripe.com" style="font-weight: bold;"
+                                    target="_blank">
+                                    Stripe
+                                </a>)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="half-display"
+            style="display: inline-block; width: 50%; min-height: 300px;
+                background-color: rgb(130, 94, 235); padding: 30px 0;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12" align="center" style="margin-bottom: 20px;">
+                        <h3 style="color: #fff;">Automatic Post Scheduling</h3>
+                        
+                        <div style="margin: 20px 0;" align="center">
+                            <i class="fab fa-buffer" style="font-size: 130px; color: #5b41a4;"></i>
+                        </div>
+                        
+                        <div style="margin: 20px 0;" align="center">
+                            <p style="color: #fff;">
+                                (Coming soon via
+                                <a href="https://buffer.com" style="color: #c4c7c9; font-weight: bold;"
+                                    target="_blank">
+                                    Buffer
+                                </a>)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="features-banner">
     <div class="jumbotron" style="background-color: transparent; border-radius: 0; padding: 2rem 0;">
         <div class="container">
             <div class="row">
+                <div class="col-md-12" align="center" style="margin-bottom: 20px;">
+                    <h3 style="color: #fff;">Simple Dashboard</h3>
+                </div>
                 <div class="col-md-5">
                     <div class="card box-shadow" align="center">
                         <div class="card-header">
@@ -151,15 +205,11 @@
                                 </p>
                                 
                                 <p>
-                                    <i class="fas fa-check" style="color: #007bff;"></i> Customize your background color
+                                    <i class="fas fa-check" style="color: #007bff;"></i> Customize your profile look
                                 </p>
                                 
                                 <p>
                                     <i class="fas fa-check" style="color: #007bff;"></i> Get your personal <strong>myrates.co</strong> url for your bio
-                                </p>
-                                
-                                <p>
-                                    <i class="fas fa-check" style="color: #007bff;"></i> Get paid directly through us (coming soon)
                                 </p>
                                 
                                 <p>

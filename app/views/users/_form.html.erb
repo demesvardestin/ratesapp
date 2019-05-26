@@ -12,17 +12,16 @@
         </div>
     <% end %>
     
-    <% if @promoter.image? %>
-        <div class="profile-image"
-            style="height: 120px; width: 120px; border-radius: 60px;
-                background-image: url('<%= @promoter.image.url %>');
-                background-size: cover; background-repeat: no-repeat;
-                margin-bottom: 15px;"></div>
-    <% else %>
-        <div class="profile-image" style="margin-bottom: 15px;">
-            <i class="far fa-user-circle" style="font-size: 120px;"></i>
-        </div>
-    <% end %>
+    <div class="profile-image"
+        style="height: 120px; width: 120px; border-radius: 60px;
+            background-image: url('<%= @promoter.image.url %>');
+            background-size: cover; background-repeat: no-repeat;
+            margin-bottom: 15px;"></div>
+
+    <!--<div class="profile-image" style="margin-bottom: 15px;">-->
+    <!--    <i class="far fa-user-circle" style="font-size: 120px;"></i>-->
+    <!--</div>-->
+    
     
     <div class="field">
         <a class="btn btn-primary" id="image-upload-trigger"
