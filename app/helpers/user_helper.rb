@@ -48,15 +48,15 @@ module UserHelper
     def promos_sold_for(period)
         case period.downcase
         when 'day'
-            current_user.promo_requests.paid.day
+            current_user.promo_requests.day
         when 'week'
-            current_user.promo_requests.paid.week
+            current_user.promo_requests.week
         when 'month'
-            current_user.promo_requests.paid.month
+            current_user.promo_requests.month
         when 'year'
-            current_user.promo_requests.paid.year
+            current_user.promo_requests.year
         else
-            current_user.promo_requests.paid.year
+            current_user.promo_requests.year
         end
     end
     
