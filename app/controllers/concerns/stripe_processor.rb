@@ -69,7 +69,8 @@ module StripeProcessor
         return charge
     end
     
-    def process_payout_for(receiver)
+    def process_payout(type, _params_)
+        account = _params_[:account]
         balance = Stripe::Balance.retrieve({ :stripe_account => receiver.stripe_token })
         balance_amt = balance["available"][0]["amount"]
         
@@ -80,6 +81,12 @@ module StripeProcessor
                 method: 'instant',
                 },
             { stripe_account: receiver.stripe_token }
+        )
+        
+        StripeLog.create(
+            account: account,
+            log_type: type,
+            stripe_id: params[:id]
         )
     end
     

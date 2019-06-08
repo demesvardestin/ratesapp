@@ -1,0 +1,83 @@
+<section id="stripe-earnings" align="center">
+    <div class="row">
+        <% if !current_user.promo_requests.present? %>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body" style="vertical-align: middle !important;">
+                        <div>
+                            <p>You havent received any request yet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% else %>
+            <div class="col-md-6">
+                <div class="card box-shadow">
+                    <div class="card-header"
+                        style="background-color: #00adf2; color: #fff; border-bottom: none;">
+                        <h6 style="margin-bottom: 0;">
+                            Today:
+                            <%= pluralize promos_sold_for('Day').count, 'request' %> received
+                        </h6>
+                    </div>
+                    
+                    <div class="card-body">
+                        <%= area_chart current_user.promo_requests.group_by_day(:created_at).count,
+                            points: false, height: '170px',
+                            thousands: ',' %>
+                    </div>
+                </div>
+                
+                <div class="card box-shadow">
+                    <div class="card-header"
+                        style="background-color: #00adf2; color: #fff; border-bottom: none;">
+                        <h6 style="margin-bottom: 0;">
+                            This week:
+                            <%= pluralize promos_sold_for('Week').count, 'request' %> received
+                        </h6>
+                    </div>
+                    
+                    <div class="card-body">
+                        <%= area_chart current_user.promo_requests.group_by_week(:created_at).count,
+                            points: false, height: '170px',
+                            thousands: ',' %>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+            
+                <div class="card box-shadow">
+                    <div class="card-header"
+                        style="background-color: #00adf2; color: #fff; border-bottom: none;">
+                        <h6 style="margin-bottom: 0;">
+                            This month:
+                            <%= pluralize promos_sold_for('Month').count, 'request' %> received
+                        </h6>
+                    </div>
+                    
+                    <div class="card-body">
+                        <%= area_chart current_user.promo_requests.group_by_month(:created_at).count,
+                            points: false, height: '170px',
+                            thousands: ',' %>
+                    </div>
+                </div>
+                
+                <div class="card box-shadow">
+                    <div class="card-header"
+                        style="background-color: #00adf2; color: #fff; border-bottom: none;">
+                        <h6 style="margin-bottom: 0;">
+                            This year:
+                            <%= pluralize promos_sold_for('Year').count, 'request' %> received
+                        </h6>
+                    </div>
+                    
+                    <div class="card-body">
+                        <%= area_chart current_user.promo_requests.group_by_month(:created_at).count,
+                            points: false, height: '170px',
+                            thousands: ',' %>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</section>

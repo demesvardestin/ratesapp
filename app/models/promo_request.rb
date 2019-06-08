@@ -50,11 +50,7 @@ class PromoRequest < ApplicationRecord
     end
     
     def payment_method
-        if direct_payment
-            "Paid to your debit card"
-        else
-            "Paid via Cashapp or Paypal"
-        end
+        "Cashapp or Paypal"
     end
     
     protected

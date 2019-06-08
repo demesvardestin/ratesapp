@@ -1,3 +1,8 @@
+<style type="text/css">
+    .navbar-toggler .fas:not(.active) {
+        display: none;
+    }
+</style>
 <nav class="navbar navbar-expand-lg navbar-light background-transparent"
     style="border-bottom: none !important; padding-top: 10px; padding-bottom: 10px;">
     <div class="container">
@@ -11,8 +16,10 @@
             onclick="$('#mobileNavbarCollapse').toggleClass('mobile-hide');
                     $('.navbar').toggleClass('background-transparent');
                     $('.fa-bars').toggleClass('color-blue');
-                    $('.navbar-brand').toggleClass('color-blue color-white');">
-            <i class="fas fa-bars" style="font-size: 26px; color: #fff;"></i>
+                    $('.navbar-brand').toggleClass('color-blue color-white');
+                    $('.navbar-toggler .fas').toggleClass('active');">
+            <i class="fas fa-bars active" style="font-size: 26px; color: #fff;"></i>
+            <i class="fas fa-times" style="font-size: 26px;"></i>
         </button>
         
         <div class="collapse navbar-collapse justify-content-end mobile-hide" id="mobileNavbarCollapse">

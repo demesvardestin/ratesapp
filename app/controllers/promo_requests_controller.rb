@@ -15,13 +15,7 @@ class PromoRequestsController < ApplicationController
     
     respond_to do |format|
       if @request.save
-        case @promoter.preferred_payout_method
-        when 'debit'
-          format.html { redirect_to request_payment_path(:request_id => @request.token) }
-        else
-          @request.update(direct_payment: false)
-          format.html { redirect_to request_receipt_path(:request_id => @request.token) }
-        end
+        format.html { redirect_to request_receipt_path(:request_id => @request.token) }
       else
         format.html { render :new, :promoter => @promoter.username, :promo_id => @request.promo_id }
       end
@@ -48,8 +42,6 @@ class PromoRequestsController < ApplicationController
     end
     
     redirect_to request_receipt_path(:request_id => @request.token), notice: "Your request has been successfully processed!"
-    
-    process_payout_for(@promoter)
     
     RequestMailer.send_payment_receipt_to_client(@request).deliver_now
     RequestMailer.send_payment_receipt_to_promoter(@request).deliver_now

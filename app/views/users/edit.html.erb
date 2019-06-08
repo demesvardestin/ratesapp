@@ -158,32 +158,6 @@
                                             <b><%= "@" + @promoter.username %></b>
                                         </p>
                                         
-                                        <% if current_user.promos.present? %>
-                                            <div class="row">
-                                                <div class="col-md-12" style="padding-left: 16px; padding-right: 16px;">
-                                                    <div class="card package-card box-shadow">
-                                                        <div class="card-header basic-package"
-                                                            style="color: #fff; font-weight: bold; border-bottom: none;
-                                                                padding-top: 25px;">
-                                                            <i class="fas fa-award" style="font-size: 25px;"></i>
-                                                            <h4><%= number_to_currency(shorten(number_to_human(@promo.package_price))) %></h4>
-                                                            <h6 data-toggle="modal" data-target="#viewPromoDetails<%= @promo.id %>"
-                                                                style="cursor: pointer; font-size: 15px;">
-                                                                View Details
-                                                            </h6>
-                                                        </div>
-                                                        <div class="card-footer" style="padding: 0;">
-                                                            <a class="btn btn-link btn-block" style="text-decoration: none;"
-                                                                data-toggle="modal" data-target="#editPromoDetails<%= @promo.id %>"
-                                                                href="#">
-                                                                Edit
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <% end %>
-                                        
                                         <section align="center" style="margin-top: 80px;">
                                             <p>
                                                 <button id="<%= 'color' + idx.to_s %>" class="btn btn-light box-shadow"

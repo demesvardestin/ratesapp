@@ -47,6 +47,8 @@ class UsersController < ApplicationController
         when 'payout.paid'
             user, body = payout_paid type, params
             RequestMailer.send_stripe_alert_to(user, "Your Payout Is On The Way!", body).deliver_now
+        when 'balance.available'
+            process_payout(type, params)
         when 'payout.failed'
             user, body = payout_failed type, params
             RequestMailer.send_stripe_alert_to(user, "Payout Issues", body).deliver_now
@@ -57,7 +59,7 @@ class UsersController < ApplicationController
         end
     end
     
-    def earnings
+    def analytics
         @promos = current_user.promo_requests
                     .paid.paginate(page: params[:page], per_page: 10)
                     .order('created_at DESC')

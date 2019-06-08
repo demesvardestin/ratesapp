@@ -1,3 +1,9 @@
+<style type="text/css">
+    .navbar-toggler .fas:not(.active) {
+        display: none;
+    }
+</style>
+
 <nav class="navbar navbar-expand-lg navbar-light fixed-top">
     <div class="container">
         <a class="navbar-brand color-blue" href="/">
@@ -7,8 +13,10 @@
             data-target="#mobileNavbarCollapse" aria-controls="mobileNavbarCollapse"
             aria-expanded="false" aria-label="Toggle navigation"
             style="padding: 0; border: 0; box-shadow: none; outline: none;"
-            onclick="$('#mobileNavbarCollapse').toggleClass('mobile-hide');">
-            <span class="navbar-toggler-icon"></span>
+            onclick="$('#mobileNavbarCollapse').toggleClass('mobile-hide');
+                    $('.navbar-toggler .fas').toggleClass('active');">
+            <i class="fas fa-bars active" style="font-size: 26px;"></i>
+            <i class="fas fa-times" style="font-size: 26px;"></i>
         </button>
         
         <div class="collapse navbar-collapse justify-content-end mobile-hide" id="mobileNavbarCollapse">
@@ -26,9 +34,9 @@
                 </li>
                 <div class="dropdown-divider"></div>
                 <li class="nav-item" style="margin: 0;">
-                    <a class="dropdown-item" href="/account/earnings"
+                    <a class="dropdown-item" href="/account/analytics"
                         style="padding: 15px 0;">
-                        <i class="fas fa-angle-right"></i> Earnings
+                        <i class="fas fa-angle-right"></i> Analytics
                     </a>
                 </li>
                 <div class="dropdown-divider"></div>
@@ -128,8 +136,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/account/earnings">
-                        Earnings
+                    <a class="nav-link" href="/account/analytics">
+                        Analytics
                     </a>
                 </li>
                 <li class="nav-item">

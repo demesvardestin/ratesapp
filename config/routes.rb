@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   post '/account/set_email_preferences', to: 'users#set_email_preferences'
   get '/account/settings', to: "users#edit"
   get '/account/payouts', to: "users#payouts"
-  get '/account/earnings', to: "users#earnings"
+  get '/account/analytics', to: "users#analytics"
   post '/add_stripe_account', to: 'users#add_stripe_account'
   get '/promo/requests', to: "users#promo_requests"
   get '/requests/fetch_processed_requests', to: "promo_requests#processed"
