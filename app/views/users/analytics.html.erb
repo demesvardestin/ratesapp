@@ -23,7 +23,7 @@
                     
                     <div class="card-body">
                         <%= area_chart current_user.promo_requests.group_by_day(:created_at).count,
-                            points: false, height: '170px',
+                            height: '170px',
                             thousands: ',' %>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                     
                     <div class="card-body">
                         <%= area_chart current_user.promo_requests.group_by_week(:created_at).count,
-                            points: false, height: '170px',
+                            height: '170px',
                             thousands: ',' %>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                     
                     <div class="card-body">
                         <%= area_chart current_user.promo_requests.group_by_month(:created_at).count,
-                            points: false, height: '170px',
+                            height: '170px',
                             thousands: ',' %>
                     </div>
                 </div>
@@ -72,8 +72,8 @@
                     </div>
                     
                     <div class="card-body">
-                        <%= area_chart current_user.promo_requests.group_by_month(:created_at).count,
-                            points: false, height: '170px',
+                        <%= area_chart current_user.promo_requests.group_by_year(:created_at).count,
+                            height: '170px',
                             thousands: ',' %>
                     </div>
                 </div>
