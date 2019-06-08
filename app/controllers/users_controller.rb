@@ -141,8 +141,12 @@ class UsersController < ApplicationController
             )
             current_user.update(stripe_token: acct.id, stripe_external_account_verified: false)
             redirect_to :back, notice: "Your card has been added and is pending verification"
-        rescue
-            redirect_to :back, notice: "An error occurred. Please try again."
+        rescue Stripe::StripeError => e
+            body = e.json_body
+            err = body[:error]
+            message = err[:message]
+            
+            redirect_to :back, notice: "#{message}. Error: #{err[:code]}. Status: #{e.http_status}"
             return
         end
     end

@@ -33,7 +33,7 @@
         display: none;
     }
     
-    .tab-content-container .nav-box, .payout-preference-box {
+    .tab-content-container .nav-box:not(:last-child), .payout-preference-box {
         border: 0.5px solid #e7e7e9;
         border-radius: 8px;
         padding: 30px 15px;
@@ -124,29 +124,93 @@
                             <% end %>
                         </div>
                         
-                        <div id="tab-content-debit" class="nav-box" style="padding-top: 0;">
+                        <div id="tab-content-debit" class="nav-box" style="border: 0.5px solid #e7e7e9; border-radius: 8px;">
                             <div class="alert alert-warning" role="alert"
-                                style="border-top-left-radius: 0; border-top-right-radius: 0;">
+                                style="border-radius: 0; border-top-left-radius: 8px; border-top-right-radius: 8px;">
                                 Available for US users only
                             </div>
-                            <% if current_user.stripe_token.present? %>
-                                <div id="card-on-file">
-                                    <p>
-                                        <%= card_brand.upcase %> ending in
-                                        <span class="color-blue bold">
-                                            <%= stripe_last_4 %>
-                                        </span>
-                                        
-                                        <% if current_user.stripe_external_account_verified %>
-                                            (<a onclick="$('#card-on-file').hide(); $('#change-card').show();"
-                                                class="color-blue cursor-pointer">change</a>)
-                                        <% else %>
-                                            <span class="badge badge-secondary">verificaiton pending</span>
-                                        <% end %>
-                                    </p>
-                                </div>
-                                
-                                <div id="change-card" style="display: none;">
+                            <div style="padding: 20px 15px;">
+                                <% if current_user.stripe_token.present? %>
+                                    <div id="card-on-file">
+                                        <p>
+                                            <%= card_brand.upcase %> ending in
+                                            <span class="color-blue bold">
+                                                <%= stripe_last_4 %>
+                                            </span>
+                                            
+                                            <% if current_user.stripe_external_account_verified %>
+                                                (<a onclick="$('#card-on-file').hide(); $('#change-card').show();"
+                                                    class="color-blue cursor-pointer">change</a>)
+                                            <% else %>
+                                                <span class="badge badge-secondary">verificaiton pending</span>
+                                            <% end %>
+                                        </p>
+                                    </div>
+                                    
+                                    <div id="change-card" style="display: none;">
+                                        <form method="post" id="payment-form" action="/add_stripe_account">
+                                            <div class="field">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div id="card-element" class="col-md-12"></div>
+                                                        <div id="card-errors" role="alert" class="col-md-12"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="field">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control" name="line1"
+                                                            placeholder="street addresss" required="true">
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" name="city"
+                                                            placeholder="city" required="true">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="text" class="form-control" name="state"
+                                                            placeholder="state" required="true">
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" name="postal_code"
+                                                            placeholder="zipcode" required="true">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="field">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control" name="phone"
+                                                            placeholder="Phone" required="true">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control" name="ssn_last_4"
+                                                            placeholder="SSN Last 4" required="true">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control" name="dob"
+                                                            placeholder="Date of birth - mm/dd/yyyy" required="true">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="actions">
+                                                <div class="row">
+                                                    <div class="col-md-12" align="right">
+                                                        <input type="submit" class="btn btn-primary btn-block"
+                                                            value="Update card"
+                                                            data-disable-with="Updating, please wait...">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <button class="btn btn-secondary btn-block"
+                                            style="margin-top: 15px;"
+                                            onclick="$('#change-card').hide(); $('#card-on-file').show();">
+                                            Cancel
+                                        </button>
+                                    </div>
+                                <% else %>
+                                    <h5 style="margin-bottom: 15px;">Get paid directly and avoid transaction fees</h5>
                                     <form method="post" id="payment-form" action="/add_stripe_account">
                                         <div class="field">
                                             <div class="row">
@@ -196,82 +260,20 @@
                                             <div class="row">
                                                 <div class="col-md-12" align="right">
                                                     <input type="submit" class="btn btn-primary btn-block"
-                                                        value="Update card"
-                                                        data-disable-with="Updating, please wait...">
+                                                        value="Add debit card"
+                                                        data-disable-with="Adding, please wait...">
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
-                                    <button class="btn btn-secondary btn-block"
-                                        style="margin-top: 15px;"
-                                        onclick="$('#change-card').hide(); $('#card-on-file').show();">
-                                        Cancel
-                                    </button>
-                                </div>
-                            <% else %>
-                                <h5 style="margin-bottom: 15px;">Get paid directly and avoid transaction fees</h5>
-                                <form method="post" id="payment-form" action="/add_stripe_account">
-                                    <div class="field">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div id="card-element" class="col-md-12"></div>
-                                                <div id="card-errors" role="alert" class="col-md-12"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="field">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <input type="text" class="form-control" name="line1"
-                                                    placeholder="street addresss" required="true">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <input type="text" class="form-control" name="city"
-                                                    placeholder="city" required="true">
-                                            </div>
-                                            <div class="col-md-2">
-                                                <input type="text" class="form-control" name="state"
-                                                    placeholder="state" required="true">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <input type="text" class="form-control" name="postal_code"
-                                                    placeholder="zipcode" required="true">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="field">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <input type="text" class="form-control" name="phone"
-                                                    placeholder="Phone" required="true">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="text" class="form-control" name="ssn_last_4"
-                                                    placeholder="SSN Last 4" required="true">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="text" class="form-control" name="dob"
-                                                    placeholder="Date of birth - mm/dd/yyyy" required="true">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="actions">
-                                        <div class="row">
-                                            <div class="col-md-12" align="right">
-                                                <input type="submit" class="btn btn-primary btn-block"
-                                                    value="Add debit card"
-                                                    data-disable-with="Adding, please wait...">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <p>
-                                   By adding your card, you agree to our
-                                   <a href="/pages/terms">terms</a> and Stripe's
-                                   <a href="https://stripe.com/connect/legal"
-                                    target="_blank">terms</a>.
-                                </p>
-                            <% end %>
+                                    <p>
+                                       By adding your card, you agree to our
+                                       <a href="/pages/terms">terms</a> and Stripe's
+                                       <a href="https://stripe.com/connect/legal"
+                                        target="_blank">terms</a>.
+                                    </p>
+                                <% end %>
+                            </div>
                         </div>
                     </div>
                     
