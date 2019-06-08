@@ -1,59 +1,293 @@
+<style type="text/css">
+    .StripeElement {
+        box-sizing: border-box;
+        height: 40px;
+        padding: 10px 12px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        background-color: white;
+        box-shadow: none !important;
+        -webkit-transition: box-shadow 150ms ease;
+        transition: box-shadow 150ms ease;
+        height: 50px;
+    }
+    
+    .StripeElement--focus {
+        box-shadow: 0 1px 3px 0 #cfd7df;
+    }
+    
+    .StripeElement--invalid {
+        border-color: #fa755a;
+    }
+    
+    .StripeElement--webkit-autofill {
+        background-color: #fefde5 !important;
+    }
+    
+    .card-toggle-btn a:not(.active) {
+        color: #007bff !important;
+        box-shadow: none;
+    }
+    
+    .tab-content-container .nav-box:not(.active) {
+        display: none;
+    }
+    
+    .tab-content-container .nav-box, .payout-preference-box {
+        border: 0.5px solid #e7e7e9;
+        border-radius: 8px;
+        padding: 30px 15px;
+    }
+    
+    @media only screen and (min-device-width: 767px) and (max-device-width: 1024px) {
+        .nav-box, .payout-preference-box {
+            padding: 0 !important;
+            border: none !important;
+        }
+    }
+</style>
+
 <section id="payouts">
-    <div class="row">
-        <div class="col-md-4 offset-md-4">
+    <div class="row" align="center">
+        <div class="col-md-8 offset-md-2">
             <div class="card">
-                <div class="card-header"
-                    style="background-color: #00adf2; color: #fff; border-bottom: none;">
-                    <h6 style="margin-bottom: 0;">Payout Links</h6>
-                </div>
-                
                 <div class="card-body" align="center"
                     style="border-bottom: none; padding: 20px; font-size: 15px !important;">
-                    <%= form_for(@promoter, :html => { :multipart => true, :id => "user-form" }) do |f| %>
-                        <% if @promoter.errors.any? %>
-                            <div id="error_explanation" class="alert alert-warning" role="alert">
-                                <h2>The following <%= pluralize(@promoter.errors.count, "error") %> occurred:</h2>
-                        
-                                <ul>
-                                    <% @promoter.errors.full_messages.each do |message| %>
-                                        <li><%= message %></li>
-                                    <% end %>
-                                </ul>
-                            </div>
-                        <% end %>
-                        
-                        <div class="field">
-                            <%= f.label :cashapp_link %>
-                            <div class="input-group mb-3" style="font-size: 15px !important;">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3"
-                                        style="background-color: #fff !important; border: 1px solid #e7e7e9 !important;
-                                            color: #a1a1a3;">
-                                        <i class="fas fa-dollar-sign" style="margin-right: 5px;"></i>
-                                        cash.me/$
-                                    </span>
+                    <ul class="nav nav-pills nav-fill card-toggle-btn">
+                        <li class="nav-item">
+                            <a class="nav-link active cursor-pointer">Cashapp</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link cursor-pointer">Debit Card</a>
+                        </li>
+                    </ul>
+                    
+                    <div class="tab-content-container" style="margin-top: 15px;">
+                        <div id="tab-content-cashapp" class="active nav-box">
+                            <h5 style="margin-bottom: 15px;">Add your Cashapp and PayPal links</h5>
+                            <%= form_for(@promoter, :html => { :multipart => true, :id => "user-form" }) do |f| %>
+                                <% if @promoter.errors.any? %>
+                                    <div id="error_explanation" class="alert alert-warning" role="alert">
+                                        <h2>The following <%= pluralize(@promoter.errors.count, "error") %> occurred:</h2>
+                                
+                                        <ul>
+                                            <% @promoter.errors.full_messages.each do |message| %>
+                                                <li><%= message %></li>
+                                            <% end %>
+                                        </ul>
+                                    </div>
+                                <% end %>
+                                
+                                <div class="field">
+                                    <!--<%= f.label :cashapp_link %>-->
+                                    <div class="input-group mb-3" style="font-size: 15px !important;">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon3"
+                                                style="background-color: #fff !important; border: 1px solid #e7e7e9 !important;
+                                                    color: #a1a1a3;">
+                                                <i class="fas fa-dollar-sign" style="margin-right: 5px;"></i>
+                                                cash.me/
+                                            </span>
+                                        </div>
+                                        <%= f.text_field :cashapp_link, class:"form-control", placeholder:"Username",
+                                            style:"border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important;" %>
+                                    </div>
                                 </div>
-                                <%= f.text_field :cashapp_link, class:"form-control", placeholder:"Username" %>
-                            </div>
+                                
+                                <div class="field">
+                                    <!--<%= f.label :paypal_link %>-->
+                                    <div class="input-group mb-3" style="font-size: 15px !important;">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon3"
+                                                style="background-color: #fff !important; border: 1px solid #e7e7e9 !important;
+                                                    color: #a1a1a3;">
+                                                <i class="fab fa-paypal" style="margin-right: 5px;"></i> paypal.me/
+                                            </span>
+                                        </div>
+                                        <%= f.text_field :paypal_link, class:"form-control", placeholder:"Username",
+                                            style:"border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important;" %>
+                                    </div>
+                                </div>
+                                
+                                <div class="action">
+                                    <%= f.submit "Update", class:"btn btn-success btn-block box-shadow",
+                                        data: { :disable_with => "Updating..." } %>
+                                </div>
+                            <% end %>
                         </div>
                         
-                        <div class="field">
-                            <%= f.label :paypal_link %>
-                            <div class="input-group mb-3" style="font-size: 15px !important;">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3"
-                                        style="background-color: #fff !important; border: 1px solid #e7e7e9 !important;
-                                            color: #a1a1a3;">
-                                        <i class="fab fa-paypal" style="margin-right: 5px;"></i> paypal.me/
-                                    </span>
-                                </div>
-                                <%= f.text_field :paypal_link, class:"form-control", placeholder:"Username" %>
+                        <div id="tab-content-debit" class="nav-box" style="padding-top: 0;">
+                            <div class="alert alert-warning" role="alert"
+                                style="border-top-left-radius: 0; border-top-right-radius: 0;">
+                                Available for US users only
                             </div>
+                            <% if current_user.stripe_token.present? %>
+                                <div id="card-on-file">
+                                    <p>
+                                        <%= card_brand.upcase %> ending in
+                                        <span class="color-blue bold">
+                                            <%= stripe_last_4 %>
+                                        </span>
+                                        
+                                        <% if current_user.stripe_external_account_verified %>
+                                            (<a onclick="$('#card-on-file').hide(); $('#change-card').show();"
+                                                class="color-blue cursor-pointer">change</a>)
+                                        <% else %>
+                                            <span class="badge badge-secondary">verificaiton pending</span>
+                                        <% end %>
+                                    </p>
+                                </div>
+                                
+                                <div id="change-card" style="display: none;">
+                                    <form method="post" id="payment-form" action="/add_stripe_account">
+                                        <div class="field">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div id="card-element" class="col-md-12"></div>
+                                                    <div id="card-errors" role="alert" class="col-md-12"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="line1"
+                                                        placeholder="street addresss" required="true">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control" name="city"
+                                                        placeholder="city" required="true">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input type="text" class="form-control" name="state"
+                                                        placeholder="state" required="true">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control" name="postal_code"
+                                                        placeholder="zipcode" required="true">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="phone"
+                                                        placeholder="Phone" required="true">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="ssn_last_4"
+                                                        placeholder="SSN Last 4" required="true">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="dob"
+                                                        placeholder="Date of birth - mm/dd/yyyy" required="true">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="actions">
+                                            <div class="row">
+                                                <div class="col-md-12" align="right">
+                                                    <input type="submit" class="btn btn-primary btn-block"
+                                                        value="Update card"
+                                                        data-disable-with="Updating, please wait...">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <button class="btn btn-secondary btn-block"
+                                        style="margin-top: 15px;"
+                                        onclick="$('#change-card').hide(); $('#card-on-file').show();">
+                                        Cancel
+                                    </button>
+                                </div>
+                            <% else %>
+                                <h5 style="margin-bottom: 15px;">Get paid directly and avoid transaction fees</h5>
+                                <form method="post" id="payment-form" action="/add_stripe_account">
+                                    <div class="field">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div id="card-element" class="col-md-12"></div>
+                                                <div id="card-errors" role="alert" class="col-md-12"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control" name="line1"
+                                                    placeholder="street addresss" required="true">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control" name="city"
+                                                    placeholder="city" required="true">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input type="text" class="form-control" name="state"
+                                                    placeholder="state" required="true">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control" name="postal_code"
+                                                    placeholder="zipcode" required="true">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control" name="phone"
+                                                    placeholder="Phone" required="true">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control" name="ssn_last_4"
+                                                    placeholder="SSN Last 4" required="true">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control" name="dob"
+                                                    placeholder="Date of birth - mm/dd/yyyy" required="true">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="actions">
+                                        <div class="row">
+                                            <div class="col-md-12" align="right">
+                                                <input type="submit" class="btn btn-primary btn-block"
+                                                    value="Add debit card"
+                                                    data-disable-with="Adding, please wait...">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <p>
+                                   By adding your card, you agree to our
+                                   <a href="/pages/terms">terms</a> and Stripe's
+                                   <a href="https://stripe.com/connect/legal"
+                                    target="_blank">terms</a>.
+                                </p>
+                            <% end %>
                         </div>
-                        
-                        <div class="action">
-                            <%= f.submit "Update", class:"btn btn-success btn-block box-shadow",
-                                data: { :disable_with => "Updating..." } %>
+                    </div>
+                    
+                    <% if current_user.stripe_external_account_verified %>
+                        <div align="center" class="payout-preference-box" style="margin-top: 15px;">
+                            <h5 style="margin-bottom: 15px;">Choose a payout method</h5>
+                            <form method="post" action="/set_payout_method" id="payout-method-form">
+                                <input type="hidden" id="method" name="method">
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                  <label class="btn btn-success
+                                      <%= "active" if current_user.preferred_payout_method == "links" || current_user.preferred_payout_method.nil? %>"
+                                    onclick="document.querySelector('#method').value = 'links';
+                                            document.querySelector('#payout-method-form').submit();">
+                                    <input type="radio" name="links" id="links" autocomplete="off" checked>
+                                    Links <%= "(current)" if current_user.preferred_payout_method == "links" || current_user.preferred_payout_method.nil? %>
+                                  </label>
+                                  <label class="btn btn-success <%= "active" if current_user.preferred_payout_method == "debit" %>"
+                                    onclick="document.querySelector('#method').value = 'debit';
+                                            document.querySelector('#payout-method-form').submit();">
+                                    <input type="radio" name="debit" id="debit" autocomplete="off">
+                                    Debit Card <%= "(current)" if current_user.preferred_payout_method == "debit" && current_user.stripe_external_account_verified %>
+                                  </label>
+                                </div>
+                            </div>
                         </div>
                     <% end %>
                 </div>
@@ -61,3 +295,66 @@
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+    $('.card-toggle-btn .nav-link').on('click', e => {
+        $('.card-toggle-btn .nav-link').toggleClass('active');
+        $('.tab-content-container div').toggleClass('active');
+    });
+</script>
+<script src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript">
+    var stripe = Stripe('pk_test_qLHYek2ZzEiXo8XEKJpApGoF00PfhLvqts');
+    var elements = stripe.elements();
+    var style = {
+      base: {
+        color: '#32325d',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSmoothing: 'antialiased',
+        fontSize: '16px',
+        '::placeholder': {
+          color: '#aab7c4'
+        }
+      },
+      invalid: {
+        color: '#fa755a',
+        iconColor: '#fa755a'
+      }
+    };
+    
+    var card = elements.create('card', {style: style});
+    card.mount('#card-element');
+    card.addEventListener('change', function(event) {
+      var displayError = document.getElementById('card-errors');
+      if (event.error) {
+        displayError.textContent = event.error.message;
+      } else {
+        displayError.textContent = '';
+      }
+    });
+    
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+    
+      stripe.createToken(card, { currency: 'usd' }).then(function(result) {
+        if (result.error) {
+          var errorElement = document.getElementById('card-errors');
+          errorElement.textContent = result.error.message;
+        } else {
+          stripeTokenHandler(result.token);
+        }
+      });
+    });
+    
+    function stripeTokenHandler(token) {
+      var form = document.getElementById('payment-form');
+      var hiddenInput = document.createElement('input');
+      hiddenInput.setAttribute('type', 'hidden');
+      hiddenInput.setAttribute('name', 'stripe_token');
+      hiddenInput.setAttribute('value', token.id);
+      form.appendChild(hiddenInput);
+    
+      form.submit();
+    }
+</script>

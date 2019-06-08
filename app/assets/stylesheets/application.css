@@ -20,7 +20,7 @@ body, html {
 
 body {
     color: #454545;
-    background-color: #eef3f5;
+    background-color: #fff;
     font-family: 'Mandali', sans-serif !important;
 }
 
@@ -54,7 +54,9 @@ body {
 
 
 .box-shadow {
-  box-shadow: 0 6px 15px 0 rgba(50,50,70,.08), 0 3px 5px 0 rgba(0,0,0,.05) !important;
+  box-shadow: 0 13px 27px -5px rgba(50,50,93,.25),
+  0 8px 16px -8px rgba(0,0,0,.3),
+  0 -6px 16px -6px rgba(0,0,0,.025);
 }
 
 .lightgray-background {
@@ -69,12 +71,14 @@ body {
     margin-bottom: 15px;
     border: none !important;
     border-width: 0.5px;
-    border-radius: 2px !important;
-    box-shadow: 0 6px 15px 0 rgba(50,50,70,.08), 0 3px 5px 0 rgba(0,0,0,.05) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 13px 27px -5px rgba(50,50,93,.25),
+    0 8px 16px -8px rgba(0,0,0,.3),
+    0 -6px 16px -6px rgba(0,0,0,.025);
 }
 
 .card-header, .card-footer {
-    border-radius: 2px !important;
+    border-radius: 8px !important;
     border-bottom-left-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
 }
@@ -108,7 +112,7 @@ body {
 .modal-content {
     top: 50px !important;
     border: none !important;
-    border-radius: 2px !important;
+    border-radius: 8px !important;
 }
 
 .notification-nav-item {
@@ -213,7 +217,7 @@ label {
 
 button:not(.close), input.btn, input.form-control {
     height: 50px;
-    border-radius: 2px !important;
+    border-radius: 4px !important;
     font-size: 15px;
 }
 
@@ -307,6 +311,10 @@ a.btn, input.btn, .form-control:focus {
     background-color: #51a351;
     border-color: #51a351;
     color: #fff;
+    width: 100%;
+    text-align: center;
+    opacity: 0.95;
+    filter: brightness(70%);
 }
 
 #request-image {
@@ -325,7 +333,8 @@ a.btn, input.btn, .form-control:focus {
 
 .pagination > span, .pagination > a {
     border: 0.5px solid #007bff;
-    padding: 10px;
+    border-radius: 8px;
+    padding: 8px 10px;
 }
 
 .pagination > span:first-child, .pagination > a:first-child {
@@ -439,12 +448,16 @@ a.btn, input.btn, .form-control:focus {
     color: #007bff !important;
 }
 
+.bold {
+    font-weight: bold !important;
+}
+
 footer > a, footer > span {
     color: #fff;
 }
 
 @media only screen and (min-device-width: 1025px) {
-    #newPromoPackageModal .modal-content {
+    #newPromoPackageModal .modal-content, .editPromoModal .modal-content {
         width: 125%;
         left: -15%;
     }

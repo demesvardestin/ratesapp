@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  log_type: MyString
+  additional_details: MyText
+  stripe_id: MyString
+  account: MyString
+  authorization: MyString
+  disabled_reasons: MyString
+  due_by: MyString
+  fields_needed: MyString
+  destination: MyString
+
+two:
+  log_type: MyString
+  additional_details: MyText
+  stripe_id: MyString
+  account: MyString
+  authorization: MyString
+  disabled_reasons: MyString
+  due_by: MyString
+  fields_needed: MyString
+  destination: MyString

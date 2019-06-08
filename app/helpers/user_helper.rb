@@ -34,4 +34,33 @@ module UserHelper
     def platforms
         ["Instagram", "Twitter", "Facebook", "Soundcloud"]
     end
+    
+    def stripe_last_4
+        Stripe::Account.retrieve(current_user.stripe_token)
+        .external_accounts.data.first['last4']
+    end
+    
+    def card_brand
+        Stripe::Account.retrieve(current_user.stripe_token)
+        .external_accounts.data.first['brand']
+    end
+    
+    def promos_sold_for(period)
+        case period.downcase
+        when 'day'
+            current_user.promo_requests.paid.day
+        when 'week'
+            current_user.promo_requests.paid.week
+        when 'month'
+            current_user.promo_requests.paid.month
+        when 'year'
+            current_user.promo_requests.paid.year
+        else
+            current_user.promo_requests.paid.year
+        end
+    end
+    
+    def earnings_for(period)
+        number_to_currency promos_sold_for(period).map(&:promo).sum(&:package_price_to_float)
+    end
 end

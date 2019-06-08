@@ -1,0 +1,90 @@
+<%= render 'shared/client_facing_css' %>
+
+<section id="optional-payout" align="center" class="container" style="margin-top: 15px;">
+    <div class="row">
+        <%= render "users/promoter" %>
+        <div class="col-md-4 offset-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 style="margin-bottom: 15px; color: #454545;">You're almost finished</h5>
+                  
+                    <form action="/request/pay" method="post" id="payment-form"
+                        style="margin-top: 15px;">
+                        <div id="card-element"></div>
+                        <div id="card-errors" role="alert"></div>
+                        
+                        <div class="actions">
+                            <input type="submit" class="btn btn-success btn-block"
+                                style="margin-top: 10px;" data-disable-with="Processing payment..."
+                                value="Pay <%= number_to_currency @cost %>">
+                        </div>
+                        <input type="hidden" name="request_id" value="<%= @request.token %>">
+                    </form>
+                    
+                    <p style="margin-top: 15px; font-size: 15px; color: #454545;">
+                        Payment securely processed by
+                        <a href="https://stripe.com">Stripe</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%= render "shared/footer" %>
+</section>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript">
+    var stripe = Stripe('pk_test_qLHYek2ZzEiXo8XEKJpApGoF00PfhLvqts');
+    var elements = stripe.elements();
+    var style = {
+      base: {
+        color: '#32325d',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSmoothing: 'antialiased',
+        fontSize: '16px',
+        '::placeholder': {
+          color: '#aab7c4'
+        }
+      },
+      invalid: {
+        color: '#fa755a',
+        iconColor: '#fa755a'
+      }
+    };
+    
+    var card = elements.create('card', {style: style});
+    card.mount('#card-element');
+    card.addEventListener('change', function(event) {
+      var displayError = document.getElementById('card-errors');
+      if (event.error) {
+        displayError.textContent = event.error.message;
+      } else {
+        displayError.textContent = '';
+      }
+    });
+    
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+    
+      stripe.createToken(card, { currency: 'usd' }).then(function(result) {
+        if (result.error) {
+          var errorElement = document.getElementById('card-errors');
+          errorElement.textContent = result.error.message;
+        } else {
+          stripeTokenHandler(result.token);
+        }
+      });
+    });
+    
+    function stripeTokenHandler(token) {
+      var form = document.getElementById('payment-form');
+      var hiddenInput = document.createElement('input');
+      hiddenInput.setAttribute('type', 'hidden');
+      hiddenInput.setAttribute('name', 'stripe_token');
+      hiddenInput.setAttribute('value', token.id);
+      form.appendChild(hiddenInput);
+    
+      form.submit();
+    }
+</script>

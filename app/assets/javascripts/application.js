@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require tinymce
+//= require chartkick
+//= require Chart.bundle
 //= require_tree .
 
 // POSiBLE DESIGN CHOICE FOR BUTTON AND FORM LOADING

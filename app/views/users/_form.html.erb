@@ -79,6 +79,20 @@
         </div>
     </div>
     
+    <div class="field">
+        <div class="row">
+            <div class="col-md-6">
+                <%= f.label :first_name %>
+                <%= f.text_field :first_name, class:"form-control", placeholder:"First name", required: true %>
+            </div>
+            
+            <div class="col-md-6">
+                <%= f.label :last_name %>
+                <%= f.text_field :last_name, class:"form-control", placeholder:"Last name", required: true %>
+            </div>
+        </div>
+    </div>
+    
     <div class="actions">
         <%= f.submit "Update", class:"btn btn-success btn-block", data: { :disable_with => "Updating..." } %>
     </div>

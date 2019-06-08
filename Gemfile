@@ -17,8 +17,11 @@ gem "fog-aws"
 gem 'file_validators'
 gem 'mini_magick'
 gem 'sendgrid-ruby'
+gem 'stripe'
 gem 'will_paginate', '~> 3.1.0'
 gem 'tinymce-rails'
+gem 'groupdate'
+gem "chartkick"
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

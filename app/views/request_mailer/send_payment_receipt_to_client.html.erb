@@ -17,11 +17,19 @@
                                     style="margin-bottom: 15px !important; display: block !important;"
                                     alt="MyRates Logo" title="MyRates Logo" height="80" />
                                 
-                                <p>Hi <%= @resource.username %>!</p>
-
                                 <p>
-                                    We're contacting you to notify you that your
-                                    password has been changed.
+                                    Hi <%= @request.client_email %>,
+                                    <br /><br />
+                                    This email is to confirm that your card has
+                                    been charged <%= number_to_currency @request.promo.package_price %>
+                                    for your promo request with
+                                    <a href="myrates.co/<%= @promoter.username %>">
+                                        <%= "@" + @promoter.username %></a>.
+                                </p>
+                                
+                                <p>
+                                    If you were not expecting this notice, please
+                                    <a href="myrates.co/pages/help">click here</a>.
                                 </p>
                                 
                                 <p>
@@ -33,7 +41,7 @@
                     <tr>
                         <td style="text-align: center !important;">
                             <p style="font-size: 13px !important; color: #505051 !important;">
-                                &copy; MyRates | <a href="myrates.co/help/unsubscribe_from_email">Unsubscribe</a>
+                                &copy; MyRates | <a href="myrates.co/account/settings">Unsubscribe</a>
                             </p>
                         </td>
                     </tr>

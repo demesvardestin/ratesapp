@@ -1,5 +1,7 @@
 class PromoRequestsController < ApplicationController
+  include StripeProcessor
   before_action :authenticate_user!, only: [:show, :optional_payment_path]
+  skip_before_action :verify_authenticity_token, only: :pay
   
   def new
     @request = PromoRequest.new
@@ -9,22 +11,56 @@ class PromoRequestsController < ApplicationController
   def create
     @request = PromoRequest.new(requests_params)
     @request.shipped = true
+    @promoter = Promo.find(@request.promo_id).user
     
     respond_to do |format|
       if @request.save
-        format.html { redirect_to request_receipt_path(:request_id => @request.token) }
-        RequestMailer.send_request(@request).deliver_now
-        RequestMailer.send_confirmation(@request).deliver_now
+        case @promoter.preferred_payout_method
+        when 'debit'
+          format.html { redirect_to request_payment_path(:request_id => @request.token) }
+        else
+          @request.update(direct_payment: false)
+          format.html { redirect_to request_receipt_path(:request_id => @request.token) }
+        end
       else
-        @promoter = Promo.find(@request.promo_id).user
         format.html { render :new, :promoter => @promoter.username, :promo_id => @request.promo_id }
       end
     end
   end
   
+  def payment
+    @request = PromoRequest.find_by(token: params[:request_id])
+    @promoter = @request.promo.user
+    @cost = StripeProcessor.calculate_application_fee @request.promo.package_price
+  end
+  
+  def pay
+    @request = PromoRequest.find_by(token: params[:request_id])
+    @promoter = @request.promo.user
+    token = params[:stripe_token]
+    
+    begin
+      charge = process_payment(@request.promo.package_price, token, @promoter)
+      @request.update(paid: true, stripe_charge_id: charge.id, direct_payment: true)
+    rescue
+      redirect_to :back, notice: "Something happened while processing your payment. Please try again."
+      return
+    end
+    
+    redirect_to request_receipt_path(:request_id => @request.token), notice: "Your request has been successfully processed!"
+    
+    process_payout_for(@promoter)
+    
+    RequestMailer.send_payment_receipt_to_client(@request).deliver_now
+    RequestMailer.send_payment_receipt_to_promoter(@request).deliver_now
+  end
+  
   def receipt
     @request = PromoRequest.find_by(token: params[:request_id])
     @promoter = @request.promo.user
+    
+    RequestMailer.send_request(@request).deliver_now
+    RequestMailer.send_confirmation(@request).deliver_now
   end
   
   def mark_as_processed
@@ -72,35 +108,6 @@ class PromoRequestsController < ApplicationController
     
     render :layout => false
   end
-  
-  ## Future payment integration
-  # def optional_payment
-  #   @request = PromoRequest.find_by(token: params[:request_token])
-  # end
-  
-  # def ship_request
-  #   @request = PromoRequest.find_by(token: params[:request_id])
-  #   if @request.nil?
-  #     redirect_to not_found_path
-  #     return
-  #   end
-    
-  #   @request.update(shipped: true)
-  #   redirect_to request_receipt_path(:request_id => @request.token)
-  # end
-  
-  ## Promoter email
-  #
-  # def send_email
-  #   @promoter = current_user
-  #   @request = @promoter.promo_requests.find_by(token: params[:request_id])
-  #   @content = params[:email_content]
-    
-  #   @notice = "Email sent!"
-  #   render :layout => false
-    
-  #   RequestMailer.send_promoter_email(@promoter, @request, @content).deliver_now
-  # end
   
   private
   

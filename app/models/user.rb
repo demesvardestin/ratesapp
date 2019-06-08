@@ -21,6 +21,10 @@ class User < ApplicationRecord
         return links
     end
     
+    def has_card_on_file
+        stripe_token.present?
+    end
+    
     ## GLOBAL SEARCH
     ##
     ## Summary:

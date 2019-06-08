@@ -8,6 +8,13 @@ class PromoRequest < ApplicationRecord
     scope :seen, -> { where(seen: true) }
     scope :incomplete, -> { where.not(complete: true) }
     scope :completed, -> { where(complete: true) }
+    scope :paid, -> { where(paid: true) }
+    scope :day, -> { where(created_at: DateTime.now.at_beginning_of_day.utc..Time.now.utc) }
+    scope :week, -> { where(created_at: DateTime.now.at_beginning_of_week.utc..Time.now.utc) }
+    scope :last_week, -> { where(created_at: DateTime.now.at_beginning_of_week.last_week.utc..DateTime.now.at_end_of_week.last_week.utc) }
+    scope :two_weeks_ago, -> { where(created_at: DateTime.now.at_beginning_of_week.last_week.last_week.utc..DateTime.now.at_end_of_week.last_week.last_week.utc) }
+    scope :month, -> { where(created_at: DateTime.now.at_beginning_of_month.utc..Time.now.utc) }
+    scope :year, -> { where(created_at: DateTime.now.at_beginning_of_year.utc..Time.now.utc) }
     
     before_create :generate_token
     
@@ -38,10 +45,22 @@ class PromoRequest < ApplicationRecord
         RequestMailer.send_request(request_).deliver_now 
     end
     
+    def price
+        promo.package_price.package_price_to_float
+    end
+    
+    def payment_method
+        if direct_payment
+            "Paid to your debit card"
+        else
+            "Paid via Cashapp or Paypal"
+        end
+    end
+    
     protected
     
     def generate_token
-        token = RandomToken.random(10)
+        token = RandomToken.random(8)
         
         until !PromoRequest.exists?(token: token)
           generate_token

@@ -1,0 +1,10 @@
+Hi <%= @request.client_email %>,
+
+This email is to confirm that your card has
+been charged <%= number_to_currency @request.promo.package_price %>
+for your promo request with <%= "@" + @promoter.username %>.
+
+
+If you were not expecting this notice, please go to https://myrates.co/pages/help.
+
+- The MyRates Team

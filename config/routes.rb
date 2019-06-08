@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     get '/retrieve/password', to: 'devise/passwords#new'
   end
   authenticated :user do
-    root 'users#dashboard', as: :authenticated_user_root
+    root 'users#promo_requests', as: :authenticated_user_root
   end
   resources :promos, except: [:show, :index, :new]
   resources :promo_requests, except: [:index]
@@ -34,14 +34,21 @@ Rails.application.routes.draw do
   get '/assets/download_image', to: 'promo_requests#download_image'
   get '/request/ship', to: 'promo_requests#ship_request'
   get '/request/receipt', to: 'promo_requests#receipt'
+  get '/request/payment', to: 'promo_requests#payment'
+  post '/request/pay', to: 'promo_requests#pay'
+  post '/stripe_callback', to: 'users#stripe_callback'
+  get '/account/rates', to: 'users#dashboard'
   
   post '/submit_help_ticket', to: 'welcome#submit_help_ticket'
+  post '/set_payout_method', to: 'users#set_payout_method'
   get '/pages/help', to: 'welcome#help'
   get '/pages/terms', to: 'welcome#terms'
   get '/pages/privacy', to: 'welcome#privacy'
   post '/account/set_email_preferences', to: 'users#set_email_preferences'
   get '/account/settings', to: "users#edit"
   get '/account/payouts', to: "users#payouts"
+  get '/account/earnings', to: "users#earnings"
+  post '/add_stripe_account', to: 'users#add_stripe_account'
   get '/promo/requests', to: "users#promo_requests"
   get '/requests/fetch_processed_requests', to: "promo_requests#processed"
   get '/requests/fetch_unprocessed_requests', to: "promo_requests#unprocessed"

@@ -23,7 +23,7 @@ class PromosController < ApplicationController
         
         respond_to do |format|
             if @promo.save
-                format.html { redirect_to root_path, notice: "Package details updated!" }
+                format.html { redirect_to "/account/rates", notice: "Package details updated!" }
             end
         end
     end

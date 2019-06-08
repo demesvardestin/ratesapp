@@ -3,7 +3,7 @@ class GlobalMailer < ApplicationMailer
     default from: "MyRates <no-reply@myrates.co>"
     default sender: 'MyRates'
     default reply_to: 'teammyrates@gmail.com'
-    default unsubscribe: 'https://myrates.herokuapp.com/account/settings'
+    default unsubscribe: 'myrates.co/account/settings'
  
     def new_help_ticket(ticket)
         @ticket = ticket

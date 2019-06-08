@@ -1,0 +1,2 @@
+class StripeLog < ApplicationRecord
+end

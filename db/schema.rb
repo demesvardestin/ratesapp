@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190526165241) do
+ActiveRecord::Schema.define(version: 20190607024700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(version: 20190526165241) do
     t.boolean  "complete",         default: false
     t.string   "social_platform"
     t.boolean  "shipped",          default: false
+    t.string   "stripe_charge_id"
+    t.boolean  "direct_payment"
   end
 
   create_table "promos", force: :cascade do |t|
@@ -72,6 +74,20 @@ ActiveRecord::Schema.define(version: 20190526165241) do
     t.integer  "brand_id"
     t.string   "package_price"
     t.text     "package_details", default: ""
+  end
+
+  create_table "stripe_logs", force: :cascade do |t|
+    t.string   "log_type"
+    t.text     "additional_details"
+    t.string   "stripe_id"
+    t.string   "account"
+    t.string   "authorization"
+    t.string   "disabled_reasons"
+    t.string   "due_by"
+    t.string   "fields_needed"
+    t.string   "destination"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -97,6 +113,11 @@ ActiveRecord::Schema.define(version: 20190526165241) do
     t.string   "paypal_link"
     t.string   "cashapp_link"
     t.string   "username_display"
+    t.string   "preferred_payout_method"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.boolean  "stripe_account_verified",              default: false
+    t.boolean  "stripe_external_account_verified",     default: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

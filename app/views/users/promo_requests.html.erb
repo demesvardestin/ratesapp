@@ -34,7 +34,7 @@
             <div class="card-body" style="padding-top: 30px; padding-bottom: 30px;"
                 id="all-requests">
                 <% if @requests.present? %>
-                    <%= render partial: "promo_requests/requests", locals: { requests: @requests } %>
+                    <%= render partial: "promo_requests/requests", locals: { requests: @requests.incomplete } %>
                     <div style="margin-top: 10px;">
                         <%= will_paginate @requests, :page_links => false %>
                     </div>

@@ -17,11 +17,20 @@
                                     style="margin-bottom: 15px !important; display: block !important;"
                                     alt="MyRates Logo" title="MyRates Logo" height="80" />
                                 
-                                <p>Hi <%= @resource.username %>!</p>
-
                                 <p>
-                                    We're contacting you to notify you that your
-                                    password has been changed.
+                                    Hi <%= @promoter.username %>,
+                                    <br /><br />
+                                    You have received a new promo request from
+                                    <%= @request.client_email %>. You should
+                                    receive a separate email shortly to confirm
+                                    that the payout is on its way to your
+                                    bank account!
+                                </p>
+                                
+                                <p>
+                                    If you were not expecting this notice,
+                                    or if you don't receive the payout notice email,
+                                    <a href="myrates.co/pages/help">click here</a>.
                                 </p>
                                 
                                 <p>
@@ -33,7 +42,7 @@
                     <tr>
                         <td style="text-align: center !important;">
                             <p style="font-size: 13px !important; color: #505051 !important;">
-                                &copy; MyRates | <a href="myrates.co/help/unsubscribe_from_email">Unsubscribe</a>
+                                &copy; MyRates | <a href="myrates.co/account/settings">Unsubscribe</a>
                             </p>
                         </td>
                     </tr>

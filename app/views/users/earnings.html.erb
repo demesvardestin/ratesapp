@@ -1,0 +1,133 @@
+<section id="stripe-earnings" align="center">
+    <div class="row">
+        <% if !current_user.has_card_on_file %>
+            <div class="col-md-12">
+                <div class="alert alert-warning" role="alert">
+                    To view earnings data, you need to add a debit
+                    card on file. We only track payouts that were made
+                    to you through our platform.
+                    <a onclick="window.location.href='/account/payouts'" href="#">Add a card</a>
+                </div>
+            </div>
+        <% else %>
+            <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    This is a list of all the payments that have been made to you
+                    <strong>through our platform</strong>. Payments received through
+                    third parties are not tracked.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card box-shadow">
+                    <div class="card-header"
+                        style="background-color: #00adf2; color: #fff; border-bottom: none;">
+                        <h6 style="margin-bottom: 0;">
+                            Today:
+                            <%= pluralize promos_sold_for('Day').count, 'promo' %>
+                            - <%= earnings_for('Day') %>
+                        </h6>
+                    </div>
+                    
+                    <div class="card-body">
+                        <%= area_chart current_user.promo_requests.group_by_day(:created_at).count,
+                            points: false, height: '100px', curve: false, prefix: '$',
+                            thousands: ',' %>
+                    </div>
+                </div>
+                
+                <div class="card box-shadow">
+                    <div class="card-header"
+                        style="background-color: #00adf2; color: #fff; border-bottom: none;">
+                        <h6 style="margin-bottom: 0;">
+                            This week:
+                            <%= pluralize promos_sold_for('Week').count, 'promo' %>
+                            - <%= earnings_for('Week') %>
+                        </h6>
+                    </div>
+                    
+                    <div class="card-body">
+                        <%= area_chart current_user.promo_requests.group_by_week(:created_at).count,
+                            points: false, height: '100px', curve: false, prefix: '$',
+                            thousands: ',' %>
+                    </div>
+                </div>
+            
+                <div class="card box-shadow">
+                    <div class="card-header"
+                        style="background-color: #00adf2; color: #fff; border-bottom: none;">
+                        <h6 style="margin-bottom: 0;">
+                            This month:
+                            <%= pluralize promos_sold_for('Month').count, 'promo' %>
+                            - <%= earnings_for('Month') %>
+                        </h6>
+                    </div>
+                    
+                    <div class="card-body">
+                        <%= area_chart current_user.promo_requests.group_by_month(:created_at).count,
+                            points: false, height: '100px', curve: false, prefix: '$',
+                            thousands: ',' %>
+                    </div>
+                </div>
+                
+                <div class="card box-shadow">
+                    <div class="card-header"
+                        style="background-color: #00adf2; color: #fff; border-bottom: none;">
+                        <h6 style="margin-bottom: 0;">
+                            This year:
+                            <%= pluralize promos_sold_for('Year').count, 'promo' %>
+                            - <%= earnings_for('Year') %>
+                        </h6>
+                    </div>
+                    
+                    <div class="card-body">
+                        <%= area_chart current_user.promo_requests.group_by_month(:created_at).count,
+                            points: false, height: '100px', curve: false, prefix: '$',
+                            thousands: ',' %>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-8">
+                <div class="card box-shadow">
+                    <div class="card-header"
+                        style="background-color: #00adf2; color: #fff; border-bottom: none;">
+                        <h6 style="margin-bottom: 0;">Transactions</h6>
+                    </div>
+                    
+                    <div class="card-body" align="center" style="font-size: 14px !important;">
+                        <% if @promos.present? %>
+                            <% @promos.reverse.each do |r| %>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <p><%= number_to_currency r.promo.package_price %></p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p><%= r.token %></p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p><%= r.client_email %></p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p><%= r.created_at.strftime('%-m/%d/%Y') %></p>
+                                    </div>
+                                    
+                                    <div class="col-md-12">
+                                        <hr>
+                                    </div>
+                                </div>
+                            <% end %>
+                            <div style="margin-top: 10px;">
+                                <%= will_paginate @promos, :page_links => false %>
+                            </div>
+                        <% else %>
+                            <p>No direct payouts received yet</p>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</section>

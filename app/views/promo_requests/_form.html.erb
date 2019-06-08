@@ -40,7 +40,7 @@
     <div class="field">
         <label>Email</label>
         <div>
-            <%= f.text_field :client_email, class:"form-control", placeholder:"Your email" %>
+            <%= f.text_field :client_email, class:"form-control", placeholder:"Your email", required: true %>
         </div>
     </div>
     
@@ -100,7 +100,11 @@
     </div>
     
     <div class="actions">
-        <%= f.submit "Submit", class:"btn btn-primary btn-block", data: { :disable_with => "Submitting..." }%>
+        <% if @promoter.has_card_on_file %>
+            <%= f.submit "Continue to payment", class:"btn btn-primary btn-block", data: { :disable_with => "Processing..." }%>
+        <% else %>
+            <%= f.submit "Submit", class:"btn btn-primary btn-block", data: { :disable_with => "Submitting..." }%>
+        <% end %>
     </div>
     
 <% end %>

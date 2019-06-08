@@ -13,11 +13,10 @@
                     <h5 style="color: #505051;">Your request has been sent!</h5>
                     
                     <p style="margin-top: 15px; color: #a1a1a3; font-size: 15px;">
-                        We've sent you a confirmation email. You may also receive a
-                        separate email from
+                        We've sent you a confirmation email. Check your inbox
+                        for a confirmation email from us, or for additional emails from
                         <%= link_to "@#{@promoter.username}", promoter_path(@promoter.username),
-                            style:"text-decoration: none; font-weight: bold;" %>
-                        with additional info such as payment details.
+                            style:"text-decoration: none; font-weight: bold;" %>.
                     </p>
                     
                     <p style="color: #a1a1a3; font-size: 15px;">
@@ -26,11 +25,13 @@
                 </div>
             </div>
             
-            <% @promoter.payout_links.each do |link| %>
-                <a href="https://<%= link[:link] %>" class="btn btn-success box-shadow btn-block"
-                    style="padding-top: 15px; padding-bottom: 15px;" target="_blank">
-                    <i class="<%= link[:icon] %>"></i> Pay with <%= link[:service].capitalize %>
-                </a>
+            <% if @promoter.preferred_payout_method == 'links' || @promoter.preferred_payout_method.nil? %>
+                <% @promoter.payout_links.each do |link| %>
+                    <a href="https://<%= link[:link] %>" class="btn btn-success box-shadow btn-block"
+                        style="padding-top: 15px; padding-bottom: 15px;" target="_blank">
+                        <i class="<%= link[:icon] %>"></i> Pay with <%= link[:service].capitalize %>
+                    </a>
+                <% end %>
             <% end %>
         </div>
     </div>
