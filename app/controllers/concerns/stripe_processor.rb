@@ -122,9 +122,9 @@ module StripeProcessor
             We're glad that you're using MyRates to streamline your promos! This
             email is to let you know that your debit card has been verified and
             successfully added on file! That means you can now receive payouts
-            directly to your card, without having to pay fees with app like
-            Cashapp or PayPal. All you need to do now is to head over to your payout
-            settings and make this your default payout method.
+            directly to your card, without having to pay fees with apps like
+            Cashapp or PayPal. All that's left to do is to make this your default
+            payout method in your payout settings.
         """
         user.update(stripe_external_account_verified: true)
         return user, body
