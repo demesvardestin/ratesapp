@@ -12,25 +12,26 @@
         </div>
     <% end %>
     
-    <div class="profile-image"
-        style="height: 120px; width: 120px; border-radius: 60px;
-            background-image: url('<%= @promoter.image.url %>');
-            background-size: cover; background-repeat: no-repeat;
-            margin-bottom: 15px;"></div>
-
-    <!--<div class="profile-image" style="margin-bottom: 15px;">-->
-    <!--    <i class="far fa-user-circle" style="font-size: 120px;"></i>-->
-    <!--</div>-->
-    
-    
-    <div class="field">
+    <div class="field" id="image-field">
         <a class="btn btn-primary" id="image-upload-trigger"
-            style="color: #fff; cursor: pointer;"
+            style="color: #fff; cursor: pointer; height: 120px; width: 120px;
+                border-radius: 60px; background-image: url('<%= @promoter.image.url %>');
+                background-size: cover; background-repeat: no-repeat; filter: brightness(80%);
+                border: 5px solid #e7e7e9 !important; background-color: transparent;"
             onclick="document.querySelector('#image-input-field').click();">
-            <i class="fas fa-camera"></i> Profile Picture
+            <i class="fas fa-camera" style="font-size: 40px; margin-top: 30px; color: #28a745;"></i>
         </a>
+        
         <%= f.file_field :image, style:"display: none;", id:"image-input-field",
-            onchange:"$('#image-upload-trigger').text(this.value.substring(0,20));" %>
+            onchange:"$('#image-field')
+                    .append(`
+                        <p style='margin-top: 15px;'>
+                            <span class='badge badge-primary'>
+                                ${this.value.split('fakepath').join().substring(0,3) +
+                                '...' + this.value.slice(-10)}. Click 'Update' to save changes.
+                            </span>
+                        </p>
+                    `)" %>
     </div>
     
     <div class="field">
@@ -45,37 +46,6 @@
           <%= f.text_field :username, class:"form-control", placeholder:"username",
               style:"border-left: none !important; padding-left: 3px;", value:"#{@promoter.username}",
               onkeyup:"document.querySelector('#your-bio-link').value = 'myrates.co/' + this.value;" %>
-        </div>
-    </div>
-    
-    <div class="field">
-        <%= f.label :choose_a_theme_color %>
-        <%= f.hidden_field :theme_color, value:"#{@promoter.theme_color}", id:"theme-color" %>
-        
-        <div class="row">
-            <div class="col-md-12">
-                <div class="dropdown">
-                    <button class="btn btn-secondary btn-block background-transparent-lite" type="button"
-                        id="dropdownColorMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false"
-                        style="border-color: #e7e7e9 !important;
-                                color: #a1a1a3; box-shadow: none !important;">
-                        Select <i class="fas fa-angle-down"></i>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownColorMenuButton"
-                        style="width: 100%;">
-                        <% theme_color_options.each.with_index do |c, idx| %>
-                        <a id="<%= 'color' + idx.to_s %>"    
-                            class="color-card dropdown-item <%= "active-theme-color" if (c == @promoter.theme_color || @promoter.theme_color.empty?) %>"
-                            style="background: <%= c %>; height: 40px; cursor: pointer; border-radius: 2px; border-radius: 0;"
-                            onclick="$('.color-card').css('border', 'none');
-                                    document.querySelector('#'+this.id).style.border = '3px solid #28a745';
-                                    document.querySelector('#theme-color').value = '<%= c %>';
-                                    $('#dropdownColorMenuButton').html(`<%= c.truncate(35) %> <i class='fas fa-angle-down'></i>`);"></a>
-                        <% end %>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     

@@ -1,15 +1,4 @@
 Rails.application.routes.draw do
-
-  # devise_for :brands, :controllers => { :registration => "brands/registration" }
-  # devise_scope :brand do
-  #   get '/brand/login', to: 'devise/sessions#new'
-  #   get '/brand/signup', to: 'devise/registrations#new'
-  #   get '/password-settings', to: 'users/registrations#edit'
-  #   get '/retrieve-password', to: 'devise/passwords#new'
-  # end
-  # authenticated :brand do
-  #   root 'brands#dashboard', as: :authenticated_brand_root
-  # end
   
   devise_for :users, :controllers => { :registrations => "users/registrations" }
   devise_scope :user do
@@ -55,4 +44,5 @@ Rails.application.routes.draw do
   get '/requests/fetch_all_requests', to: 'promo_requests#all'
   get '/notifications/update_all_notifications', to: 'users#update_all_notifications'
   root 'welcome#home'
+  
 end

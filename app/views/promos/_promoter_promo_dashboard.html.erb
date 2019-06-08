@@ -1,34 +1,44 @@
+<div class="modal fade" id="newPromoPackageModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content box-shadow" style="margin-top: -45px;">
+      <div class="modal-header" style="border-bottom: none;">
+        <h5 class="modal-title text-center" id="exampleModalLabel">
+            Add new rate
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render 'promos/form', promo: @promo %>
+      </div>
+    </div>
+  </div>
+</div>
+    
 <% if @promos.present? %>
     <div id="promoter-packages" align="center">
         <%= render 'promos/promos' %><br />
     </div>
-<% else %>
-    <p style="margin: 0; text-align: center;">
-        You haven't posted any rates yet.
-    </p>
-<% end %>
-
-<% if current_user == @promoter %>
-    <div class="modal fade" id="newPromoPackageModal" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content box-shadow" style="margin-top: -45px;">
-          <div class="modal-header" style="border-bottom: none;">
-            <h5 class="modal-title text-center" id="exampleModalLabel">
-                Add new rate
-            </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <%= render 'promos/form', promo: @promo %>
-          </div>
-        </div>
-      </div>
-    </div>
+    
     <button class="btn btn-primary box-shadow" style="margin-top: 15px;"
         data-toggle="modal" data-target="#newPromoPackageModal">
-        Add new rate
+        Add another rate
     </button>
+<% else %>
+    <div class="card" style="min-height: calc(100vh - 150px);">
+        <div class="card-body" style="vertical-align: middle !important;">
+            <div style="margin-top: 100px;">
+                <h5 style="margin: 0; text-align: center;">
+                    You haven't posted any rates yet.
+                </h5>
+                
+                <button class="btn btn-primary box-shadow" style="margin-top: 15px;"
+                    data-toggle="modal" data-target="#newPromoPackageModal">
+                    Add new rate
+                </button>
+            </div>
+        </div>
+    </div>
 <% end %>

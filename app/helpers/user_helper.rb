@@ -24,7 +24,7 @@ module UserHelper
     end
     
     def theme_color_options
-        ["#eef3f5", "#004085", "#85D8CE", "#155724",
+        ["#004085", "#85D8CE", "#155724",
         "linear-gradient(to right, #0f2027, #203a43, #2c5364)",
         "linear-gradient(to right, #f12711, #f5af19)",
         "linear-gradient(to right, #ad5389, #3c1053)",

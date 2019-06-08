@@ -49,9 +49,19 @@
             </div>
             
             <div class="field">
+              <%= f.label :first_name %><br />
+              <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", class:"form-control", placeholder:"First Name" %>
+            </div>
+            
+            <div class="field">
+              <%= f.label :last_name %><br />
+              <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", class:"form-control", placeholder:"Last Name" %>
+            </div>
+            
+            <div class="field">
               <%= f.label :username %><br />
               <%= f.text_field :username, autofocus: true, autocomplete: "username",
-                class:"form-control", placeholder:"Social media username", value:"#{params[:username] if params[:username]}",
+                class:"form-control", placeholder:"Username", value:"#{params[:username] if params[:username]}",
                 onkeyup:"document.querySelector('#username-display').value = this.value" %>
               <%= f.hidden_field :username_display, id:"username-display" %>
             </div>
@@ -62,11 +72,6 @@
               <em>(<%= @minimum_password_length %> characters minimum)</em>
               <% end %><br />
               <%= f.password_field :password, autocomplete: "new-password", class:"form-control", placeholder:"Password" %>
-            </div>
-          
-            <div class="field">
-              <%= f.label :password_confirmation %><br />
-              <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control", placeholder:"Password confirmation" %>
             </div>
           
             <div class="actions">

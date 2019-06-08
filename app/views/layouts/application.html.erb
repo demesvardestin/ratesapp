@@ -27,6 +27,22 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <%= tinymce_assets %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+    <script type="text/javascript">
+      let url = '<%= request.original_url %>';
+      if (!url.includes('https')) {
+        $('html').append(`
+          <div style="min-height: 100vh; text-align: center;">
+            <div class="spinner-grow text-primary" role="status"
+              style="margin-top: 48vh;">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        `);
+        url = url.split('http://').join('');
+        window.location.replace('https://' + url);
+      }
+    </script>
   </head>
 
   <body style="padding-top: 70px;">

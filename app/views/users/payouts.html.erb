@@ -47,14 +47,6 @@
     }
 </style>
 
-<script type="text/javascript">
-    let url = '<%= request.original_url %>';
-    if (!url.includes('https')) {
-        url = url.split('http://').join('');
-        window.location.replace('https://' + url);
-    }
-</script>
-
 <section id="payouts">
     <div class="row" align="center">
         <div class="col-md-8 offset-md-2">
@@ -97,7 +89,7 @@
                                                 cash.me/
                                             </span>
                                         </div>
-                                        <%= f.text_field :cashapp_link, class:"form-control", placeholder:"Username",
+                                        <%= f.text_field :cashapp_link, class:"form-control", placeholder:"Cashapp username",
                                             style:"border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important;" %>
                                     </div>
                                 </div>
@@ -112,7 +104,7 @@
                                                 <i class="fab fa-paypal" style="margin-right: 5px;"></i> paypal.me/
                                             </span>
                                         </div>
-                                        <%= f.text_field :paypal_link, class:"form-control", placeholder:"Username",
+                                        <%= f.text_field :paypal_link, class:"form-control", placeholder:"Paypal username",
                                             style:"border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important;" %>
                                     </div>
                                 </div>
@@ -196,9 +188,11 @@
                                             <div class="actions">
                                                 <div class="row">
                                                     <div class="col-md-12" align="right">
-                                                        <input type="submit" class="btn btn-primary btn-block"
-                                                            value="Update card"
-                                                            data-disable-with="Updating, please wait...">
+                                                        <button type="submit" class="btn btn-primary btn-block"
+                                                            data-disable-with="Adding, please wait..."
+                                                            id="add-debit-card-btn">
+                                                            Update card
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -259,9 +253,11 @@
                                         <div class="actions">
                                             <div class="row">
                                                 <div class="col-md-12" align="right">
-                                                    <input type="submit" class="btn btn-primary btn-block"
-                                                        value="Add debit card"
-                                                        data-disable-with="Adding, please wait...">
+                                                    <button type="submit" class="btn btn-primary btn-block"
+                                                        data-disable-with="Adding, please wait..."
+                                                        id="add-debit-card-btn">
+                                                        Add debit card
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -283,14 +279,14 @@
                             <form method="post" action="/set_payout_method" id="payout-method-form">
                                 <input type="hidden" id="method" name="method">
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                  <label class="btn btn-success
+                                  <label class="btn btn-success cursor-pointer
                                       <%= "active" if current_user.preferred_payout_method == "links" || current_user.preferred_payout_method.nil? %>"
                                     onclick="document.querySelector('#method').value = 'links';
                                             document.querySelector('#payout-method-form').submit();">
                                     <input type="radio" name="links" id="links" autocomplete="off" checked>
-                                    Links <%= "(current)" if current_user.preferred_payout_method == "links" || current_user.preferred_payout_method.nil? %>
+                                    Cashapp/Paypal <%= "(current)" if current_user.preferred_payout_method == "links" || current_user.preferred_payout_method.nil? %>
                                   </label>
-                                  <label class="btn btn-success <%= "active" if current_user.preferred_payout_method == "debit" %>"
+                                  <label class="btn btn-success cursor-pointer <%= "active" if current_user.preferred_payout_method == "debit" %>"
                                     onclick="document.querySelector('#method').value = 'debit';
                                             document.querySelector('#payout-method-form').submit();">
                                     <input type="radio" name="debit" id="debit" autocomplete="off">
@@ -317,54 +313,63 @@
     var stripe = Stripe("<%= Rails.configuration.stripe[:publishable_key] %>");
     var elements = stripe.elements();
     var style = {
-      base: {
-        color: '#32325d',
-        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-        fontSmoothing: 'antialiased',
-        fontSize: '16px',
-        '::placeholder': {
-          color: '#aab7c4'
+        base: {
+            color: '#32325d',
+            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+            fontSmoothing: 'antialiased',
+            fontSize: '16px',
+            '::placeholder': {
+                color: '#aab7c4'
+            }
+        },
+        invalid: {
+            color: '#fa755a',
+            iconColor: '#fa755a'
         }
-      },
-      invalid: {
-        color: '#fa755a',
-        iconColor: '#fa755a'
-      }
     };
     
     var card = elements.create('card', {style: style});
     card.mount('#card-element');
     card.addEventListener('change', function(event) {
-      var displayError = document.getElementById('card-errors');
-      if (event.error) {
-        displayError.textContent = event.error.message;
-      } else {
-        displayError.textContent = '';
-      }
+        var displayError = document.getElementById('card-errors');
+        if (event.error) {
+            displayError.textContent = event.error.message;
+        } else {
+            displayError.textContent = '';
+        }
     });
     
     var form = document.getElementById('payment-form');
     form.addEventListener('submit', function(event) {
-      event.preventDefault();
+        event.preventDefault();
+        
+        let btn = document.querySelector('#payment-form .btn');
+        btn.setAttribute('disabled', 'true');
+        btn.innerHTML = `
+            <div class="spinner-grow" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            Processing...
+        `;
     
-      stripe.createToken(card, { currency: 'usd' }).then(function(result) {
-        if (result.error) {
-          var errorElement = document.getElementById('card-errors');
-          errorElement.textContent = result.error.message;
-        } else {
-          stripeTokenHandler(result.token);
-        }
-      });
+        stripe.createToken(card, { currency: 'usd' }).then(function(result) {
+            if (result.error) {
+                var errorElement = document.getElementById('card-errors');
+                errorElement.textContent = result.error.message;
+            } else {
+                stripeTokenHandler(result.token);
+            }
+        });
     });
     
     function stripeTokenHandler(token) {
-      var form = document.getElementById('payment-form');
-      var hiddenInput = document.createElement('input');
-      hiddenInput.setAttribute('type', 'hidden');
-      hiddenInput.setAttribute('name', 'stripe_token');
-      hiddenInput.setAttribute('value', token.id);
-      form.appendChild(hiddenInput);
+        var form = document.getElementById('payment-form');
+        var hiddenInput = document.createElement('input');
+        hiddenInput.setAttribute('type', 'hidden');
+        hiddenInput.setAttribute('name', 'stripe_token');
+        hiddenInput.setAttribute('value', token.id);
+        form.appendChild(hiddenInput);
     
-      form.submit();
+        form.submit();
     }
 </script>

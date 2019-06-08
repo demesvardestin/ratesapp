@@ -32,7 +32,8 @@
                           View Details
                       </h6>
                   </div>
-                  <div class="card-footer" style="padding: 0;">
+                  <div class="card-footer" style="padding: 0; background-color: #fff;
+                    border-bottom-left-radius: 8px !important; border-bottom-right-radius: 8px !important;">
                     <%= link_to "Select",
                         new_promo_request_path(:promoter => @promoter.username, :promo_id => promo.id),
                         class:"btn btn-link btn-block",

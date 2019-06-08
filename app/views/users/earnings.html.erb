@@ -2,11 +2,21 @@
     <div class="row">
         <% if !current_user.has_card_on_file %>
             <div class="col-md-12">
-                <div class="alert alert-warning" role="alert">
-                    To view earnings data, you need to add a debit
-                    card on file. We only track payouts that were made
-                    to you through our platform.
-                    <a onclick="window.location.href='/account/payouts'" href="#">Add a card</a>
+                <div class="card">
+                    <div class="alert alert-warning" role="alert"
+                        style="border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-left-radius: 0;">
+                        To view earnings data, you need to add a debit
+                        card on file. We only track payouts that we sent directly
+                        to your card through our platform.
+                    </div>
+                    <div class="card-body" style="vertical-align: middle !important;">
+                        <div>
+                            <a onclick="window.location.href='/account/payouts'" href="#"
+                                class="btn btn-primary box-shadow btn-lg">
+                                <i class="fab fa-cc-visa"></i> Add a card
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         <% else %>
