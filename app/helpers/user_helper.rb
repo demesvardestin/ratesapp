@@ -63,4 +63,8 @@ module UserHelper
     def earnings_for(period)
         number_to_currency promos_sold_for(period).map(&:promo).sum(&:package_price_to_float)
     end
+    
+    def promotion_types
+        ["Anything", "Music", "Fashion", "Food", "Haircare", "Skincare", "Fitness", "Religion", "Other"]
+    end
 end

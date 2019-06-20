@@ -1,0 +1,100 @@
+<style type="text/css">
+    #alert-notice, nav, #side-panel {
+        display: none !important;
+    }
+    
+    #form-container {
+        margin-top: 30px;
+    }
+</style>
+
+<section id="registration-flow">
+    <section id="registration-step-two">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <div class="progress" style="height: 20px;">
+                                            <div class="progress-bar bg-primary progress-bar-striped
+                                                progress-bar-animated" role="progressbar" style="width: 50%;"
+                                                aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row" style="margin-top: 30px;">
+                                    <div class="col-md-12">
+                                        <h3 class="text-center">Add your account info</h3>
+                                        
+                                        <div id="form-container">
+                                            <%= form_for(@promoter, :url => { :action => "patch_registration_step_two" }, :remote => true) do |f| %>
+                                                <div class="field">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <%= f.label :first_name %>
+                                                            <%= f.text_field :first_name, class:"form-control", placeholder:"First name", required: true %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="field">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <%= f.label :last_name %>
+                                                            <%= f.text_field :last_name, class:"form-control", placeholder:"Last name", required: true %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="field">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <%= f.label :promotion_type %>
+                                                            <div class="dropdown">
+                                                                <button class="btn btn-secondary btn-block promotion-type" type="button"
+                                                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                                    aria-expanded="false"
+                                                                    style="border-color: #e7e7e9 !important; background-color: transparent;
+                                                                        color: #a1a1a3; box-shadow: none !important;">
+                                                                    Select <i class="fas fa-angle-down"></i>
+                                                                </button>
+                                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                                                                    style="border: 0.5px solid #e7e7e9; width: 100%;">
+                                                                    <% promotion_types.each do |type| %>
+                                                                        <a class="dropdown-item cursor-pointer"
+                                                                            onclick="$('.promotion-type').html(this.innerHTML);
+                                                                                document.querySelector('#promotion-type-input').value = '<%= type %>';">
+                                                                            <%= type %>
+                                                                        </a>
+                                                                    <% end %>
+                                                                </div>
+                                                            </div>
+                                                            <%= f.hidden_field :promotion_type, required: true, id:"promotion-type-input" %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row" style="margin-top: 60px;">
+                                                    <div class="col-md-3 offset-md-9">
+                                                        <div class="actions" align="right">
+                                                            <input type="submit" class="btn btn-primary btn-block"
+                                                                value="Next">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <% end %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

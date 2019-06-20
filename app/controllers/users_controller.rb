@@ -3,12 +3,49 @@ class UsersController < ApplicationController
     
     skip_before_action :verify_authenticity_token, only: [
         :update,
+        :patch_registration_step_one,
         :set_email_preferences,
         :add_stripe_account,
         :set_payout_method,
         :stripe_callback
     ]
     before_action :authenticate_user!, except: [:show, :stripe_callback]
+    
+    def registration_step_one
+        # first step. form is loaded
+        @promoter = current_user
+    end
+    
+    def patch_registration_step_one
+        @promoter = current_user
+        
+        @promoter.update(user_params)
+        redirect_to registration_step_two_path # onto the second step
+    end
+    
+    def registration_step_two
+        # second step. form fades in
+        @promoter = current_user
+    end
+    
+    def patch_registration_step_two
+        @promoter = current_user
+        
+        @promoter.update(user_params)
+        render :layout => false # onto the last step
+    end
+    
+    def registration_step_three
+        # third step
+        @promoter = current_user
+    end
+    
+    def patch_registration_step_three
+        @promoter = current_user
+        
+        @promoter.update(user_params)
+        redirect_to dashboard_path, notice: "You're all set up!" # onto the last step
+    end
     
     def show
         @promoter = User.find_by(username_display: params[:username].downcase)
@@ -68,6 +105,10 @@ class UsersController < ApplicationController
     def edit
         @promoter = current_user
         @promo = @promoter.promos.first
+    end
+    
+    def email
+        @promoter = current_user
     end
     
     def set_email_preferences
@@ -167,7 +208,8 @@ class UsersController < ApplicationController
             :cashapp_link,
             :username_display,
             :first_name,
-            :last_name
+            :last_name,
+            :promotion_type
         )
     end
     

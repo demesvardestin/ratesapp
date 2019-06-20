@@ -16,6 +16,16 @@ Rails.application.routes.draw do
   resources :users, only: [:update, :show]
   resources :help_tickets, only: :create
   
+  ## Onboarding
+  get '/registration_step_one', to: 'users#registration_step_one'
+  patch '/registration_step_one', to: 'users#patch_registration_step_one'
+  get '/registration_step_two', to: 'users#registration_step_two'
+  patch '/registration_step_two', to: 'users#patch_registration_step_two'
+  get '/registration_step_three', to: 'users#registration_step_three'
+  patch '/registration_step_three', to: 'users#patch_registration_step_three'
+  get '/dashboard', to: "users#dashboard"
+  get '/analytics', to: "users#analytics"
+  
   get '/:username', to: "users#show", as: "promoter"
   
   get '/request/mark_as_processed', to: 'promo_requests#mark_as_processed'
@@ -35,8 +45,8 @@ Rails.application.routes.draw do
   get '/pages/privacy', to: 'welcome#privacy'
   post '/account/set_email_preferences', to: 'users#set_email_preferences'
   get '/account/settings', to: "users#edit"
+  get '/account/email', to: "users#email"
   get '/account/payouts', to: "users#payouts"
-  get '/account/analytics', to: "users#analytics"
   post '/add_stripe_account', to: 'users#add_stripe_account'
   get '/promo/requests', to: "users#promo_requests"
   get '/requests/fetch_processed_requests', to: "promo_requests#processed"

@@ -20,13 +20,26 @@
 </style>
 
 <section class="row">
-    <div class="col-md-4" align="center">
+    <div class="col-md-12" style="margin-bottom: 15px;">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" href="/account/settings">Account</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/account/email">Email</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/account/payouts">Payouts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/password/settings">Password</a>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="col-md-6 offset-md-1">
         <div class="card" style="height: calc(100% - 15px);">
-            <div class="card-header"
-                style="background-color: #00adf2; color: #fff; border-bottom: none;">
-                <h6 style="margin-bottom: 0;">Account</h6>
-            </div>
-            <div class="card-body" align="center"
+            <div class="card-body"
                 style="border-bottom: none; padding: 20px; font-size: 15px !important;">
                 <%= render "users/form" %>
             </div>
@@ -35,102 +48,6 @@
     
     <div class="col-md-4" align="center">
         <div class="card" style="height: calc(100% - 15px);">
-            <div class="card-header"
-                style="background-color: #00adf2; color: #fff; border-bottom: none;">
-                <h6 style="margin-bottom: 0;">Social & Email</h6>
-            </div>
-            <div class="card-body" align="center"
-                style="border-bottom: none; padding: 20px; font-size: 15px !important;">
-                <label>Bio link</label>
-                <div class="input-group mb-3" style="margin-bottom: 0.75rem !important;">
-                    <input type="text" class="form-control"
-                        aria-label="bio-link" aria-describedby="button-addon2"
-                        value="myrates.co/<%= @promoter.username %>"
-                        style="border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important;"
-                        id="your-bio-link">
-                    <div class="input-group-append">
-                        <button class="btn btn-secondary" type="button"
-                            id="button-addon2" onclick="copyText(this)"
-                            style="border-top-left-radius: 0 !important;
-                                border-bottom-left-radius: 0 !important;
-                                box-shadow: none !important;">
-                            Add link to bio
-                        </button>
-                    </div>
-                </div>
-                
-                <form action="/account/set_email_preferences" method="post">
-                    <div class="field">
-                        <label>Promotional emails</label>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary btn-block promo-email-dropdown" type="button"
-                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false"
-                                style="border-color: #e7e7e9 !important; background-color: transparent;
-                                    color: #a1a1a3; box-shadow: none !important;">
-                                <% if @promoter.unsubscribed_from_promotional_emails %>
-                                    Unsubscribed <i class="fas fa-angle-down"></i>
-                                <% else %>
-                                    Subscribed <i class="fas fa-angle-down"></i>
-                                <% end %>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
-                                style="border: 1px solid #e7e7e9; width: 100%;">
-                                <% ["Subscribe", "Unsubscribe"].each do |t| %>
-                                    <a class="dropdown-item cursor-pointer"
-                                        onclick="$('.promo-email-dropdown').html(this.innerHTML + `<i class='fas fa-angle-down'></i>`);
-                                            document.querySelector('#promo-email').value = this.text;">
-                                        <%= t %>
-                                    </a>
-                                <% end %>
-                            </div>
-                        </div>
-                        <input type="hidden" name="promo_email" id="promo-email">
-                    </div>
-                    
-                    <div class="field">
-                        <label>All other emails</label>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary btn-block unsubscribe-dropdown" type="button"
-                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false"
-                                style="border-color: #e7e7e9 !important; background-color: transparent;
-                                    color: #a1a1a3; box-shadow: none !important;">
-                                <% if @promoter.unsubscribed_from_email %>
-                                    Unsubscribed <i class="fas fa-angle-down"></i>
-                                <% else %>
-                                    Subscribed <i class="fas fa-angle-down"></i>
-                                <% end %>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
-                                style="border: 1px solid #e7e7e9; width: 100%;">
-                                <% ["Subscribe", "Unsubscribe"].each do |t| %>
-                                    <a class="dropdown-item cursor-pointer"
-                                        onclick="$('.unsubscribe-dropdown').html(this.innerHTML + `<i class='fas fa-angle-down'></i>`);
-                                            document.querySelector('#unsubscribe').value = this.text;">
-                                        <%= t %>
-                                    </a>
-                                <% end %>
-                            </div>
-                        </div>
-                        <input type="hidden" name="unsubscribe" id="unsubscribe">
-                    </div>
-                    
-                    <div class="action">
-                        <input type="submit" class="btn btn-success btn-block box-shadow"
-                            value="Update">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-md-4" align="center">
-        <div class="card" style="height: calc(100% - 15px);">
-            <div class="card-header"
-                style="background-color: #00adf2; color: #fff; border-bottom: none;">
-                <h6 style="margin-bottom: 0;">Themes</h6>
-            </div>
             <div class="card-body" align="center"
                 style="border-bottom: none; padding: 20px; font-size: 15px !important;">
                 <%= form_for(@promoter, :html => { :multipart => true, :id => "user-bgcolor-form" }) do |f| %>
@@ -145,7 +62,7 @@
                             <% theme_color_options.shuffle.each.with_index do |c, idx| %>
                                 <div class="carousel-item <%= "active" if idx == 0 %>" style="padding: 0; width: 100% !important;"
                                     data-interval="10000000">
-                                    <div style="border-radius: 8px; border: 1px solid #e7e7e9; height: 320px;
+                                    <div style="border-radius: 8px; border: 1px solid #e7e7e9; height: 380px;
                                         background: <%= idx == 0 && @promoter.theme_color ? @promoter.theme_color : c %>;
                                         width: 100% !important;" class="col-md-12" align="center">
                                         <div class="profile-image"

@@ -49,6 +49,23 @@
 
 <section id="payouts">
     <div class="row" align="center">
+        <div class="col-md-12" style="margin-bottom: 15px;">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/account/settings">Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/account/email">Email</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/account/payouts">Payouts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/password/settings">Password</a>
+                </li>
+            </ul>
+        </div>
+        
         <div class="col-md-6 offset-md-3">
             <div class="card">
                 <div class="card-body" align="center"
@@ -70,13 +87,12 @@
                                 <% end %>
                                 
                                 <div class="field">
-                                    <!--<%= f.label :cashapp_link %>-->
+                                    <%= f.label :cashapp_link %>
                                     <div class="input-group mb-3" style="font-size: 15px !important;">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon3"
                                                 style="background-color: #fff !important; border: 1px solid #e7e7e9 !important;
                                                     color: #a1a1a3;">
-                                                <i class="fas fa-dollar-sign" style="margin-right: 5px;"></i>
                                                 cash.me/
                                             </span>
                                         </div>
@@ -86,13 +102,13 @@
                                 </div>
                                 
                                 <div class="field">
-                                    <!--<%= f.label :paypal_link %>-->
+                                    <%= f.label :paypal_link %>
                                     <div class="input-group mb-3" style="font-size: 15px !important;">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon3"
                                                 style="background-color: #fff !important; border: 1px solid #e7e7e9 !important;
                                                     color: #a1a1a3;">
-                                                <i class="fab fa-paypal" style="margin-right: 5px;"></i> paypal.me/
+                                                paypal.me/
                                             </span>
                                         </div>
                                         <%= f.text_field :paypal_link, class:"form-control", placeholder:"Paypal username",
@@ -101,7 +117,7 @@
                                 </div>
                                 
                                 <div class="action">
-                                    <%= f.submit "Update", class:"btn btn-success btn-block box-shadow",
+                                    <%= f.submit "Update", class:"btn btn-primary btn-block box-shadow",
                                         data: { :disable_with => "Updating..." } %>
                                 </div>
                             <% end %>

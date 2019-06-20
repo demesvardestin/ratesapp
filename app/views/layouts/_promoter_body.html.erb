@@ -1,5 +1,120 @@
-<div class="container">
-    <div style="padding: 20px 0;">
+<style type="text/css">
+    body {
+        padding-top: 0 !important;
+    }
+    
+    .navbar {
+        display: none !important;
+    }
+</style>
+
+<section id="alert-notice" style="display: flex; flex-direction: row-reverse;">
+    <%= render "shared/alert_notice" %>
+</section>
+
+<section id="side-panel">
+    <div style="padding: 0 0.85rem; width: 100%; text-align: center !important;">
+        <ul class="nav flex-column text-left">
+            <div style="display: flex;">
+                <div id="nav-link-icon">
+                    <li class="nav-item">
+                        <button class="nav-link cursor-pointer btn btn-link"
+                            id="side-panel-menu" style="font-size: 18px !important;">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </li>
+                </div>
+            </div>
+        </ul>
+    </div>
+    
+    <div style="margin-top: 45px; padding: 0 0.85rem; width: 100%;">
+        <ul class="nav flex-column text-left">
+            <div style="display: flex;">
+                <div id="nav-link-icon">
+                    <li class="nav-item">
+                        <a class="nav-link <%= path_for "dashboard" %>" href="/dashboard">
+                            <i class="fas fa-money-check-alt"></i>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link <%= path_for "requests" %>" href="/promo/requests">
+                            <i class="far fa-bell"></i>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link <%= path_for "analytics" %>" href="/analytics">
+                            <i class="far fa-chart-bar"></i>
+                        </a>
+                    </li>
+                </div>
+                
+                <div id="nav-link-text">
+                    <li class="nav-item">
+                        <a class="nav-link <%= path_for "dashboard" %>" href="/dashboard">
+                            <span class="nav-link-text">Rates</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link <%= path_for "requests" %>" href="/promo/requests">
+                            <span class="nav-link-text">Requests</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link <%= path_for "analytics" %>" href="/analytics">
+                            <span class="nav-link-text">Analytics</span>
+                        </a>
+                    </li>
+                </div>
+            </div>
+        </ul>
+    </div>
+    
+    <hr>
+    
+    <div style="width: 100%; padding: 0 0.85rem;">
+        <ul class="nav flex-column text-left">
+            <div style="display: flex;">
+                <div id="nav-link-icon">
+                    <li class="nav-item">
+                        <a class="nav-link <%= path_for "account" %>" href="/account/settings">
+                            <i class="far fa-user-circle"></i>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <%= link_to destroy_user_session_path,
+                            class:"nav-link", method: :delete do %>
+                            <i class="fas fa-sign-out-alt"></i>
+                        <% end %>
+                    </li>
+                </div>
+                
+                <div id="nav-link-text">
+                    <li class="nav-item">
+                        <a class="nav-link <%= path_for "account" %>" href="/account/settings">
+                            <span class="nav-link-text">Settings</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <%= link_to destroy_user_session_path,
+                            class:"nav-link", method: :delete do %>
+                            <span class="nav-link-text">Logout</span>
+                        <% end %>
+                    </li>
+                </div>
+            </div>
+        </ul>
+    </div>
+</section>
+
+<div id="promoter-body">
+    <div class="container">
         <%= yield %>
     </div>
 </div>

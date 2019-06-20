@@ -1,0 +1,78 @@
+<style type="text/css">
+    #alert-notice, nav, #side-panel {
+        display: none !important;
+    }
+    
+    #form-container {
+        margin-top: 60px;
+    }
+</style>
+
+<section id="registration-step-one">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <div class="progress" style="height: 20px;">
+                                        <div class="progress-bar bg-primary progress-bar-striped
+                                            progress-bar-animated" role="progressbar" style="width: 25%;"
+                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row" style="margin-top: 30px;">
+                                <div class="col-md-12 text-center">
+                                    <h3>Upload a profile picture</h3>
+                                    
+                                    <div id="form-container">
+                                        <%= form_for(@promoter, :url => { :action => "patch_registration_step_one" }, :html => { :multipart => true, :id => "user-form" }) do |f| %>
+                                            <%= render 'shared/image/errors', object: @promoter %>
+                                            
+                                            <div class="field" id="image-field">
+                                                <a class="btn btn-primary" id="image-upload-trigger"
+                                                    style="color: #fff; cursor: pointer; height: 150px; width: 150px;
+                                                        border-radius: 75px; background-image: url('<%= @promoter.image.url %>');
+                                                        background-size: cover; background-repeat: no-repeat;
+                                                        border: 5px solid #e7e7e9 !important; background-color: transparent;"
+                                                    onclick="document.querySelector('#image-input-field').click();">
+                                                    <i class="fas fa-camera" style="font-size: 40px; margin-top: 40px; color: #1d1d5c;"></i>
+                                                </a>
+                                                
+                                                <%= f.hidden_field :username, value:"#{@promoter.username}" %>
+                                                <%= f.file_field :image, style:"display: none;", id:"image-input-field",
+                                                    onchange:"$('#image-field')
+                                                            .append(`
+                                                                <p style='margin-top: 15px;'>
+                                                                    <span class='badge badge-secondary'>
+                                                                        ${this.value.split('fakepath').join().substring(0,3) +
+                                                                        '...' + this.value.slice(-10)}. Click 'Next' to save changes.
+                                                                    </span>
+                                                                </p>
+                                                            `)"
+                                                %>
+                                            </div>
+                                            
+                                            <div class="row" style="margin-top: 60px;">
+                                                <div class="col-md-3 offset-md-9">
+                                                    <div class="actions" align="right">
+                                                        <input type="submit" class="btn btn-primary btn-block"
+                                                            value="Next">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -74,4 +74,12 @@ module ApplicationHelper
         ["I'm not receiving emails", "I'm having trouble logging into my account",
             "I'm getting spammed", "Other"]
     end
+    
+    def path_for(path)
+        if request.original_url.include?(path)
+           return "active" 
+        end
+        
+        return ""
+    end
 end

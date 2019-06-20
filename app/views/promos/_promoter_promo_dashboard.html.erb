@@ -22,23 +22,25 @@
         <%= render 'promos/promos' %><br />
     </div>
     
-    <button class="btn btn-primary box-shadow" style="margin-top: 15px;"
+    <button class="btn btn-primary"
         data-toggle="modal" data-target="#newPromoPackageModal">
         Add another rate
     </button>
 <% else %>
-    <div class="card" style="min-height: calc(100vh - 150px);">
-        <div class="card-body" style="vertical-align: middle !important;">
-            <div style="margin-top: 100px;">
-                <h5 style="margin: 0; text-align: center;">
-                    You haven't posted any rates yet.
-                </h5>
-                
-                <button class="btn btn-primary box-shadow" style="margin-top: 15px;"
-                    data-toggle="modal" data-target="#newPromoPackageModal">
-                    Add new rate
-                </button>
+    <section class="row">
+        <div class="col-md-4 offset-md-4">
+            <div class="card" style="margin-top: 30px;">
+                <div class="card-body" style="vertical-align: middle !important;">
+                    <div>
+                        <h5>You haven't added any rates yet</h5>
+                        
+                        <button class="btn btn-primary" style="margin-top: 20px;"
+                            data-toggle="modal" data-target="#newPromoPackageModal">
+                            Add your first rate
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 <% end %>

@@ -12,14 +12,14 @@
         </div>
     <% end %>
     
-    <div class="field" id="image-field">
+    <div class="field" id="image-field" align="center">
         <a class="btn btn-primary" id="image-upload-trigger"
             style="color: #fff; cursor: pointer; height: 120px; width: 120px;
                 border-radius: 60px; background-image: url('<%= @promoter.image.url %>');
                 background-size: cover; background-repeat: no-repeat; filter: brightness(80%);
                 border: 5px solid #e7e7e9 !important; background-color: transparent;"
             onclick="document.querySelector('#image-input-field').click();">
-            <i class="fas fa-camera" style="font-size: 40px; margin-top: 30px; color: #28a745;"></i>
+            <i class="fas fa-camera" style="font-size: 40px; margin-top: 30px; color: #1d1d5c;"></i>
         </a>
         
         <%= f.file_field :image, style:"display: none;", id:"image-input-field",
@@ -55,7 +55,6 @@
                 <%= f.label :first_name %>
                 <%= f.text_field :first_name, class:"form-control", placeholder:"First name", required: true %>
             </div>
-            
             <div class="col-md-6">
                 <%= f.label :last_name %>
                 <%= f.text_field :last_name, class:"form-control", placeholder:"Last name", required: true %>
@@ -63,7 +62,36 @@
         </div>
     </div>
     
+    <div class="field">
+        <div class="row">
+            <div class="col-md-12">
+                <%= f.label :promotion_type %>
+                <div class="dropdown">
+                    <button class="btn btn-secondary btn-block promotion-type" type="button"
+                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false"
+                        style="border-color: #e7e7e9 !important; background-color: transparent;
+                            color: #a1a1a3; box-shadow: none !important;">
+                        <%= @promoter.promotion_type || "Select" %>
+                        <i class="fas fa-angle-down"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                        style="border: 0.5px solid #e7e7e9; width: 100%;">
+                        <% promotion_types.each do |type| %>
+                            <a class="dropdown-item cursor-pointer"
+                                onclick="$('.promotion-type').html(this.innerHTML);
+                                    document.querySelector('#promotion-type-input').value = '<%= type %>';">
+                                <%= type %>
+                            </a>
+                        <% end %>
+                    </div>
+                </div>
+                <%= f.hidden_field :promotion_type, required: true, id:"promotion-type-input" %>
+            </div>
+        </div>
+    </div>
+    
     <div class="actions">
-        <%= f.submit "Update", class:"btn btn-success btn-block", data: { :disable_with => "Updating..." } %>
+        <%= f.submit "Update", class:"btn btn-primary btn-block", data: { :disable_with => "Updating..." } %>
     </div>
 <% end %>

@@ -38,9 +38,9 @@
     
     <div class="actions">
         <% if promo.new_record? %>
-            <%= f.submit "Add Rate", class: "btn btn-success btn-block", data: { :disable_with => "Adding..." } %>
+            <%= f.submit "Add Rate", class: "btn btn-primary btn-block", data: { :disable_with => "Adding..." } %>
         <% else %>
-            <%= f.submit "Update Rate Details", class: "btn btn-success btn-block", data: { :disable_with => "Updating..." } %>
+            <%= f.submit "Update Rate Details", class: "btn btn-primary btn-block", data: { :disable_with => "Updating..." } %>
         <% end %>
     </div>
 <% end %>

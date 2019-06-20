@@ -1,59 +1,69 @@
 <div class="row">
-    <% @promos.sorted.each do |promo| %>
-        <div class="modal fade" id="viewPromoDetails<%= promo.id %>" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content box-shadow">
-              <div class="modal-header" style="border-bottom: none;">
-                <h5 class="modal-title" id="exampleModalLabel">What you get for this rate</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body" style="text-align: left !important;">
-                <%= sanitize(promo.package_details) %>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="modal fade editPromoModal" id="editPromoDetails<%= promo.id %>" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content box-shadow" style="margin-top: -45px;">
-              <div class="modal-header" style="border-bottom: none;">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Rate Details</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body" align="center">
-                <%= render "promos/form", promo: promo %>
+  <div class="col-md-4 offset-md-4">
+    <div class="card">
+      <div class="card-body">
+        <% @promos.sorted.each do |promo| %>
+            <div class="modal fade" id="viewPromoDetails<%= promo.id %>" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content box-shadow">
+                  <div class="modal-header" style="border-bottom: none;">
+                    <h5 class="modal-title" id="exampleModalLabel">What you get for this rate</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" style="text-align: left !important;">
+                    <%= sanitize(promo.package_details) %>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        
-        <div class="col-md-3" align="center">
-            <div class="card package-card">
-                <div class="card-header basic-package"
-                    style="color: #fff; font-weight: bold; border-bottom: none;
-                        padding-top: 25px;">
+            
+            <div class="modal fade editPromoModal" id="editPromoDetails<%= promo.id %>" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content box-shadow" style="margin-top: -45px;">
+                  <div class="modal-header" style="border-bottom: none;">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Rate Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" align="center">
+                    <%= render "promos/form", promo: promo %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-12">
+                <span>
+                  <a data-toggle="modal" data-target="#viewPromoDetails<%= promo.id %>"
+                    class="btn btn-link">
                     <i class="fas fa-award" style="font-size: 25px;"></i>
-                    <h3><%= "$" + shorten(number_to_human(promo.package_price)) %></h3>
-                    <h6 data-toggle="modal" data-target="#viewPromoDetails<%= promo.id %>"
-                        style="cursor: pointer;">
-                        View Details
-                    </h6>
-                </div>
-                <div class="card-footer" style="padding: 0;">
-                    <a class="btn btn-link btn-block" style="text-decoration: none;"
-                        data-toggle="modal" data-target="#editPromoDetails<%= promo.id %>"
-                        href="#">
-                        Edit
-                    </a>
-                </div>
+                    <%= "$" + shorten(number_to_human(promo.package_price)) %>
+                  </a>
+                </span>
+                <span>
+                  <a data-toggle="modal" data-target="#viewPromoDetails<%= promo.id %>"
+                    class="btn btn-link" href="#">
+                    View Details
+                  </a>
+                </span>
+                <span>
+                  <a class="btn btn-link" style="text-decoration: none;"
+                    data-toggle="modal" data-target="#editPromoDetails<%= promo.id %>"
+                    href="#">
+                    Edit
+                  </a>
+                </span>
+                <hr>
+              </div>
             </div>
-        </div>
-    <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

@@ -18,12 +18,19 @@
 //= require Chart.bundle
 //= require_tree .
 
-// POSiBLE DESIGN CHOICE FOR BUTTON AND FORM LOADING
-//
-// window.onload = function() {
-    // $('form').on('submit', function() {
-    //     $('form > div > .btn').prepend(`
-    //         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-    //     `);
-    // });
-// };
+$(document).ready(function() {
+    // Form submission
+    let form = document.querySelector('form');
+    
+    form.addEventListener('submit', (event) => {
+        $('form .btn.btn-block').hide();
+        
+        let loader = document.createElement('button');
+        loader.setAttribute('class', 'btn btn-primary btn-block');
+        loader.setAttribute('disabled', 'true');
+        loader.innerHTML = `<div class="spinner-grow text-light" role="status"></div>`;
+        
+        document.querySelector('form .actions')
+        .appendChild(loader);
+    });
+});

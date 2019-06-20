@@ -1,0 +1,5 @@
+$('#registration-flow').html(`
+    <%= render 'users/registration_step_three' %>
+`);
+
+window.history.pushState({}, "", "/registration_step_three");

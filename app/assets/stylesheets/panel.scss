@@ -1,0 +1,11 @@
+#side-panel:hover {
+   #nav-link-text {
+        opacity: 1;
+    }
+}
+
+#side-panel-menu:focus {
+    #side-panel {
+        width: 20%;
+    }
+}
