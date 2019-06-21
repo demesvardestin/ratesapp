@@ -30,22 +30,45 @@
                                 ${this.value.split('fakepath').join().substring(0,3) +
                                 '...' + this.value.slice(-10)}. Click 'Update' to save changes.
                             </span>
-                        </p>
-                    `)" %>
+                        </p>`)" %>
     </div>
     
     <div class="field">
-        <%= f.label :username %>
-        <div class="input-group mb-3" style="font-size: 15px !important;">
-          <div class="input-group-prepend">
-            <span class="input-group-text"
-                style="background-color: #fff !important; border: 1px solid #e7e7e9 !important;
-                    padding-right: 0; color: #a1a1a3;"
-                id="basic-addon3">myrates.co/</span>
-          </div>
-          <%= f.text_field :username, class:"form-control", placeholder:"username",
-              style:"border-left: none !important; padding-left: 3px;", value:"#{@promoter.username}",
-              onkeyup:"document.querySelector('#your-bio-link').value = 'myrates.co/' + this.value;" %>
+        <div class="row">
+            <div class="col-md-6">
+                <%= f.label :username %>
+                <div class="input-group mb-3" style="font-size: 15px !important;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"
+                            style="background-color: #fff !important; border: 1px solid #e7e7e9 !important;
+                                padding-right: 0; color: #a1a1a3;"
+                            id="basic-addon3">myrates.co/</span>
+                    </div>
+                    <%= f.text_field :username, class:"form-control", placeholder:"username",
+                        style:"border-left: none !important; padding-left: 3px;", value:"#{@promoter.username}",
+                        onkeyup:"document.querySelector('#your-bio-link').value = 'myrates.co/' + this.value;" %>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <label>Bio link</label>
+                <div class="input-group mb-3" style="margin-bottom: 0.75rem !important;">
+                    <input type="text" class="form-control"
+                        aria-label="bio-link" aria-describedby="button-addon2"
+                        value="myrates.co/<%= @promoter.username %>"
+                        style="border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important;"
+                        id="your-bio-link">
+                    <div class="input-group-append">
+                        <a class="btn btn-primary cursor-pointer"
+                            id="copy-bio-link" onclick="copyText()"
+                            style="border-top-left-radius: 0 !important;
+                                border-bottom-left-radius: 0 !important;
+                                box-shadow: none !important; padding-top: 12px; color: #fff;">
+                            <i class="far fa-copy"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -65,7 +88,7 @@
     <div class="field">
         <div class="row">
             <div class="col-md-12">
-                <%= f.label :promotion_type %>
+                <%= f.label :what_type_of_promos_do_you_do %>
                 <div class="dropdown">
                     <button class="btn btn-secondary btn-block promotion-type" type="button"
                         id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
@@ -92,6 +115,6 @@
     </div>
     
     <div class="actions">
-        <%= f.submit "Update", class:"btn btn-primary btn-block", data: { :disable_with => "Updating..." } %>
+        <%= f.submit "Update", class:"btn btn-primary btn-block", onclick:"document.querySelector('#user-form').submit();" %>
     </div>
 <% end %>

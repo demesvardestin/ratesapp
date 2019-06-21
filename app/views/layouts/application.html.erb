@@ -30,7 +30,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     
     <script type="text/javascript">
-      let url = '<%= request.original_url %>';
+      var url = '<%= request.original_url %>';
       if (!url.includes('https')) {
         $('html').append(`
           <div style="min-height: 100vh; text-align: center;">

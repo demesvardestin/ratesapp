@@ -9,9 +9,6 @@
     }
     
     .tab-content-container .nav-box, .payout-preference-box {
-        border: 0.5px solid #e7e7e9;
-        border-radius: 8px;
-        padding: 30px 15px;
         margin-top: 15px;
     }
     
@@ -87,9 +84,8 @@
           </div>
     
           <div class="nav-box">
-            <h5 style="margin-bottom: 15px;">Cancel my MyRates account</h5>
-            <%= button_to "Cancel My Account", registration_path(resource_name),
-              data: { confirm: "Are you sure? This action cannot be reversed." }, class:"btn btn-danger",
+            <%= button_to "I want to cancel my account", registration_path(resource_name),
+              data: { confirm: "Are you sure? This action cannot be reversed." }, class:"btn btn-link",
               method: :delete %>
           </div>
         </div>

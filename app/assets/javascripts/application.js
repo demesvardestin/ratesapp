@@ -23,7 +23,7 @@ $(document).ready(function() {
     let form = document.querySelector('form');
     
     form.addEventListener('submit', (event) => {
-        $('form .btn.btn-block').hide();
+        $('form .actions > .btn.btn-block').hide();
         
         let loader = document.createElement('button');
         loader.setAttribute('class', 'btn btn-primary btn-block');
@@ -33,4 +33,8 @@ $(document).ready(function() {
         document.querySelector('form .actions')
         .appendChild(loader);
     });
+    
+    displayBar = (elem) => {
+        elem.lastElementChild.classList.toggle('full-width');
+    }
 });

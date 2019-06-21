@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   patch '/registration_step_three', to: 'users#patch_registration_step_three'
   get '/dashboard', to: "users#dashboard"
   get '/analytics', to: "users#analytics"
+  get '/reload_charts', to: 'users#reload_charts'
   
   get '/:username', to: "users#show", as: "promoter"
   

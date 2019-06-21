@@ -4,17 +4,17 @@
     <div class="row">
         <%= render "users/promoter" %>
         <div class="col-md-8 offset-md-2" align="center">
-            <div class="card">
-                <div class="card-header"
-                    style="background-color: #00adf2; color: #fff; border-bottom: none;">
+            <div class="card box-shadow">
+                <div class="card-body" style="border-bottom: none; padding-top: 20px;
+                    padding-bottom: 30px;">
                     <h6>
                         <span style="margin-right: 5px;">
                             <i class="far fa-clipboard"></i>
                         </span>
                         Tell us more about your request
                     </h6>
-                </div>
-                <div class="card-body" style="border-bottom: none; padding-top: 20px; padding-bottom: 30px;">
+                    <hr>
+                    
                     <%= render "promo_requests/form" %>
                 </div>
             </div>

@@ -111,6 +111,12 @@ class UsersController < ApplicationController
         @promoter = current_user
     end
     
+    def reload_charts
+        @promoter = current_user
+        
+        render :layout => false
+    end
+    
     def set_email_preferences
         @promoter = current_user
         promotional_sub_status = case params[:promo_email].strip.downcase

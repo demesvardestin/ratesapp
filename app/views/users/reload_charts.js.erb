@@ -1,0 +1,93 @@
+console.log('thing');
+$('#card-chart-body').html(`
+    <div id="day-chart" class="chart-box active">
+        <h6 style="margin-bottom: 15px;">
+            Today:
+            <%= pluralize promos_sold_for('Day').count, 'request' %> received
+        </h6>
+        
+        <%= area_chart @promoter.promo_requests.group_by_day(:created_at).count,
+            height: '400px',
+            thousands: ',' %>
+    </div>
+    
+    <div id="week-chart" class="chart-box">
+        <h6 style="margin-bottom: 15px;">
+            This week:
+            <%= pluralize promos_sold_for('Week').count, 'request' %> received
+        </h6>
+        
+        <%= area_chart @promoter.promo_requests.group_by_week(:created_at).count,
+            height: '400px',
+            thousands: ',' %>
+    </div>
+    
+    <div id="month-chart" class="chart-box">
+        <h6 style="margin-bottom: 15px;">
+            This week:
+            <%= pluralize promos_sold_for('Month').count, 'request' %> received
+        </h6>
+        
+        <%= area_chart @promoter.promo_requests.group_by_month(:created_at).count,
+            height: '400px',
+            thousands: ',' %>
+    </div>
+    
+    <div id="year-chart" class="chart-box">
+        <h6 style="margin-bottom: 15px;">
+            This week:
+            <%= pluralize promos_sold_for('Year').count, 'request' %> received
+        </h6>
+        
+        <%= area_chart @promoter.promo_requests.group_by_year(:created_at).count,
+            height: '400px',
+            thousands: ',' %>
+    </div>
+    
+    <div style="margin-top: 15px;" id="chart-controls">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" id="day"
+                    onclick="$('.chart-box.active').toggleClass('active');
+                            $('#chart-controls .nav-link.active').toggleClass('active');
+                            $('#' + this.id).toggleClass('active');
+                            $('#' + this.id + '-chart').toggleClass('active');">
+                    Day
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="week"
+                    onclick="$('.chart-box.active').toggleClass('active');
+                            $('#chart-controls .nav-link.active').toggleClass('active');
+                            $('#' + this.id).toggleClass('active');
+                            $('#' + this.id + '-chart').toggleClass('active');">
+                    Week
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="month"
+                    onclick="$('.chart-box.active').toggleClass('active');
+                            $('#chart-controls .nav-link.active').toggleClass('active');
+                            $('#' + this.id).toggleClass('active');
+                            $('#' + this.id + '-chart').toggleClass('active');">
+                    Month
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="year"
+                    onclick="$('.chart-box.active').toggleClass('active');
+                            $('#chart-controls .nav-link.active').toggleClass('active');
+                            $('#' + this.id).toggleClass('active');
+                            $('#' + this.id + '-chart').toggleClass('active');">
+                    Year
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="reload-charts"
+                    onclick="reloadCharts(this)">
+                    <i class="fas fa-redo"></i> reload
+                </a>
+            </li>
+        </ul>
+    </div>
+`);

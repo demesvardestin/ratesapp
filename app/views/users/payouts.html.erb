@@ -33,12 +33,6 @@
         display: none;
     }
     
-    .tab-content-container .nav-box:not(:last-child), .payout-preference-box {
-        border: 0.5px solid #e7e7e9;
-        border-radius: 8px;
-        padding: 30px 15px;
-    }
-    
     @media only screen and (min-device-width: 767px) and (max-device-width: 1024px) {
         .nav-box, .payout-preference-box {
             padding: 0 !important;
@@ -50,29 +44,41 @@
 <section id="payouts">
     <div class="row" align="center">
         <div class="col-md-12" style="margin-bottom: 15px;">
-            <ul class="nav justify-content-center">
-                <li class="nav-item">
+            <ul class="nav justify-content-center settings-nav">
+                <li class="nav-item" onmouseover="displayBar()" oumouseout="displayBar()">
                     <a class="nav-link active" href="/account/settings">Account</a>
+                    <hr>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" onmouseover="displayBar()" oumouseout="displayBar()">
                     <a class="nav-link" href="/account/email">Email</a>
+                    <hr>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" onmouseover="displayBar()" oumouseout="displayBar()">
                     <a class="nav-link" href="/account/payouts">Payouts</a>
+                    <hr>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" onmouseover="displayBar()" oumouseout="displayBar()">
                     <a class="nav-link" href="/password/settings">Password</a>
+                    <hr>
                 </li>
             </ul>
         </div>
         
-        <div class="col-md-6 offset-md-3">
+        <div class="col-md-8 offset-md-2">
             <div class="card">
                 <div class="card-body" align="center"
                     style="border-bottom: none; padding: 20px; font-size: 15px !important;">
+                    <ul class="nav nav-pills nav-fill card-toggle-btn">
+                      <li class="nav-item">
+                        <a class="nav-link active cursor-pointer">Links</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link cursor-pointer">Debit</a>
+                      </li>
+                    </ul>
+                    
                     <div class="tab-content-container" style="margin-top: 15px;">
-                        <div id="tab-content-cashapp">
-                            <h5 style="margin-bottom: 15px;">Add payout links</h5>
+                        <div class="nav-box active">
                             <%= form_for(@promoter, :html => { :multipart => true, :id => "user-form" }) do |f| %>
                                 <% if @promoter.errors.any? %>
                                     <div id="error_explanation" class="alert alert-warning" role="alert">
@@ -117,10 +123,14 @@
                                 </div>
                                 
                                 <div class="action">
-                                    <%= f.submit "Update", class:"btn btn-primary btn-block box-shadow",
+                                    <%= f.submit "Update Payout Links", class:"btn btn-primary btn-block box-shadow",
                                         data: { :disable_with => "Updating..." } %>
                                 </div>
                             <% end %>
+                        </div>
+                        
+                        <div class="nav-box">
+                            <h6 class="text-center">Coming soon...</h6>
                         </div>
                     </div>
                 </div>
@@ -129,13 +139,8 @@
     </div>
 </section>
 
-<script type="text/javascript">
-    $('.card-toggle-btn .nav-link').on('click', e => {
-        $('.card-toggle-btn .nav-link').toggleClass('active');
-        $('.tab-content-container div').toggleClass('active');
-    });
-</script>
 <script src="https://js.stripe.com/v3/"></script>
+
 <script type="text/javascript">
     var stripe = Stripe("<%= Rails.configuration.stripe[:publishable_key] %>");
     var elements = stripe.elements();
@@ -199,4 +204,11 @@
     
         form.submit();
     }
+</script>
+
+<script type="text/javascript">
+    $('.card-toggle-btn .nav-link').on('click', e => {
+        $('.card-toggle-btn .nav-link').toggleClass('active');
+        $('.tab-content-container div').toggleClass('active');
+    });
 </script>

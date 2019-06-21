@@ -28,7 +28,7 @@ body {
     padding-top: 0;
     padding-bottom: 0;
     background-color: #fff !important;
-    border-bottom: 0.5px solid #e7e7e9;
+    border-bottom: 0.5px solid #e3e3eb;
 }
 
 .navbar-brand {
@@ -67,9 +67,13 @@ body {
     background-color: #b2ffff;
 }
 
+.no-border {
+    border: none !important;
+}
+
 .card {
     margin-bottom: 15px;
-    border: 0.5px solid #e7e7e9;
+    border: 0.5px solid #e3e3eb;
     border-radius: 8px !important;
 }
 
@@ -157,7 +161,7 @@ body {
 
 .notification-item {
     padding: .75rem 1.25rem;
-    border-top: 0.5px solid #e7e7e9;
+    border-top: 0.5px solid #e3e3eb;
 }
 
 .notification-item:first-child {
@@ -165,7 +169,7 @@ body {
 }
 
 .notification-item:last-child {
-    border-bottom: 0.5px solid #e7e7e9;
+    border-bottom: 0.5px solid #e3e3eb;
 }
 
 #notification-box > .card-body {
@@ -228,8 +232,43 @@ button:not(.close), input.btn, input.form-control {
     font-size: 15px;
 }
 
+.btn-primary {
+    background-color: #77779d;
+    border-color: #77779d;
+}
+
+.text-primary {
+    color: #77779d !important;
+}
+
+.btn-primary:disabled, .btn-primary:hover {
+    background-color: #53536d;
+    border-color: #53536d;
+    box-shadow: none !important;
+}
+
 .btn {
     font-size: 15px !important;
+}
+
+.card-toggle-btn .nav-link:not(.active) {
+    color: #77779d !important;
+}
+
+.card-toggle-btn .nav-link.active {
+    background-color: #77779d;
+    border-color: #77779d;
+}
+
+.card-toggle-btn .nav-link.active:hover {
+    background-color: #53536d;
+    border-color: #53536d;
+    box-shadow: none !important;
+    color: #fff;
+}
+
+a:not(.btn) {
+    color: #77779d;
 }
 
 a.btn-link {
@@ -241,7 +280,7 @@ textarea {
 }
 
 .form-control {
-    border-color: #e7e7e9 !important;
+    border-color: #e3e3eb !important;
 }
 
 form {
@@ -272,12 +311,12 @@ a.btn, input.btn, .form-control:focus {
 
 .package-types-dropdown > a {
     padding: 15px;
-    border-bottom: 0.5px solid #e7e7e9;
+    border-bottom: 0.5px solid #e3e3eb;
     cursor: pointer;
 }
 
 .package-types-dropdown > a:focus {
-    background-color: #e7e7e9;
+    background-color: #e3e3eb;
 }
 
 .package-types-dropdown > a:last-child {
@@ -340,7 +379,7 @@ a.btn, input.btn, .form-control:focus {
 }
 
 .pagination > span, .pagination > a {
-    border: 0.5px solid #007bff;
+    border: 0.5px solid #77779d;
     border-radius: 8px;
     padding: 8px 10px;
 }
@@ -350,7 +389,7 @@ a.btn, input.btn, .form-control:focus {
 }
 
 .pagination > .disabled {
-    border-color: #e7e7e9 !important;
+    border-color: #e3e3eb !important;
     color: #a1a1a3 !important;
 }
 
@@ -439,7 +478,7 @@ a.btn, input.btn, .form-control:focus {
 }
 
 .StripeElement {
-    border: 1px solid #e7e7e9 !important;
+    border: 1px solid #e3e3eb !important;
     padding: 15px 15px !important;
     border-radius: 2px;
 }
@@ -453,7 +492,7 @@ a.btn, input.btn, .form-control:focus {
 }
 
 .color-blue {
-    color: #007bff !important;
+    color: #77779d !important;
 }
 
 .bold {
@@ -475,7 +514,7 @@ footer > a, footer > span {
     position: fixed;
     width: 6%;
     height: 100vh;
-    border-right: 1px solid #e7e7e9;
+    border-right: 1px solid #e3e3eb;
     background-color: #fff;
     transition: width 0.25s;
     z-index: 9999 !important;
@@ -501,17 +540,18 @@ footer > a, footer > span {
     font-weight: bold;
 }
 
-.flex-column .nav-item {
+#side-panel .nav-item {
     margin: 10px 0;
     font-size: 18px;
 }
 
-.flex-column .nav-link {
+#side-panel .nav-link {
     color: #77779d;
     height: 50px !important;
+    transition: 0.5s;
 }
 
-.flex-column .nav-item:first-child {
+#side-panel .nav-item:first-child {
     margin-top: 0;
 }
 
@@ -530,6 +570,31 @@ footer > a, footer > span {
 
 #requests-card-header h6 {
     color: #1d1d5c;
+}
+
+.settings-nav .nav-link {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.settings-nav .nav-item:not(:last-child) {
+    margin-right: 20px;
+}
+
+.settings-nav hr {
+    margin: 0;
+    height: 3px;
+    background-color: #77779d;
+    width: 0;
+    transition: width 0.5s;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.settings-nav {
+    margin-bottom: 15px;
 }
 
 /* Ipad Pro */
@@ -592,7 +657,7 @@ footer > a, footer > span {
     
     #requests-filter {
         width: 100%;
-        border: 0.5px solid #e7e7e9;
+        border: 0.5px solid #e3e3eb;
     }
 }
 

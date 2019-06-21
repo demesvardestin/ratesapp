@@ -5,8 +5,7 @@
     
     body {
         padding-top: <%= @promoter.present? ? '30px !important' : '0 !important' %>;
-        background: <%= @promoter && @promoter.theme_color.present? ? @promoter.theme_color : 'linear-gradient(to right, #2948ff, #396afc)' %>;
-        color: <%= "#fff !important;" if @promoter && @promoter.theme_color != '#eef3f5' %>;
+        background: #fff;
     }
     
     #platform-logo a, .profile-link a {

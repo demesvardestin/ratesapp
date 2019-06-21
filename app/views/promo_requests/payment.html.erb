@@ -4,9 +4,15 @@
     <div class="row">
         <%= render "users/promoter" %>
         <div class="col-md-4 offset-md-4">
-            <div class="card">
+            <div class="card no-border">
                 <div class="card-body">
-                    <h5 style="margin-bottom: 15px; color: #454545;">You're almost finished</h5>
+                    <h6>
+                        <span style="margin-right: 5px;">
+                            <i class="far fa-clipboard"></i>
+                        </span>
+                        Tell us more about your request
+                    </h6>
+                    <hr>
                   
                     <form action="/request/pay" method="post" id="payment-form"
                         style="margin-top: 15px;">

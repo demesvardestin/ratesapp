@@ -1,3 +1,9 @@
+<style type="text/css">
+  .carousel-control-prev, .carousel-control-next {
+    background-color: #47475e !important;
+  }
+</style>
+
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <% @promos.sorted.each do |promo| %>
@@ -21,10 +27,11 @@
       <div class="carousel-item <%= "active" if promo == @promos.first %>"
         data-interval="600000">
           <div class="" align="center">
-              <div class="card package-card box-shadow" style="min-height: 170px;">
-                  <div class="card-header basic-package"
+              <div class="card no-border" style="min-height: 170px;">
+                  <div class="card-body"
                       style="color: #fff; font-weight: bold; border-bottom: none;
-                          padding-top: 25px;">
+                          padding-top: 25px; background-color: #77779d;
+                          border-top-left-radius: 8px; border-top-right-radius: 8px;">
                       <i class="fas fa-award" style="font-size: 25px;"></i>
                       <h3><%= "$" + shorten(number_to_human(promo.package_price)) %></h3>
                       <h6 data-toggle="modal" data-target="#viewPromoDetails<%= promo.id %>"
@@ -32,8 +39,10 @@
                           View Details
                       </h6>
                   </div>
-                  <div class="card-footer" style="padding: 0; background-color: #fff;
-                    border-bottom-left-radius: 8px !important; border-bottom-right-radius: 8px !important;">
+                  <div class="card-footer"
+                    style="padding: 0; background-color: #f1f1f5;
+                      border-radius: 0 !important;
+                      border-bottom-left-radius: 8px !important; border-bottom-right-radius: 8px !important;">
                     <%= link_to "Select",
                         new_promo_request_path(:promoter => @promoter.username, :promo_id => promo.id),
                         class:"btn btn-link btn-block",
@@ -45,12 +54,14 @@
       </div>
     <% end %>
   </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
+  <% if @promos.size > 1 %>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  <% end %>
 </div>

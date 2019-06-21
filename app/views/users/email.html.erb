@@ -20,24 +20,6 @@
         <div class="card" style="height: calc(100% - 15px);">
             <div class="card-body" align="center"
                 style="border-bottom: none; padding: 20px; font-size: 15px !important;">
-                <label>Bio link</label>
-                <div class="input-group mb-3" style="margin-bottom: 0.75rem !important;">
-                    <input type="text" class="form-control"
-                        aria-label="bio-link" aria-describedby="button-addon2"
-                        value="myrates.co/<%= @promoter.username %>"
-                        style="border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important;"
-                        id="your-bio-link">
-                    <div class="input-group-append">
-                        <button class="btn btn-secondary" type="button"
-                            id="button-addon2" onclick="copyText(this)"
-                            style="border-top-left-radius: 0 !important;
-                                border-bottom-left-radius: 0 !important;
-                                box-shadow: none !important;">
-                            Add link to bio
-                        </button>
-                    </div>
-                </div>
-                
                 <form action="/account/set_email_preferences" method="post">
                     <div class="field">
                         <label>Promotional emails</label>

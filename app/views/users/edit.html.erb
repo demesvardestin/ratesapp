@@ -1,21 +1,24 @@
 <style type="text/css">
     .carousel-control-next, .carousel-control-prev {
-        top: 130px;
+        top: 160px;
         height: 40px;
         width: 40px;
-        background-color: #007bff;
+        background-color: transparent;
         border-radius: 40px;
-        box-shadow: 0 6px 15px 0 rgba(50,50,70,.08), 0 3px 5px 0 rgba(0,0,0,.05) !important;
+        border: none;
+        box-shadow: none !important;
         opacity: 1 !important;
         transition: none;
+        color: #1d1d5c !important;
+        font-size: 25px;
     }
     
     .carousel-control-prev {
-        left: -15px !important;
+        left: -55px !important;
     }
     
     .carousel-control-next {
-        right: -15px !important;
+        right: -35px !important;
     }
 </style>
 
@@ -55,29 +58,29 @@
                 <% end %>
                 
                 <label>Select a theme</label>
-                <div class="row" style="text-align: center !important;" id="profile-preview-row">
+                <div class="row" style="text-align: center !important; margin-top: 10px;" id="profile-preview-row">
                     <div class="col-md-10 offset-md-1">
-                    <div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel">
-                        <div class="carousel-inner" style="width: 100% !important;">
-                            <% theme_color_options.shuffle.each.with_index do |c, idx| %>
-                                <div class="carousel-item <%= "active" if idx == 0 %>" style="padding: 0; width: 100% !important;"
-                                    data-interval="10000000">
-                                    <div style="border-radius: 8px; border: 1px solid #e7e7e9; height: 380px;
-                                        background: <%= idx == 0 && @promoter.theme_color ? @promoter.theme_color : c %>;
-                                        width: 100% !important;" class="col-md-12" align="center">
-                                        <div class="profile-image"
-                                            style="height: 50px; width: 50px; border-radius: 25px;
-                                                background-image: url('<%= @promoter.image.url %>');
-                                                background-size: cover; background-repeat: no-repeat;
-                                                margin: 30px 0 10px 0;"></div>
-                                        
-                                        <p style="color: <%= "#fff !important" %>; font-size: 12px;">
-                                            <b><%= "@" + @promoter.username %></b>
-                                        </p>
-                                        
-                                        <section align="center" style="margin-top: 80px;">
+                        <div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel">
+                            <div class="carousel-inner" style="width: 100% !important;">
+                                <% theme_color_options.shuffle.each.with_index do |c, idx| %>
+                                    <div class="carousel-item <%= "active" if idx == 0 %>" style="padding: 0; width: 100% !important;"
+                                        data-interval="10000000">
+                                        <div style="border-radius: 8px; border: 1px solid #e7e7e9; height: 380px;
+                                            background: <%= idx == 0 && @promoter.theme_color ? @promoter.theme_color : c %>;
+                                            width: 100% !important;" class="col-md-12" align="center">
+                                            <div class="profile-image"
+                                                style="height: 65px; width: 65px; border-radius: 32.5px;
+                                                    background-image: url('<%= @promoter.image.url %>');
+                                                    background-size: cover; background-repeat: no-repeat;
+                                                    margin: 130px 0 10px 0;"></div>
+                                            
+                                            <p style="color: <%= "#fff !important" %>; font-size: 14px;">
+                                                <b><%= "@" + @promoter.username %></b>
+                                            </p>
+                                        </div>
+                                        <section align="center" style="margin-top: 15px;">
                                             <p>
-                                                <button id="<%= 'color' + idx.to_s %>" class="btn btn-light box-shadow"
+                                                <button id="<%= 'color' + idx.to_s %>" class="btn btn-primary btn-block"
                                                     onclick="document.querySelector('#theme-color').value = '<%= c %>';
                                                         document.querySelector('#user-bgcolor-form').submit();">
                                                     Select
@@ -85,18 +88,19 @@
                                             </p>
                                         </section>
                                     </div>
-                                </div>
-                            <% end %>
+                                <% end %>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                                <i class="fas fa-angle-left"></i>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                                <i class="fas fa-angle-right"></i>
+                            </a>
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
                     </div>
                 </div>
             </div>
@@ -105,11 +109,23 @@
 </div>
 
 <script type="text/javascript">
-    function copyText (elem) {
-        document.getElementById('your-bio-link').select();
+    var bioLink = document.querySelector('#your-bio-link');
+    
+    copyText = e => {
+        bioLink.select();
         document.execCommand("copy");
         
-        // alert("Copied link to clipboard!");
-        elem.innerHTML = 'Link Copied!'
+        $('#copy-bio-link').html(`
+            <i class="fas fa-check"></i>
+        `);
+        
+        setTimeout(resetCopyBtn, 1000);
+    }
+    
+    resetCopyBtn = f => {
+        $('#copy-bio-link').html(`
+            <i class="far fa-copy"></i>
+        `);
+        $(`#${bioLink.id}`).blur();
     }
 </script>
