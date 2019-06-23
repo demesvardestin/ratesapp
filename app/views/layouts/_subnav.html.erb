@@ -1,0 +1,30 @@
+<div class="col-md-12" style="margin-bottom: 15px;">
+    <ul class="nav justify-content-center settings-nav">
+        <li class="nav-item" onmouseover="displayBar(this)" oumouseout="hideBar(this)">
+            <a class="nav-link active" href="/account/settings">Account</a>
+            <hr>
+        </li>
+        <li class="nav-item" onmouseover="displayBar(this)" oumouseout="hideBar(this)">
+            <a class="nav-link" href="/account/email">Email</a>
+            <hr>
+        </li>
+        <li class="nav-item" onmouseover="displayBar(this)" oumouseout="hideBar(this)">
+            <a class="nav-link" href="/account/payouts">Payouts</a>
+            <hr>
+        </li>
+        <li class="nav-item" onmouseover="displayBar(this)" oumouseout="hideBar(this)">
+            <a class="nav-link" href="/password/settings">Password</a>
+            <hr>
+        </li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    displayBar = (elem) => {
+        elem.lastElementChild.style.width = '0';
+    }
+    
+    hideBar = (elem) => {
+        elem.lastElementChild.style.width = 'initial';
+    }
+</script>

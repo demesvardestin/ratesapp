@@ -11,7 +11,7 @@
             </ul>
         </div>
     <% end %>
-    
+
     <div class="field" id="image-field" align="center">
         <a class="btn btn-primary" id="image-upload-trigger"
             style="color: #fff; cursor: pointer; height: 120px; width: 120px;
@@ -21,16 +21,7 @@
             onclick="document.querySelector('#image-input-field').click();">
             <i class="fas fa-camera" style="font-size: 40px; margin-top: 30px; color: #1d1d5c;"></i>
         </a>
-        
-        <%= f.file_field :image, style:"display: none;", id:"image-input-field",
-            onchange:"$('#image-field')
-                    .append(`
-                        <p style='margin-top: 15px;'>
-                            <span class='badge badge-primary'>
-                                ${this.value.split('fakepath').join().substring(0,3) +
-                                '...' + this.value.slice(-10)}. Click 'Update' to save changes.
-                            </span>
-                        </p>`)" %>
+        <%= f.file_field :image, style:"display: none;", id:"image-input-field" %>
     </div>
     
     <div class="field">
@@ -118,3 +109,22 @@
         <%= f.submit "Update", class:"btn btn-primary btn-block", onclick:"document.querySelector('#user-form').submit();" %>
     </div>
 <% end %>
+
+<script type="text/javascript">
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = (e) => {
+            document.querySelector('#image-upload-trigger')
+            .style.backgroundImage = `url('${e.target.result}')`;
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+    
+    $("#image-input-field").change(function() {
+        readURL(this);
+    });
+</script>

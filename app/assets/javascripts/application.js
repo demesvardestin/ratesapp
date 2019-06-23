@@ -33,8 +33,4 @@ $(document).ready(function() {
         document.querySelector('form .actions')
         .appendChild(loader);
     });
-    
-    displayBar = (elem) => {
-        elem.lastElementChild.classList.toggle('full-width');
-    }
 });

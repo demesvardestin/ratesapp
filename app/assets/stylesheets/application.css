@@ -210,7 +210,7 @@ body {
 }
 
 .navbar-nav .nav-item:last-child > a {
-    color: #fff !important;
+    color: #fff;
 }
 
 .hide {
@@ -235,6 +235,10 @@ button:not(.close), input.btn, input.form-control {
 .btn-primary {
     background-color: #77779d;
     border-color: #77779d;
+}
+
+.bg-primary {
+    background-color: #77779d !important;
 }
 
 .text-primary {
@@ -518,16 +522,25 @@ footer > a, footer > span {
     background-color: #fff;
     transition: width 0.25s;
     z-index: 9999 !important;
-    text-align: left;
+    text-align: center !important;
     padding: 2rem 0;
 }
 
 #side-panel:hover {
-    text-align: left;
+    text-align: left !important;
     width: 20%;
     box-shadow: 0 13px 27px -5px rgba(50,50,93,.25),
     0 8px 16px -8px rgba(0,0,0,.3),
     0 -6px 16px -6px rgba(0,0,0,.025) !important;
+}
+
+width-20 {
+    width: 20% !important;
+}
+
+.card-body:not(.promo-card-body), .card-body:not(.rates-body) {
+    padding-top: 15px;
+    padding-bottom: 30px;
 }
 
 #side-panel .nav-link:hover {
@@ -548,7 +561,7 @@ footer > a, footer > span {
 #side-panel .nav-link {
     color: #77779d;
     height: 50px !important;
-    transition: 0.5s;
+    transition: 0.15s;
 }
 
 #side-panel .nav-item:first-child {
@@ -597,6 +610,10 @@ footer > a, footer > span {
     margin-bottom: 15px;
 }
 
+.side-panel-container {
+     text-align: center !important;
+}
+
 /* Ipad Pro */
 @media only screen and (min-device-width: 1024px) {
     #newPromoPackageModal .modal-content, .editPromoModal .modal-content {
@@ -620,7 +637,7 @@ footer > a, footer > span {
     }
     
     #side-panel {
-        width: 8% !important;
+        width: 8%;
     }
     
     #promoter-body {
@@ -689,7 +706,7 @@ footer > a, footer > span {
     }
     
     #side-panel {
-        display: none;
+        display: none !important;
     }
     
     #promoter-body {

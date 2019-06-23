@@ -3,8 +3,20 @@
         display: none !important;
     }
     
+    body {
+        padding-top: 0 !important;
+    }
+    
+    #promoter-body {
+        width: 100% !important;
+    }
+    
     #form-container {
         margin-top: 60px;
+    }
+    
+    #promoter-body > div.container {
+        padding-top: 0 !important;
     }
 </style>
 
@@ -44,17 +56,7 @@
                                                 </a>
                                                 
                                                 <%= f.hidden_field :username, value:"#{@promoter.username}" %>
-                                                <%= f.file_field :image, style:"display: none;", id:"image-input-field",
-                                                    onchange:"$('#image-field')
-                                                            .append(`
-                                                                <p style='margin-top: 15px;'>
-                                                                    <span class='badge badge-secondary'>
-                                                                        ${this.value.split('fakepath').join().substring(0,3) +
-                                                                        '...' + this.value.slice(-10)}. Click 'Next' to save changes.
-                                                                    </span>
-                                                                </p>
-                                                            `)"
-                                                %>
+                                                <%= f.file_field :image, style:"display: none;", id:"image-input-field" %>
                                             </div>
                                             
                                             <div class="row" style="margin-top: 60px;">
@@ -76,3 +78,22 @@
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = (e) => {
+            document.querySelector('#image-upload-trigger')
+            .style.backgroundImage = `url('${e.target.result}')`;
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+    
+    $("#image-input-field").change(function() {
+        readURL(this);
+    });
+</script>

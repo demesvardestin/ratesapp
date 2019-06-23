@@ -3,8 +3,17 @@
         padding-top: 0 !important;
     }
     
-    .navbar {
+    .navbar:not(.mobile-nav) {
         display: none !important;
+    }
+    
+    .mobile-nav .nav-item {
+        margin: 10px 0 !important;
+    }
+    
+    .mobile-nav .nav-link {
+        font-size: 16px !important;
+        color: #77779d !important;
     }
 </style>
 
@@ -13,27 +22,25 @@
 </section>
 
 <section id="side-panel">
-    <div style="padding: 0 0.85rem; width: 100%; text-align: center !important;">
-        <ul class="nav flex-column text-left">
-            <div style="display: flex;">
+    <div style="padding: 0 0.85rem; width: 100%;" class="side-panel-container">
+        <ul class="nav flex-column">
+            <div style="display: flex; justify-content: center;">
                 <div id="nav-link-icon">
                     <li class="nav-item">
-                        <button class="nav-link cursor-pointer btn btn-link"
-                            id="side-panel-menu" style="font-size: 18px !important;">
-                            <i class="fas fa-bars"></i>
-                        </button>
+                        <img src="/favicon.ico" height="40" id="side-panel-menu"
+                            onclick="$('#side-panel').toggleClass('width-20 box-shadow');">
                     </li>
                 </div>
             </div>
         </ul>
     </div>
     
-    <div style="margin-top: 45px; padding: 0 0.85rem; width: 100%;">
-        <ul class="nav flex-column text-left">
-            <div style="display: flex;">
+    <div style="margin-top: 45px; padding: 0 0.85rem; width: 100%;" class="side-panel-container">
+        <ul class="nav flex-column">
+            <div style="display: flex; justify-content: center;">
                 <div id="nav-link-icon">
                     <li class="nav-item">
-                        <a class="nav-link <%= path_for "dashboard" %>" href="/dashboard">
+                        <a class="nav-link <%= path_for "dashboard" %> btn btn-link" href="/dashboard">
                             <i class="fas fa-money-check-alt"></i>
                         </a>
                     </li>
@@ -76,9 +83,9 @@
     
     <hr>
     
-    <div style="width: 100%; padding: 0 0.85rem;">
-        <ul class="nav flex-column text-left">
-            <div style="display: flex;">
+    <div style="width: 100%; padding: 0 0.85rem;" class="side-panel-container">
+        <ul class="nav flex-column">
+            <div style="display: flex; justify-content: center;">
                 <div id="nav-link-icon">
                     <li class="nav-item">
                         <a class="nav-link <%= path_for "account" %>" href="/account/settings">
@@ -114,7 +121,53 @@
 </section>
 
 <div id="promoter-body">
-    <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top mobile-nav">
+        <div class="container">
+            <a class="navbar-brand color-blue" href="/">
+                myrates
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#mobileNavbarCollapse" aria-controls="mobileNavbarCollapse"
+                aria-expanded="false" aria-label="Toggle navigation"
+                style="padding: 0; border: 0; box-shadow: none; outline: none;"
+                onclick="$('#mobileNavbarCollapse').toggleClass('mobile-hide');
+                        $('.navbar-toggler .fas').toggleClass('active');">
+                <i class="fas fa-bars active" style="font-size: 26px;"></i>
+                <i class="fas fa-times" style="font-size: 26px;"></i>
+            </button>
+            
+            <div class="collapse navbar-collapse justify-content-end mobile-hide" id="mobileNavbarCollapse">
+                <ul class="navbar-nav" style="border-top: 3px solid #e7e7e9; text-align: center;">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">
+                            Rates
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/promo/requests">
+                            Requests
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/analytics">
+                            Analytics
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/account/settings">
+                            Settings
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <%= link_to "Logout", destroy_user_session_path,
+                            class:"nav-link", method: :delete,
+                            style:"font-weight: bold;" %>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" style="padding-top: 60px;">
         <%= yield %>
     </div>
 </div>

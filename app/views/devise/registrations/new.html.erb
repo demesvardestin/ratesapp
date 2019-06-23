@@ -1,15 +1,10 @@
 <style type="text/css">
     nav {
-        display: none !important;
-    }
-    
-    body {
-        padding-top: 0 !important;
+      display: none !important;
     }
     
     #base-body {
-      min-height: calc(100vh - 65px);
-      margin-bottom: 15px;
+      min-height: calc(100vh - 70px);
     }
     
     .form-control {
@@ -62,7 +57,7 @@
             </div>
           
             <div class="actions">
-              <%= f.submit "Sign up", class:"btn btn-primary btn-block" %>
+              <%= f.submit "Sign up", class:"btn btn-primary btn-block", data: { "disable-with": "Processing..." } %>
             </div>
           <% end %>
         </div>

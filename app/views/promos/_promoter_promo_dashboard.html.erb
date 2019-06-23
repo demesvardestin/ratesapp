@@ -18,14 +18,18 @@
 </div>
     
 <% if @promos.present? %>
+    <div class="row" style="margin-bottom: 15px;">
+        <div class="col-md-4 offset-md-4">
+            <button class="btn btn-primary btn-block"
+                data-toggle="modal" data-target="#newPromoPackageModal">
+                Add another rate
+            </button>
+        </div>
+    </div>
+    
     <div id="promoter-packages" align="center">
         <%= render 'promos/promos' %><br />
     </div>
-    
-    <button class="btn btn-primary"
-        data-toggle="modal" data-target="#newPromoPackageModal">
-        Add another rate
-    </button>
 <% else %>
     <section class="row">
         <div class="col-md-4 offset-md-4">

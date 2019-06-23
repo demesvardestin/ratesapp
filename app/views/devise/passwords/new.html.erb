@@ -1,20 +1,16 @@
 <style type="text/css">
-    nav {
-        display: none !important;
-    }
-    
-    body {
-        padding-top: 0 !important;
-    }
-    
-    #base-body {
-      min-height: calc(100vh - 66px);
-    }
-    
-    .form-control {
-      outline: none !important;
-      box-shadow: none !important;
-    }
+  nav {
+    display: none !important;
+  }
+  
+  #base-body {
+    min-height: calc(100vh - 70px);
+  }
+  
+  .form-control {
+    outline: none !important;
+    box-shadow: none !important;
+  }
 </style>
 
 <section id="register" class="container">
@@ -23,11 +19,8 @@
       <%= render "shared/header" %>
       
       <div class="card mr-card">
-        <div class="card-header"
-          style="background-color: #00adf2; color: #fff; border-bottom: none;">
-          <h6 style="margin-bottom: 0;">Reset Password</h6>
-        </div>
         <div class="card-body">
+          <h3 class="text-center">Reset password</h3>
           <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
             <% flash.each do |name, msg| %>
               <% if msg.is_a?(String) && !msg.downcase.include?("signed out successfully") %>

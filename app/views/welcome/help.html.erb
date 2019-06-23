@@ -1,9 +1,10 @@
 <style type="text/css">
     body {
         padding-top: 0 !important;
-        background: #396afc;
-        background: -webkit-linear-gradient(to right, #2948ff, #396afc);
-        background: linear-gradient(to right, #2948ff, #396afc);
+    }
+    
+    .navbar {
+        border-bottom: 0.5px solid #c8c8d7 !important;
     }
     
     #contact-form {
@@ -15,17 +16,15 @@
     }
 </style>
 
-<section id="contact-form" style="padding: 30px 0;">
+<section id="contact-form" style="padding: 50px 0;">
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <div class="card box-shadow">
-                    <div class="card-header"
-                        style="background-color: #00adf2; color: #fff; border-bottom: none;">
-                        What Can We Help You With?
-                    </div>
-                    
+                <div class="card box-shadow no-border">
                     <div class="card-body">
+                        <h5>What Can We Help You With?</h5>
+                        <hr>
+                        
                         <% if params[:submitted] %>
                             <p align="center">
                                 Your request has been submitted!

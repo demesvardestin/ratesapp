@@ -6,6 +6,7 @@ class User < ApplicationRecord
         :recoverable, :rememberable, :validatable
     
     before_create { self.claimed = true }
+    before_create { self.theme_color = "#adadc4" }
     before_create { self.username_display = self.username.downcase }
     after_create { send_welcome_email }
     

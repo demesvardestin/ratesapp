@@ -5,7 +5,7 @@
     
     body {
         padding-top: <%= @promoter.present? ? '30px !important' : '0 !important' %>;
-        background: #fff;
+        background: <%= @promoter.present? ? "#{@promoter.theme_color}" : '#fff' %>;
     }
     
     #platform-logo a, .profile-link a {
